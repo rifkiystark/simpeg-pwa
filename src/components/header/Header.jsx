@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom"
+import logo from "../../assets/img/logo.svg"
 
 const Header = () => {
     const fullname = "Ananda Rifkiy Hasan"
@@ -14,16 +16,16 @@ const Header = () => {
       d-none-navbar-horizontal
       pe-0 pe-md-3
       ">
-                <a href="{{ url('/') }}">
-                    <img src="/static/tabler/static/logo.svg" width="110" height="32" alt="Tabler" className="navbar-brand-image" />
-                </a>
+                <Link to="/dashboard">
+                    <img src={logo} width="110" height="32" alt="Tabler" className="navbar-brand-image" />
+                </Link>
             </h1>
             <div className="navbar-nav flex-row order-md-last">
                 <div className="nav-item d-flex me-3 dropdown">
                     <div className="btn-list">
 
 
-                        <a href="#" data-bs-toggle="dropdown" className="btn btn-outline-white" style={{ padding: ".3rem .4rem" }} target="_blank" rel="noreferrer">
+                        <button data-bs-toggle="dropdown" className="btn btn-outline-white" style={{ padding: ".3rem .4rem" }} target="_blank" rel="noreferrer">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" style={{ margin: 0, height: 24 }} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <rect x="4" y="4" width="6" height="6" rx="1" />
@@ -33,7 +35,7 @@ const Header = () => {
                                 <line x1="17" y1="4" x2="17" y2="10" />
                             </svg>
                             <span className="d-none d-xl-block">SekolaCloud Apps</span>
-                        </a>
+                        </button>
                         <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a target="_blank" href="{{ str_replace('/simpeg', '', url('/')) }}/lms" className="dropdown-item"><span className="avatar avatar-xs rounded me-2" style={{ backgroundImage: 'url("/staticic/lms.svg")' }}></span>
                                 LMS</a>
@@ -78,7 +80,7 @@ const Header = () => {
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="{{ url('logout') }}" className="dropdown-item">Logout</a>
+                        <Link to="login" className="dropdown-item">Logout</Link>
                     </div>
                 </div>
             </div>

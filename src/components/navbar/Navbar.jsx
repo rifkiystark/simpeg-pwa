@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Navbar = () => {
     const level = "admin"
     return (
@@ -7,7 +9,7 @@ const Navbar = () => {
                     <div className="container-xl">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link" href="{{ url('/') }}/dashboard">
+                                <Link className="nav-link" to="dashboard">
                                     <span className="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -17,9 +19,9 @@ const Navbar = () => {
                                         </svg>
                                     </span>
                                     <span className="nav-link-title"> Dashboard </span>
-                                </a>
+                                </Link>
                             </li>
-                            {(level == "admin" || level == "adminunit") ? <li className="nav-item">
+                            {(level === "admin" || level === "adminunit") ? <li className="nav-item">
                                 <a className="nav-link" href="{{ url('/') }}/list">
                                     <span className="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
