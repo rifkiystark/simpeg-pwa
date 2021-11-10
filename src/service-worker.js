@@ -11,7 +11,7 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
+import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -48,12 +48,12 @@ registerRoute(
 
 registerRoute(
   new RegExp('.+\\.js$'),
-  new NetworkFirst()
+  new CacheFirst()
 );
 
 registerRoute(
   new RegExp('.+\\.css$'),
-  new NetworkFirst()
+  new CacheFirst()
 );
 
 // An example runtime caching route for requests that aren't handled by the

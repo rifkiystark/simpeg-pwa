@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
-
+import logo from "../../assets/img/logo.svg";
 
 
 function LoginPage() {
@@ -17,7 +17,7 @@ function LoginPage() {
             <div className="page page-center">
                 <div className="container-tight py-4">
                     <div className="text-center mb-4">
-                        <a href="."><img src="/static/tabler/static/logo.svg" height="48" width="128" alt="" /></a>
+                        <a href="."><img src={logo} height="48" width="128" alt="" /></a>
                     </div>
                     <div className="card card-md">
 
