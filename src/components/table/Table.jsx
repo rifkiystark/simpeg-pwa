@@ -1,10 +1,7 @@
 import { useState } from "react"
-import { useDispatch } from 'react-redux'
-import { setUser } from "../../reduxslice/userSlice"
 
 
 function Table({ data }) {
-    const dispatch = useDispatch()
     let [dataTable, setDataTable] = useState(data)
 
     const search = (e) => {
@@ -15,7 +12,7 @@ function Table({ data }) {
         let tempDataTable = data
         let tempRowData = []
         tempDataTable.data.forEach(rowData => {
-            for (const [key, value] of Object.entries(rowData)) {
+            for (const [value] of Object.entries(rowData)) {
                 if (value.toLowerCase().includes(e.target.value)) {
                     tempRowData.push(rowData)
                     break
