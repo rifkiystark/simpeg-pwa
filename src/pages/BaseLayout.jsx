@@ -8,13 +8,12 @@ function BaseLayout() {
     console.log(location)
     return (
 
-        <body className="antialiased" style={{ minHeight: "100vh" }}>
-            <div className="wrapper">
-                <Header />
-                <Navbar />
-                <Outlet />
-            </div>
-        </body>
+
+        <div className="wrapper">
+            <Header />
+            <Navbar />
+            <Outlet />
+        </div>
     )
 }
 

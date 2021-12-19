@@ -22,7 +22,7 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             {(level === "admin" || level === "adminunit") ? <li className="nav-item">
-                                <a className="nav-link" href="{{ url('/') }}/list">
+                                <Link className="nav-link" to="employees">
                                     <span className="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -33,12 +33,12 @@ const Navbar = () => {
                                         </svg>
                                     </span>
                                     <span className="nav-link-title"> Pegawai </span>
-                                </a>
+                                </Link>
                             </li> : ""}
 
                             {(level == "admin") ?
                                 <><li className="nav-item">
-                                    <a className="nav-link" href="{{ url('/') }}/users">
+                                    <Link className="nav-link" to="users">
                                         <span className="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -49,7 +49,7 @@ const Navbar = () => {
                                             </svg>
                                         </span>
                                         <span className="nav-link-title"> Pengguna </span>
-                                    </a>
+                                    </Link>
                                 </li>
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false">
