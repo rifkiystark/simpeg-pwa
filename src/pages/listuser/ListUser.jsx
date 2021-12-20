@@ -30,9 +30,11 @@ function ListUser() {
                 name: "Action",
                 key: "",
                 render: (data, index, rowData) => (<>
-                    <a className="btn btn-sm mt-1" href="{{ url('/') }}/pegawai/profile/{{$p->id_peg}}">
-                        Lihat
-                    </a>
+                    <button className="btn btn-sm mt-1 me-1" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={() => {
+                        dispatch(setUser(rowData))
+                    }}>
+                        Edit
+                    </button>
                     <button type="button" className="btn btn-danger btn-sm mt-1" data-bs-toggle="modal" data-bs-target="#ModalDelete" onClick={() => {
                         dispatch(setUser(rowData))
                     }}>
@@ -142,7 +144,49 @@ function ListUser() {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
+            <div class="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-modal="true" style={{ paddingRight: 6 }}>
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Pengguna</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url('users/update') }}" method="post" id="editForm{{$user->id}}">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" name="email" class="form-control" value={user.email} placeholder="" required />
+                                    <input type="hidden" name="id_user" class="form-control" value="{{$user->id}}" placeholder="" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password Baru</label>
+                                    <input type="text" name="password" class="form-control" placeholder="" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Level</label>
+                                    <select name="level" required class="form-select">
+                                        <option value="adminunit"> Admin Unit </option>
+                                        <option value="pegawai"> Pegawai </option>
+                                        <option value="adminkeuangansekolahmasuk"> Admin Keuangan Pemasukan Sekolah </option>
+                                        <option value="adminkeuangansekolahkeluar"> Admin Keuangan Pengeluaran Sekolah </option>
+                                        <option value="adminkeuanganmasuk"> Admin Keuangan Masuk </option>
+                                        <option value="adminkeuangankeluar"> Admin Keuangan Keluar </option>
+                                    </select>
+                                </div>
+
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="editForm">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="modal modal-blur fade" id="ModalDelete" tabIndex="-1" role="dialog" aria-modal="true" style={{ paddingRight: 6 }}>
                 <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
                     <div className="modal-content">
