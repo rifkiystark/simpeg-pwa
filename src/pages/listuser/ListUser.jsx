@@ -2,9 +2,6 @@ import Table from "../../components/table/Table"
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from "../../reduxslice/userSlice";
 
-
-
-
 function ListUser() {
     const dispatch = useDispatch()
     const dummyUser = {
@@ -141,7 +138,7 @@ function ListUser() {
                             <h3 className="card-title">Daftar Pengguna</h3>
                         </div>
                         <div className="card-body">
-                            <Table data={dummyUser} />
+                            <Table data={dummyUser} tableName="Data Pengguna" />
                         </div>
                     </div>
                 </div>

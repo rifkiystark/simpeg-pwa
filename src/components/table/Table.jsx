@@ -1,9 +1,11 @@
 import { useState } from "react"
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
-
-function Table({ data }) {
+function Table({ data, tableName }) {
     let [dataTable, setDataTable] = useState(data)
     let [activePage, setActivePage] = useState(1)
+    
     let totalDataPerPage = 10
     let [totalPage, setTotalPage] = useState(parseInt(dataTable.data.length / totalDataPerPage) + (dataTable.data.length % totalDataPerPage > 0 ? 1 : 0))
 
@@ -30,10 +32,21 @@ function Table({ data }) {
         })
         setTotalPage(parseInt(tempRowData.length / totalDataPerPage) + (tempRowData.length % totalDataPerPage > 0 ? 1 : 0))
     }
+
+    const exportExcel = () => {
+        const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        const fileExtension = '.xlsx';
+
+        const ws = XLSX.utils.json_to_sheet(data.data);
+        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const dataExcel = new Blob([excelBuffer], {type: fileType});
+        FileSaver.saveAs(dataExcel, tableName + fileExtension);
+    }
     return (<>
         <div class="d-flex mb-3">
             <div class="me-auto text-muted">
-                <button className="btn btn-success">Excel</button>
+                <button className="btn btn-success" onClick={exportExcel}>Excel</button>
             </div>
             <div class="ms-auto text-muted">
                 Search:
@@ -62,7 +75,7 @@ function Table({ data }) {
                                     {dataTable.column.map((column, indexColumn) =>
                                         <td>
                                             {
-                                                column.render(row[column.key], indexRow + ((activePage-1) * totalDataPerPage), row)
+                                                column.render(row[column.key], indexRow + ((activePage - 1) * totalDataPerPage), row)
                                             }
                                         </td>
                                     )}
