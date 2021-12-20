@@ -11,11 +11,9 @@ function Table({ data }) {
         setActivePage(1)
         if (e.target.value === "") {
             setDataTable(data)
-            setTotalPage(parseInt(dataTable.data.length / totalDataPerPage) + (dataTable.data.length % totalDataPerPage > 0 ? 1 : 0))
-            console.log(dataTable)
+            setTotalPage(parseInt(data.data.length / totalDataPerPage) + (data.data.length % totalDataPerPage > 0 ? 1 : 0))
             return
         }
-        console.log(e.target.value)
         let tempDataTable = data
         let tempRowData = []
         tempDataTable.data.forEach(rowData => {
@@ -30,9 +28,7 @@ function Table({ data }) {
         setDataTable(prevState => {
             return { ...prevState, data: tempRowData }
         })
-        setTotalPage(parseInt(dataTable.data.length / totalDataPerPage) + (dataTable.data.length % totalDataPerPage > 0 ? 1 : 0))
-
-        console.log(dataTable)
+        setTotalPage(parseInt(tempRowData.length / totalDataPerPage) + (tempRowData.length % totalDataPerPage > 0 ? 1 : 0))
     }
     return (<>
         <div class="d-flex mb-3">
