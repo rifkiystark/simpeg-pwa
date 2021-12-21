@@ -48,7 +48,7 @@ function Table({ data, tableName }) {
             <div class="mb-3 me-auto text-muted col-sm-12 col-md-6">
                 <button className="btn btn-success" onClick={exportExcel}>Excel</button>
             </div>
-            <div class="mb-3 ms-auto text-muted  col-sm-12 col-md-6 justify-content-md-end justify-content-start">
+            <div class="mb-3 ms-auto text-muted d-flex col-sm-12 col-md-6 align-items-center justify-content-md-end justify-content-start">
                 Search:
                 <div class="ms-2 d-inline-block">
                     <input type="text" class="form-control" aria-label="Search invoice" onChange={search} />
@@ -96,7 +96,6 @@ function Table({ data, tableName }) {
                         }
                     }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
-
                     </button>
                 </li>
                 {

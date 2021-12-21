@@ -36,7 +36,7 @@ const Navbar = () => {
                                 </Link>
                             </li> : ""}
 
-                            {(level == "admin") ?
+                            {(level === "admin") ?
                                 <><li className="nav-item">
                                     <Link className="nav-link" to="users">
                                         <span className="nav-link-icon d-md-none d-lg-inline-block">
@@ -66,38 +66,38 @@ const Navbar = () => {
                                         <div className="dropdown-menu">
                                             <div className="dropdown-menu-columns">
                                                 <div className="dropdown-menu-column">
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmagama/tambah"> Agama </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmdiklat/tambah">
+                                                    <Link className="dropdown-item" to="master/religions"> Agama </Link>
+                                                    <Link className="dropdown-item" to="master/training">
                                                         Diklat
-                                                    </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmgapok/tambah"> Gapok </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmgolongan/tambah">
+                                                    </Link>
+                                                    <Link className="dropdown-item" to="master/salary"> Gapok </Link>
+                                                    <Link className="dropdown-item" to="master/group">
                                                         Golongan
-                                                    </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmpendidikan/tambah">
+                                                    </Link>
+                                                    <Link className="dropdown-item" to="master/education">
                                                         Pendidikan
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="dropdown-menu-column">
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmjabatans/tambah">
+                                                    <Link className="dropdown-item" to="master/structural-position">
                                                         Jabatan Struktural
-                                                    </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmjabatanf/tambah">
+                                                    </Link>
+                                                    <Link className="dropdown-item" to="master/functional-position">
                                                         Jabatan Fungsional
-                                                    </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmjabatanft/tambah">
+                                                    </Link>
+                                                    <Link className="dropdown-item" to="master/additional-posotion">
                                                         Jabatan Tambahan
-                                                    </a>
-                                                    <a className="dropdown-item" href="{{ url('/') }}/pegawai/tmupt/tambah">
+                                                    </Link>
+                                                    <Link className="dropdown-item" to="master/units">
                                                         UPT
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
                                     </li></> : ""}
 
 
-                            {(level == "admin" || level == "adminunit") ?
+                            {(level === "admin" || level === "adminunit") ?
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                         <span className="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -115,7 +115,7 @@ const Navbar = () => {
                                         <a className="dropdown-item" href="{{ url('/') }}/presensi/setting"> Setting </a>
                                         <a className="dropdown-item" href="{{ url('/') }}/presensi/history"> Presensi Saya </a>
                                     </div>
-                                </li> : (level == "pegawai") ?
+                                </li> : (level === "pegawai") ?
                                     <>
                                         <li className="nav-item dropdown @if($active == 'pegawai') active @endif">
                                             <a className="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false">

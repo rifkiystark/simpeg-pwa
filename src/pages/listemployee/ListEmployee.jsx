@@ -1,9 +1,133 @@
 import Table from "../../components/table/Table";
 
 
-
 function ListEmployee() {
     let isAdmin = true;
+    const dummyEmployee = {
+        column: [
+            {
+                name: "No",
+                key: "",
+                render: (data, index, rowData) => (index + 1)
+            },
+            {
+                name: "NIP/NIPY",
+                key: "nip",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "NIP KTP",
+                key: "nik",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Nama",
+                key: "nama",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Jenis Kelamin",
+                key: "jenkel",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Agama",
+                key: "agama",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "TTL",
+                key: "tanggalLahir",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "TMT",
+                key: "tmt",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Masa Kerja",
+                key: "masaKerja",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Alamat KTP",
+                key: "alamatKTP",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Alamat Domisili",
+                key: "alamatDomisili",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "UPT",
+                key: "upt",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Status Kepegawaian",
+                key: "statusKepegawaian",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Status Keaktifan",
+                key: "statusKeaktifan",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Jabatan Fungsional",
+                key: "jabatanFungsional",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Jabatan Struktural",
+                key: "jabatanStruktural",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Jabatan Tambahan",
+                key: "jabatanTambahan",
+                render: (data, index, rowData) => data
+            },
+            {
+                name: "Action",
+                key: "",
+                render: (data, index, rowData) => (<>
+                    <button className="btn btn-sm mt-1 me-1" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={() => {
+                       
+                    }}>
+                        Lihat
+                    </button>
+                    <button type="button" className="btn btn-danger btn-sm mt-1" data-bs-toggle="modal" data-bs-target="#ModalDelete" onClick={() => {
+                       
+                    }}>
+                        Hapus
+                    </button></>)
+            }
+        ],
+        data: [
+            {
+                nip: "Ananda Rifkiy Hasan",
+                nik: "ananda.rifkiy32@gmail.com",
+                nama: "admin",
+                jenkel: "admin",
+                agama: "admin",
+                tanggalLahir: "admin",
+                tmt: "admin",
+                masaKerja: "admin",
+                alamatKTP: "admin",
+                alamatDomisili: "admin",
+                upt: "admin",
+                statusKepegawaian: "admin",
+                statusKeaktifan: "admin",
+                jabatanFungsional: "admin",
+                jabatanStruktural: "admin",
+                jabatanTambahan: "admin",
+            }
+
+        ]
+    }
     return (
         <div className="page-wrapper">
             <div className="container-xl">
@@ -40,7 +164,7 @@ function ListEmployee() {
                                 </div>
                             </div> : ""}
 
-                            <Table />
+                            <Table data={dummyEmployee} tableName="Pegawai" />
 
                             
                         </div>

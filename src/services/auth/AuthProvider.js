@@ -7,7 +7,6 @@ function AuthProvider({ children, level }) {
         level: "admin"
     }
     const location = useLocation();
-    console.log(level)
     if (!level.includes(user.level)) {
         return <Navigate to="/login" state={{ from: location }} />
     }

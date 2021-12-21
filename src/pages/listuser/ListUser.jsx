@@ -136,8 +136,20 @@ function ListUser() {
             <div className="page-body">
                 <div className="container-xl">
                     <div className="card">
-                        <div className="card-header">
-                            <h3 className="card-title">Daftar Pengguna</h3>
+                        <div className="card-header pe-0">
+                            <div class="row w-100">
+                                <div class="col-md-6 col-sm-12">
+                                    <h3 class="card-title">Daftar Pengguna</h3>
+                                </div>
+                                <div class="col-md-6 col-sm-12 text-end">
+                                    <a href="http://localhost/simpeglocal/import/formatimportsimpeg.xlsx" className="btn btn-secondary me-1" target="_blank" rel="noreferrer" download>
+                                        Download Format Import
+                                    </a>
+                                    <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-import">
+                                        Import
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div className="card-body">
                             <Table data={dummyUser} tableName="Data Pengguna" />
@@ -176,8 +188,6 @@ function ListUser() {
                                         <option value="adminkeuangankeluar"> Admin Keuangan Keluar </option>
                                     </select>
                                 </div>
-
-
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -216,7 +226,31 @@ function ListUser() {
                     </div>
                 </div>
             </div>
-        </div >
+            <div class="modal modal-blur fade" id="modal-import" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Import Pengguna</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="http://localhost/simpeglocal/users/import" method="post" id="import" enctype="multipart/form-data">
+                                <div class ="mb-3">
+                                <label class ="form-label">File</label>
+                                <input type ="file" name="file" class ="form-control" placeholder="" required />
+                                </div>
+
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="import">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

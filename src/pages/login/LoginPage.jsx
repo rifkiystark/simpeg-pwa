@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import logo from "../../assets/img/logo.svg";
 
 
@@ -11,6 +11,12 @@ function LoginPage() {
     }
 
     const router = useNavigate();
+    let location = useLocation();
+
+    // After succes, run code below to navigate
+    // router(from, { replace: true });
+
+    let from = location.state?.from?.pathname || "/";
 
     return (
         <body className="antialiased border-top-wide border-primary d-flex flex-column">
