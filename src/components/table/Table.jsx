@@ -44,11 +44,11 @@ function Table({ data, tableName }) {
         FileSaver.saveAs(dataExcel, tableName + fileExtension);
     }
     return (<>
-        <div class="d-flex mb-3">
-            <div class="me-auto text-muted">
+        <div class="d-flex row">
+            <div class="mb-3 me-auto text-muted col-sm-12 col-md-6">
                 <button className="btn btn-success" onClick={exportExcel}>Excel</button>
             </div>
-            <div class="ms-auto text-muted">
+            <div class="mb-3 ms-auto text-muted  col-sm-12 col-md-6 justify-content-md-end justify-content-start">
                 Search:
                 <div class="ms-2 d-inline-block">
                     <input type="text" class="form-control" aria-label="Search invoice" onChange={search} />
