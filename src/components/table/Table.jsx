@@ -6,7 +6,7 @@ function Table({ data, tableName }) {
     let [dataTable, setDataTable] = useState(data)
     let [activePage, setActivePage] = useState(1)
 
-    let totalDataPerPage = 1
+    let totalDataPerPage = 10
     let [totalPage, setTotalPage] = useState(parseInt(dataTable.data.length / totalDataPerPage) + (dataTable.data.length % totalDataPerPage > 0 ? 1 : 0))
 
     const search = (e) => {
@@ -107,7 +107,7 @@ function Table({ data, tableName }) {
                             return <li className="page-item active"><button className="page-link">{i + 1}</button></li>
                         } else if ((i + 1) - activePage === 4) {
                             return <li className="page-item"><button className="page-link">..</button></li>
-                        } else if ((activePage - i < 4 && i < activePage) || (i - activePage < 4 && i > activePage)) {
+                        } else if ((activePage - i < 4 && (i-1) < activePage) || ((i-1) - activePage < 4 && i > activePage)) {
                             return <li className="page-item" onClick={() => {
                                 setActivePage(i + 1)
                             }}><button className="page-link">{i + 1}</button></li>
