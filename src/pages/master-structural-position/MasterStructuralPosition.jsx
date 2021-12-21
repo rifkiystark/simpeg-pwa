@@ -1,21 +1,21 @@
 import Table from "../../components/table/Table";
 import { useDispatch, useSelector } from 'react-redux';
-import { setEducation } from "../../reduxslice/masterDataSlice";
+import { setStructuralPosition } from "../../reduxslice/masterDataSlice";
 
 
-function MasterEducation() {
+function MasterStructuralPosition() {
     let dispatch = useDispatch();
-    let education = useSelector((state) => state.masterData.education)
-    const dummyEducation = {
+    let structuralPosition = useSelector((state) => state.masterData.structuralPosition)
+    const dummyStructuralPosition = {
         column: [
             {
-                name: "Kode Pendidikan",
-                key: "kodePendidikan",
+                name: "Kode Jabatan Struktural",
+                key: "kodeJabatanStruktural",
                 render: (data, index, rowData) => data
             },
             {
-                name: "Pendidikan",
-                key: "pendidikan",
+                name: "Nama Jabatan",
+                key: "namaJabatan",
                 render: (data, index, rowData) => data
             },
 
@@ -24,12 +24,12 @@ function MasterEducation() {
                 key: "",
                 render: (data, index, rowData) => (<>
                     <button className="btn btn-primary btn-sm mt-1 me-1" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={() => {
-                        dispatch(setEducation(rowData))
+                        dispatch(setStructuralPosition(rowData))
                     }}>
                         Edit
                     </button>
                     <button type="button" className="btn btn-danger btn-sm mt-1" data-bs-toggle="modal" data-bs-target="#ModalDelete" onClick={() => {
-                        dispatch(setEducation(rowData))
+                        dispatch(setStructuralPosition(rowData))
                     }}>
                         Hapus
                     </button></>)
@@ -37,8 +37,8 @@ function MasterEducation() {
         ],
         data: [
             {
-                kodePendidikan: "1",
-                pendidikan: "SD",
+                kodeJabatanStruktural: "1",
+                namaJabatan: "Pimpinan",
 
             }
 
@@ -51,7 +51,7 @@ function MasterEducation() {
                     <div className="row align-items-center">
                         <div className="col">
                             <div className="page-pretitle">Halaman Master Data</div>
-                            <h2 className="page-title">Master Data Pendidikan</h2>
+                            <h2 className="page-title">Master Data Jabatan Struktural</h2>
                         </div>
                     </div>
                 </div>
@@ -60,10 +60,10 @@ function MasterEducation() {
                 <div className="container-xl">
                     <div className="card">
                         <div className="card-header">
-                            <h3 className="card-title">Data Pendidikan</h3>
+                            <h3 className="card-title">Data Jabatan Struktural</h3>
                         </div>
                         <div className="card-body">
-                            <Table data={dummyEducation} tableName="Master Data Pendidikan" />
+                            <Table data={dummyStructuralPosition} tableName="Master Data Jabatan Struktural" />
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ function MasterEducation() {
                                 <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
                             </svg>
                             <h3>Apakah anda yakin?</h3>
-                            <div className="text-muted">Anda akan menghapus data pendidikan <b>{education.pendidikan}</b></div>
+                            <div className="text-muted">Anda akan menghapus data jabatan struktural <b>{structuralPosition.namaJabatan}</b></div>
                         </div>
                         <div className="modal-footer">
                             <div className="w-100">
@@ -101,7 +101,7 @@ function MasterEducation() {
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Pendidikan</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Jabatan Struktural</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -110,9 +110,9 @@ function MasterEducation() {
                             <form action="http://localhost/simpeglocal/pegawai/tmdiklat/edit/proses" method="post">
                                 <div class="row g-3">
                                     <div class="col-md-12">
-                                        <label class="form-label">Pendidikan</label>
-                                        <input type="hidden" name="kode_diklat" class="form-control" value={education.kodePendidikan} />
-                                        <input type="text" name="jenis_diklat" class="form-control" value={education.pendidikan} />
+                                        <label class="form-label">Jabatan Struktural</label>
+                                        <input type="hidden" name="kode_diklat" class="form-control" value={structuralPosition.kodeJabatanStruktural} />
+                                        <input type="text" name="jenis_diklat" class="form-control" value={structuralPosition.namaJabatan} />
                                     </div>
 
 
@@ -133,4 +133,4 @@ function MasterEducation() {
 }
 
 
-export default MasterEducation
+export default MasterStructuralPosition

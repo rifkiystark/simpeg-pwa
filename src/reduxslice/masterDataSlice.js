@@ -27,6 +27,22 @@ export const masterDataSlice = createSlice({
             kodePendidikan: "",
             pendidikan: ""
         },
+        structuralPosition: {
+            kodeJabatanStruktural: "",
+            namaJabatan: ""
+        },
+        functionalPosition: {
+            kodeJabatanFungsional: "",
+            namaJabatan: ""
+        },
+        additionalPosition: {
+            kodeJabatanTambahan: "",
+            namaJabatan: ""
+        },
+        units: {
+            kodeUPT: "",
+            upt: ""
+        },
     },
     reducers: {
         setReligion: (state, data) => {
@@ -44,10 +60,32 @@ export const masterDataSlice = createSlice({
         setEducation: (state, data) => {
             state.education = data.payload
         },
+        setStructuralPosition: (state, data) => {
+            state.structuralPosition = data.payload
+        },
+        setFunctionalPosition: (state, data) => {
+            state.functionalPosition = data.payload
+        },
+        setAdditionalPosition: (state, data) => {
+            state.additionalPosition = data.payload
+        },
+        setUnits: (state, data) => {
+            state.units = data.payload
+        },
     }
 
 })
 
-export const { setReligion, setTraining, setSalary, setGroup, setEducation } = masterDataSlice.actions
+export const {
+    setReligion,
+    setTraining,
+    setSalary,
+    setGroup,
+    setEducation,
+    setStructuralPosition,
+    setFunctionalPosition,
+    setAdditionalPosition,
+    setUnits,
+} = masterDataSlice.actions
 
 export default masterDataSlice.reducer

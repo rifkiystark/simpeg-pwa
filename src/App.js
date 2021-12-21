@@ -12,6 +12,10 @@ import MasterTraining from './pages/master-training/MasterTraining';
 import MasterSalary from './pages/master-salary/MasterSalary';
 import MasterGroup from './pages/master-group/MasterGroup';
 import MasterEducation from './pages/master-education/MasterEducation';
+import MasterFunctionalPosition from './pages/master-functional-position/MasterFunctionalPosition';
+import MasterStructuralPosition from './pages/master-structural-position/MasterStructuralPosition';
+import MasterAdditionalPosition from './pages/master-additional-position/MasterAdditionalPosition';
+import MasterUnits from './pages/master-units/MasterUnits';
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
           <Route path="master/salary" element={<AuthProvider level={["admin"]}><MasterSalary /></AuthProvider>} />
           <Route path="master/group" element={<AuthProvider level={["admin"]}><MasterGroup /></AuthProvider>} />
           <Route path="master/education" element={<AuthProvider level={["admin"]}><MasterEducation /></AuthProvider>} />
+          <Route path="master/structural-position" element={<AuthProvider level={["admin"]}><MasterStructuralPosition /></AuthProvider>} />
+          <Route path="master/functional-position" element={<AuthProvider level={["admin"]}><MasterFunctionalPosition /></AuthProvider>} />
+          <Route path="master/additional-position" element={<AuthProvider level={["admin"]}><MasterAdditionalPosition /></AuthProvider>} />
+          <Route path="master/units" element={<AuthProvider level={["admin"]}><MasterUnits /></AuthProvider>} />
 
         
 

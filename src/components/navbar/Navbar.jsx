@@ -85,7 +85,7 @@ const Navbar = () => {
                                                     <Link className="dropdown-item" to="master/functional-position">
                                                         Jabatan Fungsional
                                                     </Link>
-                                                    <Link className="dropdown-item" to="master/additional-posotion">
+                                                    <Link className="dropdown-item" to="master/additional-position">
                                                         Jabatan Tambahan
                                                     </Link>
                                                     <Link className="dropdown-item" to="master/units">
