@@ -109,10 +109,10 @@ const Navbar = () => {
                                         <span className="nav-link-title"> Presensi </span>
                                     </a>
                                     <div className="dropdown-menu">
-                                        <a className="dropdown-item" href="{{ url('/') }}/presensi/data">
+                                        <Link className="dropdown-item" to="presence/data">
                                             Data Presensi
-                                        </a>
-                                        <a className="dropdown-item" href="{{ url('/') }}/presensi/setting"> Setting </a>
+                                        </Link>
+                                        <Link className="dropdown-item" to="presence/setting"> Setting </Link>
                                         <a className="dropdown-item" href="{{ url('/') }}/presensi/history"> Presensi Saya </a>
                                     </div>
                                 </li> : (level === "pegawai") ?

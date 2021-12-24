@@ -16,6 +16,8 @@ import MasterFunctionalPosition from './pages/master-functional-position/MasterF
 import MasterStructuralPosition from './pages/master-structural-position/MasterStructuralPosition';
 import MasterAdditionalPosition from './pages/master-additional-position/MasterAdditionalPosition';
 import MasterUnits from './pages/master-units/MasterUnits';
+import DataPresence from './pages/datapresence/DataPresence';
+import SettingPresence from './pages/settingpresence/SettingPresence';
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
           <Route path="dashboard" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><DashboardPage /></AuthProvider>} />
           <Route path="employees" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListEmployee /></AuthProvider>} />
           <Route path="users" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListUser /></AuthProvider>} />
-          
+
           <Route path="master/religions" element={<AuthProvider level={["admin"]}><MasterReligion /></AuthProvider>} />
           <Route path="master/training" element={<AuthProvider level={["admin"]}><MasterTraining /></AuthProvider>} />
           <Route path="master/salary" element={<AuthProvider level={["admin"]}><MasterSalary /></AuthProvider>} />
@@ -36,7 +38,11 @@ function App() {
           <Route path="master/additional-position" element={<AuthProvider level={["admin"]}><MasterAdditionalPosition /></AuthProvider>} />
           <Route path="master/units" element={<AuthProvider level={["admin"]}><MasterUnits /></AuthProvider>} />
 
-        
+
+          <Route path="presence/data" element={<AuthProvider level={["admin", 'adminunit']}><DataPresence /></AuthProvider>} />
+          <Route path="presence/setting" element={<AuthProvider level={['admin', 'adminunit']}><SettingPresence /></AuthProvider>} />
+
+
 
         </Route>
         <Route exact path="/login" element={<LoginPage />} />

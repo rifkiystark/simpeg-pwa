@@ -17,7 +17,7 @@ function LoginPage() {
     // router(from, { replace: true });
 
     let from = location.state?.from?.pathname || "/";
-
+    console.log(from)
     return (
         <body className="antialiased border-top-wide border-primary d-flex flex-column">
             <div className="page page-center">

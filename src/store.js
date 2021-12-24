@@ -4,7 +4,7 @@ import masterDataReducer from './reduxslice/masterDataSlice';
 
 export default configureStore({
   reducer: {
-      user: userReducer,
-      masterData: masterDataReducer
+    user: userReducer,
+    masterData: masterDataReducer,
   },
-})
+});
