@@ -20,7 +20,7 @@ function Table({ data, tableName }) {
         let tempRowData = []
         tempDataTable.data.forEach(rowData => {
             for (const [key, value] of Object.entries(rowData)) {
-                if (value.toLowerCase().includes(e.target.value)) {
+                if (value != null && value.toString().toLowerCase().includes(e.target.value)) {
                     tempRowData.push(rowData)
                     break
                 }

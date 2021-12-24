@@ -16,8 +16,9 @@ import MasterFunctionalPosition from './pages/master-functional-position/MasterF
 import MasterStructuralPosition from './pages/master-structural-position/MasterStructuralPosition';
 import MasterAdditionalPosition from './pages/master-additional-position/MasterAdditionalPosition';
 import MasterUnits from './pages/master-units/MasterUnits';
-import DataPresence from './pages/datapresence/DataPresence';
-import SettingPresence from './pages/settingpresence/SettingPresence';
+import DataPresence from './pages/presence-data/DataPresence';
+import SettingPresence from './pages/presence-setting/SettingPresence';
+import MyPresence from './pages/presence-my/MyPresence';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
 
           <Route path="presence/data" element={<AuthProvider level={["admin", 'adminunit']}><DataPresence /></AuthProvider>} />
           <Route path="presence/setting" element={<AuthProvider level={['admin', 'adminunit']}><SettingPresence /></AuthProvider>} />
+          <Route path="presence/history" element={<AuthProvider level={['admin', 'adminunit','pegawai']}><MyPresence /></AuthProvider>} />
 
 
 
