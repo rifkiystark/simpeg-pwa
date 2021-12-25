@@ -19,6 +19,7 @@ import MasterUnits from './pages/master-units/MasterUnits';
 import DataPresence from './pages/presence-data/DataPresence';
 import SettingPresence from './pages/presence-setting/SettingPresence';
 import MyPresence from './pages/presence-my/MyPresence';
+import Submission from './pages/submission/Submission';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="dashboard" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><DashboardPage /></AuthProvider>} />
           <Route path="employees" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListEmployee /></AuthProvider>} />
           <Route path="users" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListUser /></AuthProvider>} />
+          <Route path="submission" element={<AuthProvider level={["admin"]}><Submission /></AuthProvider>} />
 
           <Route path="master/religions" element={<AuthProvider level={["admin"]}><MasterReligion /></AuthProvider>} />
           <Route path="master/training" element={<AuthProvider level={["admin"]}><MasterTraining /></AuthProvider>} />

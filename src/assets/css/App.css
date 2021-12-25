@@ -6,6 +6,22 @@
 * Copyright 2018-2021 codecalm.net Paweł Kuna
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 */
+.divider-navbar {
+    height: 24px;
+    width: 2px;
+    background: #dddddd;
+    margin: auto 8px;
+}
+
+@media (max-width:767px) {
+    .divider-navbar {
+        height: 2px;
+        width: 100%;
+        background: #dddddd;
+        margin: auto 0;
+    }
+}
+
 .highlight pre, pre.highlight {
     max-height: 30rem;
     margin: 1.5rem 0;
