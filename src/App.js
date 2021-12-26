@@ -23,6 +23,7 @@ import Submission from './pages/submission/Submission';
 import HistoryTraining from './pages/history-training/HistoryTraining';
 import HistorySalary from './pages/history-salary/HistorySalary';
 import HistoryPunishment from './pages/history-punishment/HistoryPunishment';
+import HistoryStructuralPosition from './pages/history-structural-position/HistoryStructuralPosition';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="history/training" element={<AuthProvider level={["admin"]}><HistoryTraining /></AuthProvider>} />
           <Route path="history/salary" element={<AuthProvider level={["admin"]}><HistorySalary /></AuthProvider>} />
           <Route path="history/punishment" element={<AuthProvider level={["admin"]}><HistoryPunishment /></AuthProvider>} />
+          <Route path="history/structural-position" element={<AuthProvider level={["admin"]}><HistoryStructuralPosition /></AuthProvider>} />
 
 
         </Route>
