@@ -157,10 +157,10 @@ const Navbar = () => {
                                                     <Link class="dropdown-item" to="presence/setting"> Setting </Link>
                                                 </div>
                                             </div>
-                                            <a class="dropdown-item" href="{{ url('/') }}/pengajuan">
+                                            <Link class="dropdown-item" to="submission">
                                                 <span class="nav-link-title"> Pengajuan </span>
                                                 <span class="badge bg-red"></span>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
