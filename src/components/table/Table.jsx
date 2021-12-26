@@ -87,7 +87,7 @@ function Table({ data, tableName }) {
             </div>
         </div>
         <div className="card-footer row">
-            <p className="text-muted col-md-6 col-sm-12">Showing <span>{(activePage - 1) * totalDataPerPage + 1}</span> to <span>{(activePage * totalDataPerPage < dataTable.data.length) ? activePage * totalDataPerPage : dataTable.data.length}</span> of <span>{dataTable.data.length}</span> entries</p>
+            <p className="text-muted col-md-6 col-sm-12">Showing <span>{dataTable.data.length === 0 ? 0 : (activePage - 1) * totalDataPerPage + 1}</span> to <span>{(activePage * totalDataPerPage < dataTable.data.length) ? activePage * totalDataPerPage : dataTable.data.length}</span> of <span>{dataTable.data.length}</span> entries</p>
             <ul className="pagination col-md-6 col-sm-12 justify-content-md-end justify-content-center">
                 <li className={`page-item ` + (activePage === 1 ? 'disabled' : '')}>
                     <button className="page-link" tabIndex="-1" onClick={() => {
