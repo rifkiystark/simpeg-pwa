@@ -49,19 +49,19 @@ const Navbar = () => {
                                 <div className="dropdown-menu">
                                     <div className="dropdown-menu-columns">
                                         <div className="dropdown-menu-column">
-                                            <a className="dropdown-item" href="{{ url('/') }}/pegawai/profile/diklat/{{$pegawai->id_peg}}"> Diklat </a>
-                                            <a className="dropdown-item" href="{{ url('/') }}/pegawai/profile/gapok/{{$pegawai->id_peg}}"> Gapok </a>
-                                            <a className="dropdown-item" href="{{ url('/') }}/pegawai/profile/hukuman/{{$pegawai->id_peg}}"> Hukuman </a>
+                                            <Link className="dropdown-item" to="history/training"> Diklat </Link>
+                                            <Link className="dropdown-item" to="history/salary"> Gapok </Link>
+                                            <Link className="dropdown-item" to="history/punishment"> Hukuman </Link>
 
-                                            <a className="dropdown-item" href="{{ url('/') }}/pegawai/profile/jabatan/{{$pegawai->id_peg}}">
+                                            <Link className="dropdown-item" to="history/structural-position">
                                                 Jabatan Struktural
-                                            </a>
-                                            <a className="dropdown-item" href="{{ url('/') }}/pegawai/profile/jabatanfungsional/{{$pegawai->id_peg}}">
+                                            </Link>
+                                            <Link className="dropdown-item" to="history/functional-position">
                                                 Jabatan Fungsional
-                                            </a>
-                                            <a className="dropdown-item" href="{{ url('/') }}/pegawai/profile/jabatantambahan/{{$pegawai->id_peg}}">
+                                            </Link>
+                                            <Link className="dropdown-item" to="history/additional-position">
                                                 Jabatan Tambahan
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
