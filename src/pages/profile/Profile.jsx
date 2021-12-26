@@ -322,7 +322,7 @@ function Profile() {
                                                     <b>UPT</b> <a class="float-right">{dummyProfile.upt.upt}</a>
                                                 </li>
                                             </ul>
-                                            <a href="#" class="btn btn-primary btn-block w-100"><b>Edit</b></a>
+                                            <Link to="/profile/edit" class="btn btn-primary btn-block w-100"><b>Edit</b></Link>
 
                                         </div>
                                     </div>

@@ -27,6 +27,8 @@ import HistoryStructuralPosition from './pages/history-structural-position/Histo
 import HistoryFunctionalPosition from './pages/history-functional-position/HistoryFunctionalPosition';
 import HistoryAdditionalPosition from './pages/history-additional-position/HistoryAdditionalPosition';
 import Profile from './pages/profile/Profile';
+import EditProfile from './pages/edit-profile/EditProfile';
+import FillOutProfile from './pages/fillout-profile/FillOutProfile';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
           <Route path="users" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListUser /></AuthProvider>} />
           <Route path="submission" element={<AuthProvider level={["admin"]}><Submission /></AuthProvider>} />
           <Route path="profile" element={<AuthProvider level={["admin"]}><Profile /></AuthProvider>} />
+          <Route path="profile/edit" element={<AuthProvider level={["admin"]}><EditProfile /></AuthProvider>} />
 
           <Route path="master/religions" element={<AuthProvider level={["admin"]}><MasterReligion /></AuthProvider>} />
           <Route path="master/training" element={<AuthProvider level={["admin"]}><MasterTraining /></AuthProvider>} />
@@ -63,6 +66,7 @@ function App() {
 
 
         </Route>
+        <Route path="profile/fillout" element={<AuthProvider level={["admin"]}><FillOutProfile /></AuthProvider>} />
         <Route exact path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
