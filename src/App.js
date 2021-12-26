@@ -25,6 +25,7 @@ import HistorySalary from './pages/history-salary/HistorySalary';
 import HistoryPunishment from './pages/history-punishment/HistoryPunishment';
 import HistoryStructuralPosition from './pages/history-structural-position/HistoryStructuralPosition';
 import HistoryFunctionalPosition from './pages/history-functional-position/HistoryFunctionalPosition';
+import HistoryAdditionalPosition from './pages/history-additional-position/HistoryAdditionalPosition';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="history/punishment" element={<AuthProvider level={["admin"]}><HistoryPunishment /></AuthProvider>} />
           <Route path="history/structural-position" element={<AuthProvider level={["admin"]}><HistoryStructuralPosition /></AuthProvider>} />
           <Route path="history/functional-position" element={<AuthProvider level={["admin"]}><HistoryFunctionalPosition /></AuthProvider>} />
+          <Route path="history/additional-position" element={<AuthProvider level={["admin"]}><HistoryAdditionalPosition /></AuthProvider>} />
 
 
         </Route>
