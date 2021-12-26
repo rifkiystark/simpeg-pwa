@@ -20,6 +20,7 @@ import DataPresence from './pages/presence-data/DataPresence';
 import SettingPresence from './pages/presence-setting/SettingPresence';
 import MyPresence from './pages/presence-my/MyPresence';
 import Submission from './pages/submission/Submission';
+import HistoryTraining from './pages/history-training/HistoryTraining';
 
 function App() {
   return (
@@ -44,8 +45,9 @@ function App() {
 
           <Route path="presence/data" element={<AuthProvider level={["admin", 'adminunit']}><DataPresence /></AuthProvider>} />
           <Route path="presence/setting" element={<AuthProvider level={['admin', 'adminunit']}><SettingPresence /></AuthProvider>} />
-          <Route path="presence/history" element={<AuthProvider level={['admin', 'adminunit','pegawai']}><MyPresence /></AuthProvider>} />
+          <Route path="presence/history" element={<AuthProvider level={['admin', 'adminunit', 'pegawai']}><MyPresence /></AuthProvider>} />
 
+          <Route path="history/training" element={<AuthProvider level={["admin"]}><HistoryTraining /></AuthProvider>} />
 
 
         </Route>

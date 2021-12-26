@@ -46,7 +46,7 @@ function Table({ data, tableName }) {
     return (<>
         <div className="d-flex row">
             <div className="mb-3 me-auto text-muted col-sm-12 col-md-6">
-                <button className="btn btn-success" onClick={exportExcel}>Excel</button>
+                <button className="btn btn-outline-success" onClick={exportExcel}>Download Excel</button>
             </div>
             <div className="mb-3 ms-auto text-muted d-flex col-sm-12 col-md-6 align-items-center justify-content-md-end justify-content-start">
                 Search:
