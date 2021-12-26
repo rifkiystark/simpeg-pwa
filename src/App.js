@@ -21,6 +21,7 @@ import SettingPresence from './pages/presence-setting/SettingPresence';
 import MyPresence from './pages/presence-my/MyPresence';
 import Submission from './pages/submission/Submission';
 import HistoryTraining from './pages/history-training/HistoryTraining';
+import HistorySalary from './pages/history-salary/HistorySalary';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="presence/history" element={<AuthProvider level={['admin', 'adminunit', 'pegawai']}><MyPresence /></AuthProvider>} />
 
           <Route path="history/training" element={<AuthProvider level={["admin"]}><HistoryTraining /></AuthProvider>} />
+          <Route path="history/salary" element={<AuthProvider level={["admin"]}><HistorySalary /></AuthProvider>} />
 
 
         </Route>
