@@ -119,8 +119,8 @@ function HistoryAdditionalPosition() {
                 key: "",
                 render: (data, index, rowData) => (
                     <>
-                        <a className="btn btn-primary btn-sm m-1" href="#">Edit</a>
-                        <a className="btn btn-danger btn-sm m-1" href="#">Hapus</a>
+                        <a className="btn btn-primary btn-sm m-1" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit">Edit</a>
+                        <a className="btn btn-danger btn-sm m-1" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete">Hapus</a>
                     </>
                 ),
             },
@@ -190,13 +190,6 @@ function HistoryAdditionalPosition() {
             <div className="page-wrapper">
                 <div className="container-xl">
                     <div className="page-header d-print-none">
-                        <div className="row mb-2">
-                            <div className="col">
-                                <a href="{{ url('/') }}/pegawai/profile/{{$pegawai->id_peg}}" className="btn btn-primary btn-sm">
-                                    Kembali
-                                </a>
-                            </div>
-                        </div>
                         <div className="row align-items-center">
                             <div className="col">
                                 <div className="page-pretitle">Halaman Jabatan Tambahan</div>
@@ -212,7 +205,7 @@ function HistoryAdditionalPosition() {
 
                         <div className="card-body">
                             <h3 className="card-title">Data Jabatan Tambahan</h3>
-                            <a href="{{ url('/') }}/pegawai/diklat/tambah/{{$pegawai->id_peg}}" className="btn btn-success mb-3">
+                            <a href="" className="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modal-add">
                                 Tambah
                             </a>
                             <Table data={tableApproved} tableName="Riwayat Jabatan Tambahan Disetujui" />
@@ -226,6 +219,158 @@ function HistoryAdditionalPosition() {
                     </div>
                 </div>
             </section>
+
+            <div className="modal modal-blur fade" id="modal-add" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Tambah Jabatan Tambahan</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form action="http://localhost/simpeglocal/pegawai/jabatanfungsionalt/tambah" method="post" enctype="multipart/form-data">
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">No. SK</label>
+                                        <input type="text" name="no_sk" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" class="form-control" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Jabatan Tambahan</label>
+                                        <select name="kode_jbtft" class="form-control">
+                                            <option value="2">Satpam</option>
+                                            <option value="4">Pembantu Pelaksana</option>
+                                            <option value="5">Toolman</option>
+                                            <option value="6">Laboran</option>
+                                            <option value="7">Resepsionis</option>
+                                            <option value="10">s</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Terhitung Mulai</label>
+                                        <input type="date" name="tmt" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tamat Jabatan</label>
+                                        <input type="date" name="tamat_jabatan" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Edit Jabatan Tambahan</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form action="http://localhost/simpeglocal/pegawai/jabatanfungsionalt/tambah" method="post" enctype="multipart/form-data">
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">No. SK</label>
+                                        <input type="text" name="no_sk" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" class="form-control" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Jabatan Tambahan</label>
+                                        <select name="kode_jbtft" class="form-control">
+                                            <option value="2">Satpam</option>
+                                            <option value="4">Pembantu Pelaksana</option>
+                                            <option value="5">Toolman</option>
+                                            <option value="6">Laboran</option>
+                                            <option value="7">Resepsionis</option>
+                                            <option value="10">s</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Terhitung Mulai</label>
+                                        <input type="date" name="tmt" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tamat Jabatan</label>
+                                        <input type="date" name="tamat_jabatan" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal modal-blur fade" id="modal-delete" tabIndex="-1" role="dialog" aria-modal="true" style={{ paddingRight: 6 }}>
+                <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div className="modal-status bg-danger"></div>
+                        <div className="modal-body text-center py-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 9v2m0 4v.01"></path>
+                                <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+                            </svg>
+                            <h3>Apakah anda yakin?</h3>
+                            <div className="text-muted">Anda akan menghapus data jabatan tambahan <b>nama diklat</b></div>
+                        </div>
+                        <div className="modal-footer">
+                            <div className="w-100">
+                                <div className="row">
+                                    <div className="col">
+                                        <button className="btn btn-white w-100" data-bs-dismiss="modal">
+                                            Batal
+                                        </button>
+                                    </div>
+                                    <div className="col">
+                                        <a href="{{ url('/') }}/pegawai/hapus/{{$p->id_peg}}" className="btn btn-danger w-100" data-bs-dismiss="modal">
+                                            Hapus
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

@@ -198,13 +198,6 @@ function HistoryTraining() {
             <div className="page-wrapper">
                 <div className="container-xl">
                     <div className="page-header d-print-none">
-                        <div className="row mb-2">
-                            <div className="col">
-                                <a href="{{ url('/') }}/pegawai/profile/{{$pegawai->id_peg}}" className="btn btn-primary btn-sm">
-                                    Kembali
-                                </a>
-                            </div>
-                        </div>
                         <div className="row align-items-center">
                             <div className="col">
                                 <div className="page-pretitle">Halaman Diklat</div>
