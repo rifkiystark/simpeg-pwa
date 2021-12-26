@@ -56,7 +56,7 @@ function Submission() {
             {
                 name: "Aksi",
                 key: "",
-                render: (data, index, rowData) => <a class="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
+                render: (data, index, rowData) => <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
             },
         ],
         jabatanFungsionals: [
@@ -118,7 +118,189 @@ function Submission() {
             {
                 name: "Aksi",
                 key: "",
-                render: (data, index, rowData) => <a class="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
+                render: (data, index, rowData) => <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
+            },
+        ],
+        jabatanStrukturals: [
+            {
+                name: "No",
+                key: "",
+                render: (data, index, rowData) => (index + 1),
+            },
+            {
+                name: "Nama Pegawai",
+                key: "",
+                render: (data, index, rowData) => rowData.list_pegawai.nama,
+            },
+            {
+                name: "Nama Jabatan",
+                key: "",
+                render: (data, index, rowData) => rowData.jabatanstruktural.nama_jabatan,
+            },
+            {
+                name: "No SK",
+                key: "",
+                render: (data, index, rowData) => rowData.no_sk,
+            },
+            {
+                name: "Tanggal SK",
+                key: "",
+                render: (data, index, rowData) => rowData.tgl_sk,
+            },
+            {
+                name: "Pejabat Pengesah",
+                key: "",
+                render: (data, index, rowData) => rowData.pejabat_sk,
+            },
+            {
+                name: "Terhitung Mulai",
+                key: "",
+                render: (data, index, rowData) => rowData.tmt,
+            },
+            {
+                name: "Tamat Jabatan",
+                key: "",
+                render: (data, index, rowData) => rowData.tamat_jabatan,
+            },
+            {
+                name: "Dokumen SK",
+                key: "",
+                render: (data, index, rowData) => <a href={rowData.dokumen_sk} target="_blank" rel="noreferrer">Dokumen</a>,
+            },
+            {
+                name: "Keterangan Riwayat",
+                key: "",
+                render: (data, index, rowData) => rowData.ket,
+            },
+            {
+                name: "Di Update Oleh",
+                key: "",
+                render: (data, index, rowData) => rowData.updated_by.name,
+            },
+            {
+                name: "Aksi",
+                key: "",
+                render: (data, index, rowData) => <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
+            },
+        
+        ],
+        gapoks: [
+            {
+                name: "No",
+                key: "",
+                render: (data, index, rowData) => (index + 1),
+            },
+            {
+                name: "Nama Pegawai",
+                key: "",
+                render: (data, index, rowData) => rowData.list_pegawai.nama,
+            },
+            {
+                name: "No SK",
+                key: "",
+                render: (data, index, rowData) => rowData.no_sk,
+            },
+            {
+                name: "Tanggal SK",
+                key: "",
+                render: (data, index, rowData) => rowData.tgl_sk,
+            },
+            {
+                name: "Pejabat Pengesah",
+                key: "",
+                render: (data, index, rowData) => rowData.pejabat_sk,
+            },
+            {
+                name: "Terhitung Mulai",
+                key: "",
+                render: (data, index, rowData) => rowData.tmt,
+            },
+            {
+                name: "Naik Selanjutnya",
+                key: "",
+                render: (data, index, rowData) => rowData.naik_selanjutnya,
+            },
+            {
+                name: "Dokumen SK",
+                key: "",
+                render: (data, index, rowData) => <a href={rowData.dokumen_sk} target="_blank" rel="noreferrer">Dokumen</a>,
+            },
+            {
+                name: "Keterangan Riwayat",
+                key: "",
+                render: (data, index, rowData) => rowData.ket,
+            },
+            {
+                name: "Di Update Oleh",
+                key: "",
+                render: (data, index, rowData) => rowData.updated_by.name,
+            },
+            {
+                name: "Aksi",
+                key: "",
+                render: (data, index, rowData) => <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
+            },
+        ],
+        diklats: [
+            {
+                name: "No",
+                key: "",
+                render: (data, index, rowData) => (index + 1),
+            },
+            {
+                name: "Nama Pegawai",
+                key: "",
+                render: (data, index, rowData) => rowData.list_pegawai.nama,
+            },
+            {
+                name: "Nama Diklat",
+                key: "",
+                render: (data, index, rowData) => rowData.nama_diklat,
+            },
+            {
+                name: "Jenis Diklat",
+                key: "",
+                render: (data, index, rowData) => rowData.diklat.jenis_diklat,
+            },
+            {
+                name: "Tanggal Mulai",
+                key: "",
+                render: (data, index, rowData) => rowData.tgl_mulai,  
+            },
+            {
+                name: "Tanggal Selesai",
+                key: "",
+                render: (data, index, rowData) => rowData.tgl_selesai,
+            },
+            {
+                name: "Nomor Sertifikat",
+                key: "",
+                render: (data, index, rowData) => rowData.no_sertifikat,
+            },
+            {
+                name: "Tahun Sertifikat",
+                key: "",
+                render: (data, index, rowData) => rowData.thn_sertifikat,
+            },
+            {
+                name: "Penyelenggara",
+                key: "",
+                render: (data, index, rowData) => rowData.penyelenggara,
+            },
+            {
+                name: "Dokumen Diklat",
+                key: "",
+                render: (data, index, rowData) => <a href={rowData.dokumen_sk} target="_blank" rel="noreferrer">Dokumen</a>,
+            },
+            {
+                name: "Di Update Oleh",
+                key: "",
+                render: (data, index, rowData) => rowData.updated_by.name,
+            },
+            {
+                name: "Aksi",
+                key: "",
+                render: (data, index, rowData) => <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
             },
         ]
     }
@@ -448,53 +630,53 @@ function Submission() {
         ],
     }
     return (
-        <div class="page-wrapper">
-            <div class="container-xl">
-                <div class="page-header d-print-none">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="page-pretitle">Halaman Pengajuan</div>
-                            <h2 class="page-title">Pengajuan Kompetensi</h2>
+        <div className="page-wrapper">
+            <div className="container-xl">
+                <div className="page-header d-print-none">
+                    <div className="row align-items-center">
+                        <div className="col">
+                            <div className="page-pretitle">Halaman Pengajuan</div>
+                            <h2 className="page-title">Pengajuan Kompetensi</h2>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <section class="page-body">
-                <div class="container-xl">
-                    <div class="card card-primary card-outline">
-                        <div class="card-body">
-                            <ul class="nav nav-pills mb-3">
-                                <li class="nav-item">
-                                    <a href="#navpills-diklat" class="nav-link active show" data-bs-toggle="tab" aria-expanded="false">Diklat</a>
+            <section className="page-body">
+                <div className="container-xl">
+                    <div className="card card-primary card-outline">
+                        <div className="card-body">
+                            <ul className="nav nav-pills mb-3">
+                                <li className="nav-item">
+                                    <a href="#navpills-diklat" className="nav-link active show" data-bs-toggle="tab" aria-expanded="false">Diklat</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#navpills-gapok" class="nav-link" data-bs-toggle="tab" aria-expanded="false">Gapok</a>
+                                <li className="nav-item">
+                                    <a href="#navpills-gapok" className="nav-link" data-bs-toggle="tab" aria-expanded="false">Gapok</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#navpills-jabatan" class="nav-link" data-bs-toggle="tab" aria-expanded="false">Jabatan Struktural</a>
+                                <li className="nav-item">
+                                    <a href="#navpills-jabatan" className="nav-link" data-bs-toggle="tab" aria-expanded="false">Jabatan Struktural</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#navpills-fungsional" class="nav-link" data-bs-toggle="tab" aria-expanded="false">Jabatan Fungsional</a>
+                                <li className="nav-item">
+                                    <a href="#navpills-fungsional" className="nav-link" data-bs-toggle="tab" aria-expanded="false">Jabatan Fungsional</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#navpills-tambahan" class="nav-link" data-bs-toggle="tab" aria-expanded="false">Jabatan Tambahan</a>
+                                <li className="nav-item">
+                                    <a href="#navpills-tambahan" className="nav-link" data-bs-toggle="tab" aria-expanded="false">Jabatan Tambahan</a>
                                 </li>
                             </ul>
-                            <div class="tab-content br-n pn">
-                                <div id="navpills-diklat" class="tab-pane active show">
-
+                            <div className="tab-content br-n pn">
+                                <div id="navpills-diklat" className="tab-pane active show">
+                                    <Table data={{ data: dummyData.diklats, column: columnsData.diklats }} tableName="Data Jabatan Tambahan" />
                                 </div>
-                                <div id="navpills-gapok" class="tab-pane">
-
+                                <div id="navpills-gapok" className="tab-pane">
+                                    <Table data={{ data: dummyData.gapoks, column: columnsData.gapoks }} tableName="Data Jabatan Tambahan" />
                                 </div>
-                                <div id="navpills-jabatan" class="tab-pane">
-
+                                <div id="navpills-jabatan" className="tab-pane">
+                                    <Table data={{ data: dummyData.jabatanStrukturals, column: columnsData.jabatanStrukturals }} tableName="Data Jabatan Tambahan" />
                                 </div>
-                                <div id="navpills-fungsional" class="tab-pane">
+                                <div id="navpills-fungsional" className="tab-pane">
                                     <Table data={{ data: dummyData.jabatanFungsionals, column: columnsData.jabatanFungsionals }} tableName="Data Jabatan Tambahan" />
                                 </div>
-                                <div id="navpills-tambahan" class="tab-pane">
+                                <div id="navpills-tambahan" className="tab-pane">
                                     <Table data={{ data: dummyData.jabatanFungsionalTambahans, column: columnsData.jabatanFungsionalTambahans }} tableName="Data Jabatan Tambahan" />
                                 </div>
                             </div>

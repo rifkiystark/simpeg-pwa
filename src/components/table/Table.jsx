@@ -44,14 +44,14 @@ function Table({ data, tableName }) {
         FileSaver.saveAs(dataExcel, tableName + fileExtension);
     }
     return (<>
-        <div class="d-flex row">
-            <div class="mb-3 me-auto text-muted col-sm-12 col-md-6">
+        <div className="d-flex row">
+            <div className="mb-3 me-auto text-muted col-sm-12 col-md-6">
                 <button className="btn btn-success" onClick={exportExcel}>Excel</button>
             </div>
-            <div class="mb-3 ms-auto text-muted d-flex col-sm-12 col-md-6 align-items-center justify-content-md-end justify-content-start">
+            <div className="mb-3 ms-auto text-muted d-flex col-sm-12 col-md-6 align-items-center justify-content-md-end justify-content-start">
                 Search:
-                <div class="ms-2 d-inline-block">
-                    <input type="text" class="form-control" aria-label="Search invoice" onChange={search} />
+                <div className="ms-2 d-inline-block">
+                    <input type="text" className="form-control" aria-label="Search invoice" onChange={search} />
                 </div>
             </div>
         </div>
@@ -61,8 +61,8 @@ function Table({ data, tableName }) {
                     <table className="table table-bordered card-table table-vcenter text-nowrap datatable">
                         <thead>
                             <tr role="row">
-                                {dataTable.column.map(column =>
-                                    <th>
+                                {dataTable.column.map((column, indexColumn) =>
+                                    <th key={indexColumn}>
                                         {column.name}
                                     </th>
                                 )}
@@ -71,9 +71,9 @@ function Table({ data, tableName }) {
 
                         <tbody>
                             {dataTable.data.slice((activePage - 1) * totalDataPerPage, activePage * totalDataPerPage).map((row, indexRow) =>
-                                <tr role="row" className="odd">
+                                <tr role="row" className="odd" key={indexRow}>
                                     {dataTable.column.map((column, indexColumn) =>
-                                        <td>
+                                        <td key={indexColumn}>
                                             {
                                                 column.render(row[column.key], indexRow + ((activePage - 1) * totalDataPerPage), row)
                                             }
@@ -86,10 +86,10 @@ function Table({ data, tableName }) {
                 </div>
             </div>
         </div>
-        <div class="card-footer row">
-            <p class="text-muted col-md-6 col-sm-12">Showing <span>{(activePage - 1) * totalDataPerPage + 1}</span> to <span>{(activePage * totalDataPerPage < dataTable.data.length) ? activePage * totalDataPerPage : dataTable.data.length}</span> of <span>{dataTable.data.length}</span> entries</p>
-            <ul class="pagination col-md-6 col-sm-12 justify-content-md-end justify-content-center">
-                <li class={`page-item ` + (activePage === 1 ? 'disabled' : '')}>
+        <div className="card-footer row">
+            <p className="text-muted col-md-6 col-sm-12">Showing <span>{(activePage - 1) * totalDataPerPage + 1}</span> to <span>{(activePage * totalDataPerPage < dataTable.data.length) ? activePage * totalDataPerPage : dataTable.data.length}</span> of <span>{dataTable.data.length}</span> entries</p>
+            <ul className="pagination col-md-6 col-sm-12 justify-content-md-end justify-content-center">
+                <li className={`page-item ` + (activePage === 1 ? 'disabled' : '')}>
                     <button className="page-link" tabIndex="-1" onClick={() => {
                         if (activePage > 1) {
                             setActivePage(activePage - 1)
@@ -101,13 +101,13 @@ function Table({ data, tableName }) {
                 {
                     [...Array(totalPage)].map((x, i) => {
                         if (activePage - (i + 1) === 4) {
-                            return <li className="page-item"><button className="page-link">..</button></li>
+                            return <li key={i} className="page-item"><button className="page-link">..</button></li>
                         } else if (activePage === (i + 1)) {
-                            return <li className="page-item active"><button className="page-link">{i + 1}</button></li>
+                            return <li key={i} className="page-item active"><button className="page-link">{i + 1}</button></li>
                         } else if ((i + 1) - activePage === 4) {
-                            return <li className="page-item"><button className="page-link">..</button></li>
+                            return <li key={i} className="page-item"><button className="page-link">..</button></li>
                         } else if ((activePage - i < 4 && (i-1) < activePage) || ((i-1) - activePage < 4 && i > activePage)) {
-                            return <li className="page-item" onClick={() => {
+                            return <li key={i} className="page-item" onClick={() => {
                                 setActivePage(i + 1)
                             }}><button className="page-link">{i + 1}</button></li>
 
