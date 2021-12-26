@@ -182,7 +182,7 @@ function Submission() {
                 key: "",
                 render: (data, index, rowData) => <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>Verifikasi</a>,
             },
-        
+
         ],
         gapoks: [
             {
@@ -265,7 +265,7 @@ function Submission() {
             {
                 name: "Tanggal Mulai",
                 key: "",
-                render: (data, index, rowData) => rowData.tgl_mulai,  
+                render: (data, index, rowData) => rowData.tgl_mulai,
             },
             {
                 name: "Tanggal Selesai",

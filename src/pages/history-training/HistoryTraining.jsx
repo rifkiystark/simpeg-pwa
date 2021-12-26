@@ -53,7 +53,7 @@ function HistoryTraining() {
                     updated_at: "2021-12-08T08:02:50.000000Z",
                     role: null,
                 },
-                status: 0,
+                status: 1,
                 dokumen_sk: "diklat-e53a38d5db38103ca6c1a7511ba64fd9.png",
                 diklat: {
                     kode_diklat: 1,
@@ -123,8 +123,8 @@ function HistoryTraining() {
                 key: "",
                 render: (data, index, rowData) => (
                     <>
-                        <a className="btn btn-primary btn-sm m-1" href="#">Edit</a>
-                        <a className="btn btn-danger btn-sm m-1" href="#">Hapus</a>
+                        <a className="btn btn-primary btn-sm m-1" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit">Edit</a>
+                        <a className="btn btn-danger btn-sm m-1" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete">Hapus</a>
                     </>
                 )
             },
@@ -220,7 +220,7 @@ function HistoryTraining() {
 
                         <div className="card-body">
                             <h3 className="card-title">Data Diklat</h3>
-                            <a href="{{ url('/') }}/pegawai/diklat/tambah/{{$pegawai->id_peg}}" className="btn btn-success mb-3">
+                            <a href="#" className="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modal-add">
                                 Tambah
                             </a>
                             <Table data={tableApproved} tableName="Riwayat Diklat Disetujui" />
@@ -234,6 +234,164 @@ function HistoryTraining() {
                     </div>
                 </div>
             </section>
+
+            <div className="modal modal-blur fade" id="modal-add" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Tambah Diklat</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form action="http://localhost/simpeglocal/pegawai/diklat/tambah" method="POST" enctype="multipart/form-data">
+                                <div class="form-row row g-3">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Nama Diklat</label>
+                                        <input type="text" name="nama_diklat" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Jenis Diklat</label>
+                                        <select name="jenis_diklat" class="form-control" required>
+                                            <option value="1">Tingkat Kabupaten</option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Tanggal Mulai</label>
+                                        <input type="date" name="tgl_mulai" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Tanggal Selesai</label>
+                                        <input type="date" name="tgl_selesai" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Nomor Sertifikat</label>
+                                        <input type="text" name="nmr_sertifikat" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Tahun Sertifikat</label>
+                                        <input type="number" name="thn_sertifikat" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Penyelenggara</label>
+                                        <input type="text" name="penyelenggara" class="form-control" required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">File Dokumen</label>
+                                        <input type="file" name="dokumen_sk" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <button type="sumbit" name="submit" class="btn btn-primary">Tambah</button>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Tambah Diklat</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form action="http://localhost/simpeglocal/pegawai/diklat/tambah" method="POST" enctype="multipart/form-data">
+                                <div class="form-row row g-3">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Nama Diklat</label>
+                                        <input type="text" name="nama_diklat" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Jenis Diklat</label>
+                                        <select name="jenis_diklat" class="form-control" required>
+                                            <option value="1">Tingkat Kabupaten</option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Tanggal Mulai</label>
+                                        <input type="date" name="tgl_mulai" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Tanggal Selesai</label>
+                                        <input type="date" name="tgl_selesai" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Nomor Sertifikat</label>
+                                        <input type="text" name="nmr_sertifikat" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Tahun Sertifikat</label>
+                                        <input type="number" name="thn_sertifikat" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Penyelenggara</label>
+                                        <input type="text" name="penyelenggara" class="form-control" required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">File Dokumen</label>
+                                        <input type="file" name="dokumen_sk" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <button type="sumbit" name="submit" class="btn btn-primary">Tambah</button>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal modal-blur fade" id="modal-delete" tabIndex="-1" role="dialog" aria-modal="true" style={{ paddingRight: 6 }}>
+                <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div className="modal-status bg-danger"></div>
+                        <div className="modal-body text-center py-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 9v2m0 4v.01"></path>
+                                <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+                            </svg>
+                            <h3>Apakah anda yakin?</h3>
+                            <div className="text-muted">Anda akan menghapus data diklat <b>nama diklat</b></div>
+                        </div>
+                        <div className="modal-footer">
+                            <div className="w-100">
+                                <div className="row">
+                                    <div className="col"><button className="btn btn-white w-100" data-bs-dismiss="modal">
+                                        Batal
+                                    </button></div>
+                                    <div className="col"><a href="{{ url('/') }}/pegawai/hapus/{{$p->id_peg}}" className="btn btn-danger w-100" data-bs-dismiss="modal">
+                                        Hapus
+                                    </a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
