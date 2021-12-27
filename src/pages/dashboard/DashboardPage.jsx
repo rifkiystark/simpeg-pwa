@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 function DashboardPage() {
@@ -47,7 +48,7 @@ function DashboardPage() {
             </div>
 
             <div class="col-sm-6 col-lg-3">
-              <a class="card" href="@if ($presensi == null) {{url('/')}}/presensi/masuk @else # @endif">
+              <Link class="card" to="/presence/in">
                 <div class="card">
                   <div class="progress progress-sm card-progress">
                     <div class="progress-bar bg-green" style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
@@ -66,10 +67,10 @@ function DashboardPage() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <a class="card" href="#">
+              <Link class="card" to="/presence/out">
                 <div class="card">
                   <div class="progress progress-sm card-progress">
                     <div class="progress-bar bg-orange bg-green @endif" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -88,7 +89,7 @@ function DashboardPage() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

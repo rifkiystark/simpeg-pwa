@@ -29,6 +29,8 @@ import HistoryAdditionalPosition from './pages/history-additional-position/Histo
 import Profile from './pages/profile/Profile';
 import EditProfile from './pages/edit-profile/EditProfile';
 import FillOutProfile from './pages/fillout-profile/FillOutProfile';
+import PresenceIn from './pages/presence-in/PresenceIn';
+import PresenceOut from './pages/presence-out/PresenceOut';
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
           <Route path="presence/data" element={<AuthProvider level={["admin", 'adminunit']}><DataPresence /></AuthProvider>} />
           <Route path="presence/setting" element={<AuthProvider level={['admin', 'adminunit']}><SettingPresence /></AuthProvider>} />
           <Route path="presence/history" element={<AuthProvider level={['admin', 'adminunit', 'pegawai']}><MyPresence /></AuthProvider>} />
+          <Route path="presence/in" element={<AuthProvider level={['admin', 'adminunit', 'pegawai']}><PresenceIn /></AuthProvider>} />
+          <Route path="presence/out" element={<AuthProvider level={['admin', 'adminunit', 'pegawai']}><PresenceOut /></AuthProvider>} />
 
           <Route path="history/training" element={<AuthProvider level={["admin"]}><HistoryTraining /></AuthProvider>} />
           <Route path="history/salary" element={<AuthProvider level={["admin"]}><HistorySalary /></AuthProvider>} />
