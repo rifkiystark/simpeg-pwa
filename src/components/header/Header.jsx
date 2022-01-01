@@ -1,10 +1,25 @@
 
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import logo from "../../assets/img/logo.svg"
+import { setMe } from "../../reduxslice/meSlice"
+import { useNavigate } from 'react-router';
 
 const Header = () => {
-    const fullname = "Ananda Rifkiy Hasan"
-    const level = "Admin"
+    const dispatch = useDispatch()
+    const me = useSelector((state) => state.me)
+
+    const router = useNavigate()
+
+    const fullname = me != null ? me.name : ""
+    const level = me != null ?me.level : ""
+
+    const logout = () => {
+        localStorage.clear()
+        dispatch(setMe(null))
+        router("/login", { replace: true })
+    }
 
     return <header className="navbar navbar-expand-md navbar-light d-print-none">
         <div className="container-xl">
@@ -80,7 +95,7 @@ const Header = () => {
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <Link to="login" className="dropdown-item">Logout</Link>
+                        <button className="dropdown-item" onClick={logout}>Logout</button>
                     </div>
                 </div>
             </div>

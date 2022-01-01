@@ -1,9 +1,11 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import $ from "jquery"
+import { useSelector } from "react-redux"
 
 const Navbar = () => {
-    const level = "admin"
+    const me = useSelector((state) => state.me)
+    const level = me != null ? me.level : ""
 
     useEffect(() => {
         $(".dropend a.dropdown-toggle").on("click", function (e) {
