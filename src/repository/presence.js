@@ -62,7 +62,12 @@ const presenceOut = async (dataPresence) => {
     } catch (error) {
         if (error.response) {
             if (error.response.status === 404) {
-                return { status: false, data: {}, message: Const.MESSAGE_CODE.NOT_YET_PRESENCE_IN }
+                const todayUnsyncPresence = localStorage.getItem(Const.STORAGE_KEY.UNSYNC_PRESENCE)
+                if(todayUnsyncPresence != null){
+                    return { status: false, data: dataPresence, message: "" }
+                } else {
+                    return { status: false, data: {}, message: Const.MESSAGE_CODE.NOT_YET_PRESENCE_IN }
+                }
             }
         }
         return { status: false, data: dataPresence, message: "" }
