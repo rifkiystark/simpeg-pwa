@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Const from "../../constant"
+import { useEffect, useState } from 'react';
+import { presenceStatus } from "../../repository/presence";
+import moment from 'moment';
 
 
 function DashboardPage() {
@@ -9,6 +12,55 @@ function DashboardPage() {
   const level = me != null ? me.level : ""
   const name = me != null ? me.name : ""
   const upt = uptInfo != null ? uptInfo.upt : ""
+
+  const [greeting, setGreeting] = useState("")
+  const [time, setTime] = useState("")
+  const [date, setDate] = useState("")
+  const [presence, setPresence] = useState(null)
+
+  const showTime = () => {
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+
+    if (h >= 4 && h <= 9) {
+      setGreeting("Selamat Pagi")
+    } else if (h > 9 && h <= 14) {
+      setGreeting("Selamat Siang")
+    } else if (h > 14 && h <= 17) {
+      setGreeting("Selamat Sore")
+    } else {
+      setGreeting("Selamat Malam")
+    }
+
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    var time = h + ":" + m + ":" + s + " WIB"
+    setTime(time);
+
+    setDate(`${date.getDate()} ${Const.MONTH_ID[date.getMonth()]} ${date.getFullYear()}`)
+
+    setTimeout(showTime, 1000);
+  }
+
+  const getPresenceStatus = async () => {
+    const { status, data, message } = await presenceStatus()
+    if(status){
+      setPresence(data.presenceToday)
+      if(message === ""){
+        localStorage.setItem(Const.STORAGE_KEY.PRESENCE, JSON.stringify(data.presenceToday))
+      }
+    } 
+  }
+
+  useEffect(() => {
+    showTime()
+    getPresenceStatus()
+  }, [])
+
   return (
     <div class="page-wrapper">
       <div class="container-xl">
@@ -44,21 +96,21 @@ function DashboardPage() {
                 </div>
                 <div class="card-body">
                   <div class="d-flex align-items-center">
-                    <div class="h3 mb-1" id="greetings">Selamat Pagi</div>
+                    <div class="h3 mb-1" id="greetings">{greeting}</div>
                   </div>
-                  <div class="h1 mb-1" id="clock">01:39:13 WIB</div>
+                  <div class="h1 mb-1" id="clock">{time}</div>
                   <div class="d-flex align-items-center">
-                    <div class="subheader" id="tanggal">20 May 2021</div>
+                    <div class="subheader" id="tanggal">{date}</div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6 col-lg-3">
-              <Link class="card" to="/presence/in">
+              <Link class="card" to={presence == null ? "/presence/in" : "#"}>
                 <div class="card">
                   <div class="progress progress-sm card-progress">
-                    <div class="progress-bar bg-green" style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <div class={`progress-bar ${presence != null ? "bg-green" : "bg-primary"}`} style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                       <span class="visually-hidden"></span>
                     </div>
                   </div>
@@ -70,17 +122,17 @@ function DashboardPage() {
                       <div class="h1 mb-1 me-2">Masuk</div>
                     </div>
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Anda masuk pada 12:00:00</div>
+                      <div class="subheader">{presence != null ? "Anda masuk pada " + moment.unix(parseInt(presence.masuk)).format("HH:MM:ss") : ""}</div>
                     </div>
                   </div>
                 </div>
               </Link>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <Link class="card" to="/presence/out">
+              <Link class="card" to={presence == null || presence.keluar == null ? "/presence/out" : "#"}>
                 <div class="card">
                   <div class="progress progress-sm card-progress">
-                    <div class="progress-bar bg-orange bg-green @endif" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div class={`progress-bar ${presence != null ? presence.keluar != null ? "bg-green" : "bg-primary" : "bg-primary"}`} style={{ width: "100%" }} role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                       <span class="visually-hidden"></span>
                     </div>
                   </div>
@@ -92,7 +144,7 @@ function DashboardPage() {
                       <div class="h1 mb-1 me-2">Pulang</div>
                     </div>
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Anda pulang pada 16:00:00</div>
+                      <div class="subheader">{presence != null ? presence.keluar != null ? "Anda pulang pada " + moment.unix(parseInt(presence.keluar)).format("HH:MM:ss") : "" : ""}</div>
                     </div>
                   </div>
                 </div>

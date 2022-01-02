@@ -1,14 +1,29 @@
+import moment from "moment";
+import 'moment/locale/id';
 import { useEffect, useState } from "react";
+import LoadingIcon from "../../components/loading-icon/LoadingIcon";
+import Const from "../../constant";
+import { presenceIn } from "../../repository/presence";
+import Toast from '../../components/toast/Toast';
+import { useNavigate } from 'react-router';
 
 function PresenceIn() {
-    let [showNoGPS, setShowNoGPS] = useState(false)
-    let [showOutLocation, setShowOutLocation] = useState(false)
-    let [showInLocation, setShowInLocation] = useState(false)
 
-    let [latitude, setLatitude] = useState(0)
-    let [longitude, setLongitude] = useState(0)
-    let [type, setType] = useState("")
-    let [location, setLocation] = useState("")
+    const settingPresence = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.UPT_INFO)).settings
+    const router = useNavigate()
+
+    const [showNoGPS, setShowNoGPS] = useState(false)
+    const [showOutLocation, setShowOutLocation] = useState(false)
+    const [showInLocation, setShowInLocation] = useState(false)
+    const [showLoading, setLoading] = useState(false)
+
+    const [lat, setLatitude] = useState(0)
+    const [long, setLongitude] = useState(0)
+    const [type, setType] = useState("")
+    const [lokasi, setLocation] = useState("Dalam kawasan UPT")
+    const [keterangan, setNote] = useState("Tepat waktu")
+    const [date, setDate] = useState("")
+    const [masuk, setTime] = useState(0)
 
     const displayLocation = (latitude, longitude) => {
         var request = new XMLHttpRequest();
@@ -19,7 +34,7 @@ function PresenceIn() {
 
         request.open(method, url, async);
         request.onreadystatechange = function () {
-            if (request.readyState == 4 && request.status == 200) {
+            if (request.readyState === 4 && request.status === 200) {
                 var data = JSON.parse(request.responseText);
                 var address = data.features[0].place_name;
                 setLocation(address)
@@ -59,7 +74,9 @@ function PresenceIn() {
                 break;
 
             case error.UNKNOWN_ERROR:
-
+                alert("An unknown error occurred.");
+                break;
+            default:
                 alert("An unknown error occurred.");
                 break;
         }
@@ -87,13 +104,13 @@ function PresenceIn() {
             longitude
         } = position.coords;
         if (latitude != null && longitude != null) {
-
-            var centerLat = '{{$pegawai->upt->settings->latitude}}';
-            var centerLng = '{{$pegawai->upt->settings->longitude}}';
+            console.log(settingPresence)
+            var centerLat = settingPresence.latitude;
+            var centerLng = settingPresence.longitude;
 
             var d = getDistanceFromLatLonInMeters(parseFloat(centerLat), parseFloat(centerLng), position.coords.latitude, position.coords.longitude);
-
-            if (d <= 200) {
+            console.log(d)
+            if (d <= settingPresence.radius) {
                 setType("WFO")
                 setLatitude(latitude)
                 setLongitude(longitude)
@@ -111,19 +128,45 @@ function PresenceIn() {
                 setShowOutLocation(true)
                 setShowNoGPS(false)
             }
+            setNote(isLate())
+            moment.locale("id")
+            setDate(moment().format("YYYY-MM-DD"))
+            setTime(moment().unix())
+
         } else {
             setShowInLocation(false)
             setShowOutLocation(false)
             setShowNoGPS(true)
         }
+
     }
 
     useEffect(() => {
         getLocation()
     }, [])
 
-    const doPresence = () => {
-        alert(latitude + " | " + longitude + " | " + type + " | " + location)
+    const doPresence = async () => {
+        setLoading(true)
+        const { status, data, message } = await presenceIn({ lat, long, type, lokasi, keterangan, date, masuk })
+        if (status) {
+            Toast.successToast("Presensi Berhasil")
+        } else {
+            localStorage.setItem(Const.STORAGE_KEY.UNSYNC_PRESENCE, JSON.stringify(data))
+            Toast.warningToast("Presensi gagal dikirim, tetap tenang, kami akan mengirimkan lagi nanti")
+        }
+        setLoading(false)
+        router("/dashboard", { replace: true })
+    }
+
+    const isLate = () => {
+        const now = moment();
+        const presenceTime = moment(settingPresence.waktu_masuk, "H:m");
+        const diff = now.diff(presenceTime, "minutes")
+        if (diff > 0) {
+            return "Terlambat " + diff + " menit"
+        } else {
+            return "Tepat waktu"
+        }
     }
 
     return (
@@ -149,7 +192,7 @@ function PresenceIn() {
                             <div className="btn-list">
                                 <button onClick={getLocation} className="btn btn-warning">Refresh Lokasi</button>
 
-                                <button onClick={doPresence} className="btn btn-success">Masuk</button>
+                                <button onClick={doPresence} className="btn btn-success">{!showLoading ? "Masuk" : <LoadingIcon />}</button>
                             </div>
                         </div>
 
@@ -159,7 +202,7 @@ function PresenceIn() {
                                 Anda bisa melakukan presensi
                             </p>
                             <div className="btn-list">
-                                <button onClick={doPresence} className="btn btn-success">Masuk</button>
+                                <button onClick={doPresence} className="btn btn-success">{!showLoading ? "Masuk" : <LoadingIcon />}</button>
                             </div>
                         </div>
 
