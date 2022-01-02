@@ -44,24 +44,24 @@ function PresenceOut() {
     }
     return (
         <>
-            <div class="page-wrapper">
-                <div class="container-xl">
-                    <div class="page-header d-print-none">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="page-pretitle">Halaman Presensi</div>
-                                <h2 class="page-title">Pulang</h2>
+            <div className="page-wrapper">
+                <div className="container-xl">
+                    <div className="page-header d-print-none">
+                        <div className="row align-items-center">
+                            <div className="col">
+                                <div className="page-pretitle">Halaman Presensi</div>
+                                <h2 className="page-title">Pulang</h2>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="page-body">
-                    <div class="container-xl">
-                        <div class="alert alert-success w-100" role="alert">
-                            <div class="btn-list">
-                                <div class="form-row">
-                                    <div class="col-12">
-                                        <button onClick={doPresenceOut} class="btn btn-success">{!isLoading ? "Pulang" : <LoadingIcon />}</button>
+                <div className="page-body">
+                    <div className="container-xl">
+                        <div className="alert alert-success w-100" role="alert">
+                            <div className="btn-list">
+                                <div className="form-row">
+                                    <div className="col-12">
+                                        <button onClick={doPresenceOut} className="btn btn-success">{!isLoading ? "Pulang" : <LoadingIcon />}</button>
                                     </div>
                                 </div>
 

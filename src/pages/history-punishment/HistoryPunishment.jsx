@@ -211,39 +211,39 @@ function HistoryPunishment() {
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/hukuman/tambah" method="post" enctype="multipart/form-data">
 
-                                <div class="row g-3">
+                                <div className="row g-3">
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Hukuman</label>
-                                        <input type="text" name="hukuman" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Hukuman</label>
+                                        <input type="text" name="hukuman" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">No.SK</label>
-                                        <input type="text" name="no_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">No.SK</label>
+                                        <input type="text" name="no_sk" className="form-control" required="" />
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Keterangan</label>
-                                        <input type="text" name="ket" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Keterangan</label>
+                                        <input type="text" name="ket" className="form-control" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
                             </form>
@@ -262,39 +262,39 @@ function HistoryPunishment() {
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/hukuman/tambah" method="post" enctype="multipart/form-data">
 
-                                <div class="row g-3">
+                                <div className="row g-3">
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Hukuman</label>
-                                        <input type="text" name="hukuman" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Hukuman</label>
+                                        <input type="text" name="hukuman" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">No.SK</label>
-                                        <input type="text" name="no_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">No.SK</label>
+                                        <input type="text" name="no_sk" className="form-control" required="" />
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Keterangan</label>
-                                        <input type="text" name="ket" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Keterangan</label>
+                                        <input type="text" name="ket" className="form-control" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
 

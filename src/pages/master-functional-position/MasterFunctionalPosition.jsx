@@ -97,33 +97,33 @@ function MasterFunctionalPosition() {
                     </div>
                 </div>
             </div>
-            <div class="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Jabatan Fungsional</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <div className="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Jabatan Fungsional</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/tmdiklat/edit/proses" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <label class="form-label">Jabatan Fungsional</label>
-                                        <input type="hidden" name="kode_diklat" class="form-control" value={functionalPosition.kodeJabatanFungsional} />
-                                        <input type="text" name="jenis_diklat" class="form-control" value={functionalPosition.namaJabatan} />
+                                <div className="row g-3">
+                                    <div className="col-md-12">
+                                        <label className="form-label">Jabatan Fungsional</label>
+                                        <input type="hidden" name="kode_diklat" className="form-control" value={functionalPosition.kodeJabatanFungsional} />
+                                        <input type="text" name="jenis_diklat" className="form-control" value={functionalPosition.namaJabatan} />
                                     </div>
 
 
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Perbarui" class="btn btn-success" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Perbarui" className="btn btn-success" />
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

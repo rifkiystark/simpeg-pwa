@@ -114,45 +114,45 @@ function MasterSalary() {
                     </div>
                 </div>
             </div>
-            <div class="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Gapok</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <div className="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Gapok</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/tmgapok/edit/proses" method="post">
-                                <div class="row g-3">
-                                    <input type="hidden" name="kode_gapok" value={salary.kodeGapok} class="form-control" />
-                                    <div class="col-md-6">
-                                        <label class="form-label">Masa Kerja</label>
-                                        <input type="number" value="1" name={salary.masaKerja} class="form-control" />
+                                <div className="row g-3">
+                                    <input type="hidden" name="kode_gapok" value={salary.kodeGapok} className="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Masa Kerja</label>
+                                        <input type="number" value="1" name={salary.masaKerja} className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">PP</label>
-                                        <input type="text" name="PP" value={salary.pp} class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">PP</label>
+                                        <input type="text" name="PP" value={salary.pp} className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Kode Golongan</label>
-                                        <input type="text" name="kode_gol" value={salary.kodeGolongan} class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Kode Golongan</label>
+                                        <input type="text" name="kode_gol" value={salary.kodeGolongan} className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Gapok</label>
-                                        <input type="number" name="gapok" value={salary.gapok} class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Gapok</label>
+                                        <input type="number" name="gapok" value={salary.gapok} className="form-control" />
                                     </div>
 
 
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Perbarui" class="btn btn-success" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Perbarui" className="btn btn-success" />
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

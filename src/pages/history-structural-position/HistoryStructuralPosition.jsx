@@ -244,22 +244,22 @@ function HistoryStructuralPosition() {
                             <form action="http://localhost/simpeglocal/pegawai/jabatan/tambah" method="post" enctype="multipart/form-data">
 
 
-                                <div class="row g-3">
-                                    <div class="col-md-6">
+                                <div className="row g-3">
+                                    <div className="col-md-6">
                                         <label>No. SK</label>
-                                        <input type="text" name="no_sk" class="form-control" required="" />
+                                        <input type="text" name="no_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" required="" />
+                                        <input type="date" name="tgl_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" required="" />
+                                        <input type="text" name="pejabat_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Jabatan Struktural</label>
-                                        <select name="kode_jbts" class="form-control" required="" >
+                                        <select name="kode_jbts" className="form-control" required="" >
                                             <option value="1">Pimpinan</option>
                                             <option value="2">Wakil Pimpinan</option>
                                             <option value="3">Pegawai</option>
@@ -270,35 +270,35 @@ function HistoryStructuralPosition() {
                                             <option value="8">Staff Yayasan</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Terhitung Mulai</label>
-                                        <input type="date" name="tmt" class="form-control" required="" />
+                                        <input type="date" name="tmt" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Tamat Jabatan</label>
-                                        <input type="date" name="tamat_jabatan" class="form-control" required="" />
+                                        <input type="date" name="tamat_jabatan" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Golongan</label>
-                                        <select name="kode_gol" class="form-control" required>
+                                        <select name="kode_gol" className="form-control" required>
                                             <option value="-">-</option>
                                             <option value="2">Kepala Sekolah</option>
                                             <option value="3">Guru</option>
                                             <option value="4">Wakil Kepala Sekolah</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                        <input type="file" name="dokumen_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div className="col-md-12">
                                         <label>Keterangan</label>
-                                        <input type="text" name="ket" class="form-control" />
+                                        <input type="text" name="ket" className="form-control" />
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
                             </form>
@@ -318,22 +318,22 @@ function HistoryStructuralPosition() {
                             <form action="http://localhost/simpeglocal/pegawai/jabatan/tambah" method="post" enctype="multipart/form-data">
 
 
-                                <div class="row g-3">
-                                    <div class="col-md-6">
+                                <div className="row g-3">
+                                    <div className="col-md-6">
                                         <label>No. SK</label>
-                                        <input type="text" name="no_sk" class="form-control" required="" />
+                                        <input type="text" name="no_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" required="" />
+                                        <input type="date" name="tgl_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" required="" />
+                                        <input type="text" name="pejabat_sk" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Jabatan Struktural</label>
-                                        <select name="kode_jbts" class="form-control" required="" >
+                                        <select name="kode_jbts" className="form-control" required="" >
                                             <option value="1">Pimpinan</option>
                                             <option value="2">Wakil Pimpinan</option>
                                             <option value="3">Pegawai</option>
@@ -344,35 +344,35 @@ function HistoryStructuralPosition() {
                                             <option value="8">Staff Yayasan</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Terhitung Mulai</label>
-                                        <input type="date" name="tmt" class="form-control" required="" />
+                                        <input type="date" name="tmt" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Tamat Jabatan</label>
-                                        <input type="date" name="tamat_jabatan" class="form-control" required="" />
+                                        <input type="date" name="tamat_jabatan" className="form-control" required="" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>Golongan</label>
-                                        <select name="kode_gol" class="form-control" required>
+                                        <select name="kode_gol" className="form-control" required>
                                             <option value="-">-</option>
                                             <option value="2">Kepala Sekolah</option>
                                             <option value="3">Guru</option>
                                             <option value="4">Wakil Kepala Sekolah</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <label>File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                        <input type="file" name="dokumen_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div className="col-md-12">
                                         <label>Keterangan</label>
-                                        <input type="text" name="ket" class="form-control" />
+                                        <input type="text" name="ket" className="form-control" />
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
                             </form>

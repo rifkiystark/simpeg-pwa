@@ -16,10 +16,10 @@ function BaseLayout() {
     const dispatch = useDispatch()
     const router = useNavigate()
     const location = useLocation()
-   
+
     useEffect(() => {
-        if(location.pathname == "/"){
-            router("/dashboard", {replace: true})
+        if (location.pathname == "/") {
+            router("/dashboard", { replace: true })
         }
         async function fetchUserInfo() {
             const { status, data, message } = await userInfo()
@@ -27,25 +27,28 @@ function BaseLayout() {
                 localStorage.setItem(Const.STORAGE_KEY.USER_INFO, JSON.stringify(data.user))
                 localStorage.setItem(Const.STORAGE_KEY.UPT_INFO, JSON.stringify(data.upt))
                 dispatch(setMe(data.user))
-            } else if(message === Const.MESSAGE_CODE.FILL_USER_INFO){
+            } else if (message === Const.MESSAGE_CODE.FILL_USER_INFO) {
                 router("/profile/fillout", { replace: true })
             }
         }
-        async function syncPresences(){
+        async function syncPresences() {
             let unsyncPresences = []
-            for(let i = 0; i < localStorage.length; i++){
-                if(localStorage.key(i).includes("__UP__")){
+            for (let i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i).includes("__UP__")) {
                     unsyncPresences.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
                 }
             }
-            const { status, data, message} = await syncPresence({unsyncPresences});
-            if(status){
-                for(let i = 0; i < localStorage.length; i++){
-                    if(localStorage.key(i).includes("__UP__")){
-                        localStorage.removeItem(localStorage.key(i))
+            if (unsyncPresences.length > 0) {
+                const { status, data, message } = await syncPresence({ unsyncPresences });
+                if (status) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        if (localStorage.key(i).includes("__UP__")) {
+                            localStorage.removeItem(localStorage.key(i))
+                        }
                     }
                 }
-            } 
+            }
+
         }
         syncPresences()
         if (me == null) {

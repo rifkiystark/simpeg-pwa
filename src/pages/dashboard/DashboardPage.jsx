@@ -62,89 +62,89 @@ function DashboardPage() {
   }, [])
 
   return (
-    <div class="page-wrapper">
-      <div class="container-xl">
-        <div class="page-header d-print-none">
-          <div class="row align-items-center">
-            <div class="col">
-              <div class="page-pretitle">Info Login</div>
-              <h2 class="page-title">{name} | UPT : {upt}</h2>
+    <div className="page-wrapper">
+      <div className="container-xl">
+        <div className="page-header d-print-none">
+          <div className="row align-items-center">
+            <div className="col">
+              <div className="page-pretitle">Info Login</div>
+              <h2 className="page-title">{name} | UPT : {upt}</h2>
             </div>
 
           </div>
         </div>
       </div>
-      <div class="container-xl">
-        <div class="page-header d-print-none">
-          <div class="row align-items-center">
-            <div class="col">
-              <div class="page-pretitle">Halaman Pegawai</div>
-              <h2 class="page-title">Presensi</h2>
+      <div className="container-xl">
+        <div className="page-header d-print-none">
+          <div className="row align-items-center">
+            <div className="col">
+              <div className="page-pretitle">Halaman Pegawai</div>
+              <h2 className="page-title">Presensi</h2>
             </div>
           </div>
         </div>
       </div>
-      <div class="page-body">
-        <div class="container-xl">
-          <div class="row row-deck row-cards">
-            <div class="col-sm-12 col-lg-6">
-              <div class="card">
-                <div class="progress progress-sm card-progress">
-                  <div class="progress-bar" style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                    <span class="visually-hidden"></span>
+      <div className="page-body">
+        <div className="container-xl">
+          <div className="row row-deck row-cards">
+            <div className="col-sm-12 col-lg-6">
+              <div className="card">
+                <div className="progress progress-sm card-progress">
+                  <div className="progress-bar" style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <span className="visually-hidden"></span>
                   </div>
                 </div>
-                <div class="card-body">
-                  <div class="d-flex align-items-center">
-                    <div class="h3 mb-1" id="greetings">{greeting}</div>
+                <div className="card-body">
+                  <div className="d-flex align-items-center">
+                    <div className="h3 mb-1" id="greetings">{greeting}</div>
                   </div>
-                  <div class="h1 mb-1" id="clock">{time}</div>
-                  <div class="d-flex align-items-center">
-                    <div class="subheader" id="tanggal">{date}</div>
+                  <div className="h1 mb-1" id="clock">{time}</div>
+                  <div className="d-flex align-items-center">
+                    <div className="subheader" id="tanggal">{date}</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-sm-6 col-lg-3">
-              <Link class="card" to={presence == null ? "/presence/in" : "#"}>
-                <div class="card">
-                  <div class="progress progress-sm card-progress">
-                    <div class={`progress-bar ${presence != null ? "bg-green" : "bg-primary"}`} style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                      <span class="visually-hidden"></span>
+            <div className="col-sm-6 col-lg-3">
+              <Link className="card" to={presence == null ? "/presence/in" : "#"}>
+                <div className="card">
+                  <div className="progress progress-sm card-progress">
+                    <div className={`progress-bar ${presence != null ? "bg-green" : "bg-primary"}`} style={{ width: "100%" }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                      <span className="visually-hidden"></span>
                     </div>
                   </div>
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="h3 mb-1">Presensi</div>
+                  <div className="card-body">
+                    <div className="d-flex align-items-center">
+                      <div className="h3 mb-1">Presensi</div>
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-1 me-2">Masuk</div>
+                    <div className="d-flex align-items-baseline">
+                      <div className="h1 mb-1 me-2">Masuk</div>
                     </div>
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">{presence != null ? "Anda masuk pada " + moment.unix(parseInt(presence.masuk)).format("HH:MM:ss") : ""}</div>
+                    <div className="d-flex align-items-center">
+                      <div className="subheader">{presence != null ? "Anda masuk pada " + moment.unix(parseInt(presence.masuk)).format("HH:MM:ss") : ""}</div>
                     </div>
                   </div>
                 </div>
               </Link>
             </div>
-            <div class="col-sm-6 col-lg-3">
-              <Link class="card" to={presence == null || presence.keluar == null ? "/presence/out" : "#"}>
-                <div class="card">
-                  <div class="progress progress-sm card-progress">
-                    <div class={`progress-bar ${presence != null ? presence.keluar != null ? "bg-green" : "bg-primary" : "bg-primary"}`} style={{ width: "100%" }} role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                      <span class="visually-hidden"></span>
+            <div className="col-sm-6 col-lg-3">
+              <Link className="card" to={presence == null || presence.keluar == null ? "/presence/out" : "#"}>
+                <div className="card">
+                  <div className="progress progress-sm card-progress">
+                    <div className={`progress-bar ${presence != null ? presence.keluar != null ? "bg-green" : "bg-primary" : "bg-primary"}`} style={{ width: "100%" }} role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                      <span className="visually-hidden"></span>
                     </div>
                   </div>
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="h3 mb-1">Presensi</div>
+                  <div className="card-body">
+                    <div className="d-flex align-items-center">
+                      <div className="h3 mb-1">Presensi</div>
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-1 me-2">Pulang</div>
+                    <div className="d-flex align-items-baseline">
+                      <div className="h1 mb-1 me-2">Pulang</div>
                     </div>
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">{presence != null ? presence.keluar != null ? "Anda pulang pada " + moment.unix(parseInt(presence.keluar)).format("HH:MM:ss") : "" : ""}</div>
+                    <div className="d-flex align-items-center">
+                      <div className="subheader">{presence != null ? presence.keluar != null ? "Anda pulang pada " + moment.unix(parseInt(presence.keluar)).format("HH:MM:ss") : "" : ""}</div>
                     </div>
                   </div>
                 </div>
@@ -156,51 +156,51 @@ function DashboardPage() {
 
       {level === "admin" ? (
         <>
-          <div class="container-xl">
+          <div className="container-xl">
 
-            <div class="page-header d-print-none">
-              <div class="row align-items-center">
-                <div class="col">
-                  <div class="page-pretitle">Halaman Admin</div>
-                  <h2 class="page-title">Dashboard</h2>
+            <div className="page-header d-print-none">
+              <div className="row align-items-center">
+                <div className="col">
+                  <div className="page-pretitle">Halaman Admin</div>
+                  <h2 className="page-title">Dashboard</h2>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="page-body">
-            <div class="container-xl">
-              <div class="row row-deck row-cards">
-                <div class="col-md-6 col-xl-3">
-                  <div class="card card-sm">
-                    <div class="card-body">
-                      <div class="row align-items-center">
-                        <div class="col-auto">
-                          <span class="bg-blue text-white avatar">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <div className="page-body">
+            <div className="container-xl">
+              <div className="row row-deck row-cards">
+                <div className="col-md-6 col-xl-3">
+                  <div className="card card-sm">
+                    <div className="card-body">
+                      <div className="row align-items-center">
+                        <div className="col-auto">
+                          <span className="bg-blue text-white avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                               <circle cx="12" cy="7" r="4" />
                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                             </svg>
                           </span>
                         </div>
-                        <div class="col">
-                          <div class="font-weight-medium" style={{ fontSize: 20 }}>
+                        <div className="col">
+                          <div className="font-weight-medium" style={{ fontSize: 20 }}>
                             12
                           </div>
-                          <div class="text-muted">Pengguna</div>
+                          <div className="text-muted">Pengguna</div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-xl-3">
-                  <div class="card card-sm">
-                    <div class="card-body">
-                      <div class="row align-items-center">
-                        <div class="col-auto">
-                          <span class="bg-yellow text-white avatar">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <div className="col-md-6 col-xl-3">
+                  <div className="card card-sm">
+                    <div className="card-body">
+                      <div className="row align-items-center">
+                        <div className="col-auto">
+                          <span className="bg-yellow text-white avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                               <circle cx="9" cy="7" r="4" />
                               <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -209,57 +209,57 @@ function DashboardPage() {
                             </svg>
                           </span>
                         </div>
-                        <div class="col">
-                          <div class="font-weight-medium" style={{ fontSize: 20 }}>
+                        <div className="col">
+                          <div className="font-weight-medium" style={{ fontSize: 20 }}>
                             12
                           </div>
-                          <div class="text-muted">Pegawai</div>
+                          <div className="text-muted">Pegawai</div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-xl-3">
-                  <div class="card card-sm">
-                    <div class="card-body">
-                      <div class="row align-items-center">
-                        <div class="col-auto">
-                          <span class="bg-green text-white avatar">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <div className="col-md-6 col-xl-3">
+                  <div className="card card-sm">
+                    <div className="card-body">
+                      <div className="row align-items-center">
+                        <div className="col-auto">
+                          <span className="bg-green text-white avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                               <circle cx="12" cy="5" r="2" />
                               <path d="M10 22v-5l-1 -1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />
                             </svg>
                           </span>
                         </div>
-                        <div class="col">
-                          <div class="font-weight-medium" style={{ fontSize: 20 }}>
+                        <div className="col">
+                          <div className="font-weight-medium" style={{ fontSize: 20 }}>
                             12
                           </div>
-                          <div class="text-muted">Laki-laki</div>
+                          <div className="text-muted">Laki-laki</div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-xl-3">
-                  <div class="card card-sm">
-                    <div class="card-body">
-                      <div class="row align-items-center">
-                        <div class="col-auto">
-                          <span class="bg-pink text-white avatar">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <div className="col-md-6 col-xl-3">
+                  <div className="card card-sm">
+                    <div className="card-body">
+                      <div className="row align-items-center">
+                        <div className="col-auto">
+                          <span className="bg-pink text-white avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                               <circle cx="12" cy="5" r="2" />
                               <path d="M10 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" />
                             </svg>
                           </span>
                         </div>
-                        <div class="col">
-                          <div class="font-weight-medium" style={{ fontSize: 20 }}>
+                        <div className="col">
+                          <div className="font-weight-medium" style={{ fontSize: 20 }}>
                             12
                           </div>
-                          <div class="text-muted">Perempuan</div>
+                          <div className="text-muted">Perempuan</div>
                         </div>
                       </div>
                     </div>

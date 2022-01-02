@@ -41,7 +41,7 @@ const Header = () => {
 
 
                         <button data-bs-toggle="dropdown" className="btn btn-outline-white" style={{ padding: ".3rem .4rem" }} target="_blank" rel="noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" style={{ margin: 0, height: 24 }} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" style={{ margin: 0, height: 24 }} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinecap="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <rect x="4" y="4" width="6" height="6" rx="1" />
                                 <rect x="4" y="14" width="6" height="6" rx="1" />
@@ -76,7 +76,7 @@ const Header = () => {
                 <div className="nav-item dropdown">
                     <a href="#" className="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                         <span className="avatar avatar-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinecap="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <circle cx="12" cy="7" r="4" />
                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />

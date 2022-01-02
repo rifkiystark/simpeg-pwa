@@ -281,208 +281,208 @@ function Profile() {
         data: dummyProfile.orangtua
     }
     return (
-        <div class="page-wrapper">
-            <div class="container-xl">
-                <div class="page-header d-print-none">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="page-pretitle">Halaman Pegawai</div>
-                            <h2 class="page-title">Daftar Pegawai</h2>
+        <div className="page-wrapper">
+            <div className="container-xl">
+                <div className="page-header d-print-none">
+                    <div className="row align-items-center">
+                        <div className="col">
+                            <div className="page-pretitle">Halaman Pegawai</div>
+                            <h2 className="page-title">Daftar Pegawai</h2>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="page-body">
-                <div class="container-xl">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="card card-primary card-outline">
-                                        <div class="card-body box-profile">
-                                            <div class="text-center mt-4">
-                                                <img class="profile-user-img img-fluid img-circle" src="{{  str_replace('/index.php', '', url('/')) }}/foto/{{$pegawai->foto}}" style={{ width: 100, height: 100, objectFit: "cover" }} alt="User profile picture" />
+            <div className="page-body">
+                <div className="container-xl">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <div className="row g-3">
+                                <div className="col-12">
+                                    <div className="card card-primary card-outline">
+                                        <div className="card-body box-profile">
+                                            <div className="text-center mt-4">
+                                                <img className="profile-user-img img-fluid img-circle" src="{{  str_replace('/index.php', '', url('/')) }}/foto/{{$pegawai->foto}}" style={{ width: 100, height: 100, objectFit: "cover" }} alt="User profile picture" />
                                             </div>
 
-                                            <h3 class="profile-username text-center">{dummyProfile.gelar_depan} {dummyProfile.nama} {dummyProfile.gelar_belakang}</h3>
+                                            <h3 className="profile-username text-center">{dummyProfile.gelar_depan} {dummyProfile.nama} {dummyProfile.gelar_belakang}</h3>
 
-                                            <p class="text-muted text-center">-</p>
+                                            <p className="text-muted text-center">-</p>
 
-                                            <ul class="list-group list-group-unbordered mb-3">
-                                                <li class="list-group-item">
-                                                    <b>NIPY</b> <a class="float-right">{dummyProfile.nip}</a>
+                                            <ul className="list-group list-group-unbordered mb-3">
+                                                <li className="list-group-item">
+                                                    <b>NIPY</b> <a className="float-right">{dummyProfile.nip}</a>
                                                 </li>
-                                                <li class="list-group-item">
-                                                    <b>Telepon</b> <a class="float-right">{dummyProfile.no_telp}</a>
+                                                <li className="list-group-item">
+                                                    <b>Telepon</b> <a className="float-right">{dummyProfile.no_telp}</a>
                                                 </li>
-                                                <li class="list-group-item">
-                                                    <b>Status</b> <a class="float-right">{dummyProfile.sts_pegawai}</a>
+                                                <li className="list-group-item">
+                                                    <b>Status</b> <a className="float-right">{dummyProfile.sts_pegawai}</a>
                                                 </li>
-                                                <li class="list-group-item">
-                                                    <b>UPT</b> <a class="float-right">{dummyProfile.upt.upt}</a>
+                                                <li className="list-group-item">
+                                                    <b>UPT</b> <a className="float-right">{dummyProfile.upt.upt}</a>
                                                 </li>
                                             </ul>
-                                            <Link to="/profile/edit" class="btn btn-primary btn-block w-100"><b>Edit</b></Link>
+                                            <Link to="/profile/edit" className="btn btn-primary btn-block w-100"><b>Edit</b></Link>
 
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" col-12">
-                                    <div class="card mb-4">
-                                        <div class="card-header py-3">
-                                            <h4 class="m-0 font-weight-bold text-primary text-center">Kompetensi</h4>
+                                <div className=" col-12">
+                                    <div className="card mb-4">
+                                        <div className="card-header py-3">
+                                            <h4 className="m-0 font-weight-bold text-primary text-center">Kompetensi</h4>
                                         </div>
-                                        <div class="card-body" style={{ paddingTop: 8 }}>
+                                        <div className="card-body" style={{ paddingTop: 8 }}>
 
-                                            <Link to="/history/training" class="btn btn-primary m-1">Diklat</Link>
-                                            <Link to="/history/salary" class="btn btn-success m-1">Gapok</Link>
-                                            <Link to="/history/punishment" class="btn btn-warning m-1">Hukuman</Link>
+                                            <Link to="/history/training" className="btn btn-primary m-1">Diklat</Link>
+                                            <Link to="/history/salary" className="btn btn-success m-1">Gapok</Link>
+                                            <Link to="/history/punishment" className="btn btn-warning m-1">Hukuman</Link>
                                             <hr />
-                                            <Link to="/history/structural-position" class="btn btn-danger m-1">Jabatan</Link>
-                                            <Link to="/history/functional-position" class="btn btn-info m-1">Jabatan Fungsional</Link>
-                                            <Link to="/history/additional-position" class="btn btn-danger m-1">Jabatan Tambahan</Link>
+                                            <Link to="/history/structural-position" className="btn btn-danger m-1">Jabatan</Link>
+                                            <Link to="/history/functional-position" className="btn btn-info m-1">Jabatan Fungsional</Link>
+                                            <Link to="/history/additional-position" className="btn btn-danger m-1">Jabatan Tambahan</Link>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header p-2">
-                                    <ul class="nav nav-pills " data-bs-toggle="tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#profile" data-bs-toggle="tab">Profile</a>
+                        <div className="col-md-8">
+                            <div className="card">
+                                <div className="card-header p-2">
+                                    <ul className="nav nav-pills " data-bs-toggle="tabs">
+                                        <li className="nav-item">
+                                            <a className="nav-link active" href="#profile" data-bs-toggle="tab">Profile</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#suamiistri" data-bs-toggle="tab">Suami / Istri</a>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="#suamiistri" data-bs-toggle="tab">Suami / Istri</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#anak" data-bs-toggle="tab">Anak</a>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="#anak" data-bs-toggle="tab">Anak</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#ortu" data-bs-toggle="tab">Orang Tua</a>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="#ortu" data-bs-toggle="tab">Orang Tua</a>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="card-body">
-                                    <div class="tab-content">
-                                        <div class="active tab-pane show" id="profile">
-                                            <div class="">
-                                                <div class="mb-4 pl-2 pt-2 pr-2">
-                                                    <div class="row">
-                                                        <div class="col-md-4">NIPY</div>
-                                                        <div class="col-md-8">: {dummyProfile.nip}</div>
+                                <div className="card-body">
+                                    <div className="tab-content">
+                                        <div className="active tab-pane show" id="profile">
+                                            <div className="">
+                                                <div className="mb-4 pl-2 pt-2 pr-2">
+                                                    <div className="row">
+                                                        <div className="col-md-4">NIPY</div>
+                                                        <div className="col-md-8">: {dummyProfile.nip}</div>
                                                     </div>
                                                     <hr />
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">NIPY Lama</div>
-                                                        <div class="col-md-8">: {dummyProfile.nip_lama}</div>
+                                                    <div className="row">
+                                                        <div className="col-md-4">NIPY Lama</div>
+                                                        <div className="col-md-8">: {dummyProfile.nip_lama}</div>
                                                     </div>
                                                     <hr />
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">NIK</div>
-                                                        <div class="col-md-8">: {dummyProfile.nik}</div>
+                                                    <div className="row">
+                                                        <div className="col-md-4">NIK</div>
+                                                        <div className="col-md-8">: {dummyProfile.nik}</div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Nama</div>
-                                                        <div class="col-md-8">: {dummyProfile.gelar_depan} {dummyProfile.nama} {dummyProfile.gelar_belakang}</div>
+                                                    <div className="row">
+                                                        <div className="col-md-4">Nama</div>
+                                                        <div className="col-md-8">: {dummyProfile.gelar_depan} {dummyProfile.nama} {dummyProfile.gelar_belakang}</div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Tempat, Tanggal Lahir</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Tempat, Tanggal Lahir</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.t_lahir}, {dummyProfile.tgl_lahir}
                                                         </div>
                                                     </div>
                                                     <hr />
 
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">Alamat KTP</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Alamat KTP</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.alamat_ktp}
                                                         </div>
                                                     </div>
                                                     <hr />
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">Alamat KTP</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Alamat KTP</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.alamat_domisili}
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Agama</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Agama</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.agama.agama}
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Jenis Kelamin</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Jenis Kelamin</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.jns_kelamin === "L" ? "Laki-laki" : "Perempuan"}
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Hobi</div>
-                                                        <div class="col-md-8">: {dummyProfile.hobi}</div>
+                                                    <div className="row">
+                                                        <div className="col-md-4">Hobi</div>
+                                                        <div className="col-md-8">: {dummyProfile.hobi}</div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Status Pernikahan</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Status Pernikahan</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.sts_marital}
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Status Kepegawaian</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Status Kepegawaian</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.sts_pegawai}
                                                         </div>
                                                     </div>
                                                     <hr />
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">Status Keaktifan</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Status Keaktifan</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.sts_keaktifan}
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">Pendidikan</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Pendidikan</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.pendidikan.map(data => data.pendidikan)}
                                                         </div>
                                                     </div>
                                                     <hr />
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">Institusi Pendidikan</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Institusi Pendidikan</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.nama_sekolah}
                                                         </div>
                                                     </div>
                                                     <hr />
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">Tahun Lulus</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">Tahun Lulus</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.tahun_sttb}
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div class="row">
-                                                        <div class="col-md-4">No. Telp</div>
-                                                        <div class="col-md-8">
+                                                    <div className="row">
+                                                        <div className="col-md-4">No. Telp</div>
+                                                        <div className="col-md-8">
                                                             : {dummyProfile.no_telp}
                                                         </div>
                                                     </div>
@@ -490,30 +490,30 @@ function Profile() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="suamiistri">
-                                            <div class="">
-                                                <div class="mb-4 pl-2 pt-2 pr-2">
+                                        <div className="tab-pane" id="suamiistri">
+                                            <div className="">
+                                                <div className="mb-4 pl-2 pt-2 pr-2">
                                                     <Table data={tableMarital} tableName="Tes" />
-                                                    <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#ModalSuami">Tambah</button>
+                                                    <button type="button" className="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#ModalSuami">Tambah</button>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane" id="anak">
-                                            <div class="">
-                                                <div class="mb-4 pl-2 pt-2 pr-2">
+                                        <div className="tab-pane" id="anak">
+                                            <div className="">
+                                                <div className="mb-4 pl-2 pt-2 pr-2">
                                                     <Table data={tableChild} tableName="Tes" />
 
-                                                    <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#ModalAnak">Tambah</button>
+                                                    <button type="button" className="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#ModalAnak">Tambah</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="ortu">
-                                            <div class="">
-                                                <div class="mb-4 pl-2 pt-2 pr-2">
+                                        <div className="tab-pane" id="ortu">
+                                            <div className="">
+                                                <div className="mb-4 pl-2 pt-2 pr-2">
                                                     <Table data={tableParent} tableName="Tes" />
 
-                                                    <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#ModalOrtu">Tambah</button>
+                                                    <button type="button" className="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#ModalOrtu">Tambah</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -524,33 +524,33 @@ function Profile() {
                         </div>
 
 
-                        <div class="modal modal-blur fade" id="ModalSuami" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Suami Istri</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <div className="modal modal-blur fade" id="ModalSuami" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">Tambah Suami Istri</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times; </span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div className="modal-body">
                                         <form action="{{url('/')}/pegawai/suamiistri/tambah/proses" method="post">
-                                            <div class="form-row g-3 row">
-                                                <div class="form-group col-md-4">
-                                                    <label class="form-label" for="inputKarpeg">Nama</label>
-                                                    <input type="text" name="nama" id="inputKarpeg" class="form-control" required />
+                                            <div className="form-row g-3 row">
+                                                <div className="form-group col-md-4">
+                                                    <label className="form-label" for="inputKarpeg">Nama</label>
+                                                    <input type="text" name="nama" id="inputKarpeg" className="form-control" required />
                                                 </div>
-                                                <div class="form-group col-md-4">
-                                                    <label class="form-label" for="inputTtl">Tempat</label>
-                                                    <input type="text" name="t_lahir" class="form-control" />
+                                                <div className="form-group col-md-4">
+                                                    <label className="form-label" for="inputTtl">Tempat</label>
+                                                    <input type="text" name="t_lahir" className="form-control" />
                                                 </div>
-                                                <div class="form-group col-md-4">
-                                                    <label class="form-label" for="inputTgl">Tgl Lahir</label>
-                                                    <input type="date" name="tgl_lahir" class="form-control" />
+                                                <div className="form-group col-md-4">
+                                                    <label className="form-label" for="inputTgl">Tgl Lahir</label>
+                                                    <input type="date" name="tgl_lahir" className="form-control" />
                                                 </div>
-                                                <div class="form-group col-md-4">
-                                                    <label class="form-label" for="inputStatus">Jenis Kelamin</label>
-                                                    <select name="kelamin" id="inputUser" class="form-control" required>
+                                                <div className="form-group col-md-4">
+                                                    <label className="form-label" for="inputStatus">Jenis Kelamin</label>
+                                                    <select name="kelamin" id="inputUser" className="form-control" required>
                                                         <option>---</option>
 
                                                         <option value="L">Laki-laki</option>
@@ -558,34 +558,34 @@ function Profile() {
 
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-4">
-                                                    <label class="form-label" for="inputStatus">Pendidikan</label>
-                                                    <select name="pendidikan" id="inputUser" class="form-control" required>
+                                                <div className="form-group col-md-4">
+                                                    <label className="form-label" for="inputStatus">Pendidikan</label>
+                                                    <select name="pendidikan" id="inputUser" className="form-control" required>
                                                         <option>---</option>
 
                                                         <option value="{{$pdds->kode_pdd}">asd</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-4">
-                                                    <label class="form-label" for="inputStatus">Tanggal Pernikahan</label>
-                                                    <input type="date" name="tgl_menikah" class="form-control" />
+                                                <div className="form-group col-md-4">
+                                                    <label className="form-label" for="inputStatus">Tanggal Pernikahan</label>
+                                                    <input type="date" name="tgl_menikah" className="form-control" />
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="form-label" for="inputStatus">Status Tunjangan</label>
-                                                    <select name="sts_tunjangan" id="inputUser" class="form-control" required>
+                                                <div className="form-group col-md-6">
+                                                    <label className="form-label" for="inputStatus">Status Tunjangan</label>
+                                                    <select name="sts_tunjangan" id="inputUser" className="form-control" required>
                                                         <option>---</option>
                                                         <option value="Ya">Iya</option>
                                                         <option value="Tidak">Tidak</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="form-label" for="inputStatus">Keterangan</label>
-                                                    <input type="text" class="form-control" name="keterangan" />
+                                                <div className="form-group col-md-6">
+                                                    <label className="form-label" for="inputStatus">Keterangan</label>
+                                                    <input type="text" className="form-control" name="keterangan" />
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" className="btn btn-primary">Tambah</button>
                                             </div>
                                         </form>
                                     </div>
@@ -593,33 +593,33 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-                    <div class="modal modal-blur fade" id="ModalAnak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Anak</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <div className="modal modal-blur fade" id="ModalAnak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Tambah Anak</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div className="modal-body">
                                     <form action="{{url('/')}/pegawai/anak/tambah/proses" method="post">
-                                        <div class="form-row g-3 row">
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputKarpeg">Nama</label>
-                                                <input type="text" name="nama" id="inputKarpeg" class="form-control" required />
+                                        <div className="form-row g-3 row">
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputKarpeg">Nama</label>
+                                                <input type="text" name="nama" id="inputKarpeg" className="form-control" required />
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputTtl">Tempat</label>
-                                                <input type="text" name="t_lahir" class="form-control" />
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputTtl">Tempat</label>
+                                                <input type="text" name="t_lahir" className="form-control" />
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputTgl">Tgl Lahir</label>
-                                                <input type="date" name="tgl_lahir" class="form-control" />
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputTgl">Tgl Lahir</label>
+                                                <input type="date" name="tgl_lahir" className="form-control" />
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputStatus">Jenis Kelamin</label>
-                                                <select name="kelamin" id="inputUser" class="form-control" required>
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputStatus">Jenis Kelamin</label>
+                                                <select name="kelamin" id="inputUser" className="form-control" required>
                                                     <option>---</option>
 
                                                     <option value="L">Laki-laki</option>
@@ -627,71 +627,71 @@ function Profile() {
 
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputStatus">Pendidikan</label>
-                                                <select name="pendidikan" id="inputUser" class="form-control" required>
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputStatus">Pendidikan</label>
+                                                <select name="pendidikan" id="inputUser" className="form-control" required>
                                                     <option>---</option>
                                                     <option value="{{$pdds->kode_pdd}">SD</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputStatus">Status Pernikahan</label>
-                                                <select name="sts_pernikahan" id="inputUser" class="form-control" required>
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputStatus">Status Pernikahan</label>
+                                                <select name="sts_pernikahan" id="inputUser" className="form-control" required>
                                                     <option>---</option>
                                                     <option value="Menikah">Menikah</option>
                                                     <option value="Belum menikah">Belum menikah</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="inputStatus">Status Tunjangan</label>
-                                                <select name="sts_tunjangan" id="inputUser" class="form-control" required>
+                                            <div className="form-group col-md-6">
+                                                <label className="form-label" for="inputStatus">Status Tunjangan</label>
+                                                <select name="sts_tunjangan" id="inputUser" className="form-control" required>
                                                     <option>---</option>
                                                     <option value="Iya">Iya</option>
                                                     <option value="Tidak">Tidak</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="inputStatus">Keterangan</label>
-                                                <input type="text" class="form-control" name="keterangan" />
+                                            <div className="form-group col-md-6">
+                                                <label className="form-label" for="inputStatus">Keterangan</label>
+                                                <input type="text" className="form-control" name="keterangan" />
                                             </div>
 
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Tambah</button>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" className="btn btn-primary">Tambah</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal modal-blur fade" id="ModalOrtu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Ortu</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <div className="modal modal-blur fade" id="ModalOrtu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Tambah Ortu</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div className="modal-body">
                                     <form action="{{url('/')}/pegawai/orangtua/tambah/proses" method="post">
-                                        <div class="form-row g-3 row">
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputKarpeg">Nama</label>
-                                                <input type="text" name="nama" id="inputKarpeg" class="form-control" required />
+                                        <div className="form-row g-3 row">
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputKarpeg">Nama</label>
+                                                <input type="text" name="nama" id="inputKarpeg" className="form-control" required />
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputTtl">Tempat</label>
-                                                <input type="text" name="t_lahir" class="form-control" />
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputTtl">Tempat</label>
+                                                <input type="text" name="t_lahir" className="form-control" />
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="inputTgl">Tgl Lahir</label>
-                                                <input type="date" name="tgl_lahir" class="form-control" />
+                                            <div className="form-group col-md-4">
+                                                <label className="form-label" for="inputTgl">Tgl Lahir</label>
+                                                <input type="date" name="tgl_lahir" className="form-control" />
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="inputStatus">Jenis Kelamin</label>
-                                                <select name="kelamin" id="inputUser" class="form-control" required>
+                                            <div className="form-group col-md-6">
+                                                <label className="form-label" for="inputStatus">Jenis Kelamin</label>
+                                                <select name="kelamin" id="inputUser" className="form-control" required>
                                                     <option>---</option>
 
                                                     <option value="L">Laki-laki</option>
@@ -700,25 +700,25 @@ function Profile() {
                                                 </select>
                                             </div>
 
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="inputStatus">Alamat</label>
-                                                <input type="text" class="form-control" name="alamat" />
+                                            <div className="form-group col-md-6">
+                                                <label className="form-label" for="inputStatus">Alamat</label>
+                                                <input type="text" className="form-control" name="alamat" />
                                             </div>
 
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="inputStatus">Pekerjaan</label>
-                                                <input type="text" class="form-control" name="pekerjaan" />
+                                            <div className="form-group col-md-6">
+                                                <label className="form-label" for="inputStatus">Pekerjaan</label>
+                                                <input type="text" className="form-control" name="pekerjaan" />
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="inputStatus">Keterangan</label>
-                                                <input type="text" class="form-control" name="keterangan" />
+                                            <div className="form-group col-md-6">
+                                                <label className="form-label" for="inputStatus">Keterangan</label>
+                                                <input type="text" className="form-control" name="keterangan" />
                                             </div>
                                         </div>
 
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Tambah</button>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" className="btn btn-primary">Tambah</button>
                                         </div>
                                     </form>
                                 </div>

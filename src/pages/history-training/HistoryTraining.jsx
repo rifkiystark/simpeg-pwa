@@ -237,51 +237,51 @@ function HistoryTraining() {
                         </div>
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/diklat/tambah" method="POST" enctype="multipart/form-data">
-                                <div class="form-row row g-3">
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Nama Diklat</label>
-                                        <input type="text" name="nama_diklat" class="form-control" required />
+                                <div className="form-row row g-3">
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Nama Diklat</label>
+                                        <input type="text" name="nama_diklat" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Jenis Diklat</label>
-                                        <select name="jenis_diklat" class="form-control" required>
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Jenis Diklat</label>
+                                        <select name="jenis_diklat" className="form-control" required>
                                             <option value="1">Tingkat Kabupaten</option>
                                         </select>
                                     </div>
 
 
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Tanggal Mulai</label>
-                                        <input type="date" name="tgl_mulai" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Tanggal Mulai</label>
+                                        <input type="date" name="tgl_mulai" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Tanggal Selesai</label>
-                                        <input type="date" name="tgl_selesai" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Tanggal Selesai</label>
+                                        <input type="date" name="tgl_selesai" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Nomor Sertifikat</label>
-                                        <input type="text" name="nmr_sertifikat" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Nomor Sertifikat</label>
+                                        <input type="text" name="nmr_sertifikat" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Tahun Sertifikat</label>
-                                        <input type="number" name="thn_sertifikat" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Tahun Sertifikat</label>
+                                        <input type="number" name="thn_sertifikat" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Penyelenggara</label>
-                                        <input type="text" name="penyelenggara" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Penyelenggara</label>
+                                        <input type="text" name="penyelenggara" className="form-control" required />
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">File Dokumen</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">File Dokumen</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-12 form-group">
-                                        <button type="sumbit" name="submit" class="btn btn-primary">Tambah</button>
+                                    <div className="col-md-12 form-group">
+                                        <button type="sumbit" name="submit" className="btn btn-primary">Tambah</button>
 
                                     </div>
                                 </div>
@@ -301,51 +301,51 @@ function HistoryTraining() {
                         </div>
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/diklat/tambah" method="POST" enctype="multipart/form-data">
-                                <div class="form-row row g-3">
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Nama Diklat</label>
-                                        <input type="text" name="nama_diklat" class="form-control" required />
+                                <div className="form-row row g-3">
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Nama Diklat</label>
+                                        <input type="text" name="nama_diklat" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Jenis Diklat</label>
-                                        <select name="jenis_diklat" class="form-control" required>
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Jenis Diklat</label>
+                                        <select name="jenis_diklat" className="form-control" required>
                                             <option value="1">Tingkat Kabupaten</option>
                                         </select>
                                     </div>
 
 
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Tanggal Mulai</label>
-                                        <input type="date" name="tgl_mulai" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Tanggal Mulai</label>
+                                        <input type="date" name="tgl_mulai" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Tanggal Selesai</label>
-                                        <input type="date" name="tgl_selesai" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Tanggal Selesai</label>
+                                        <input type="date" name="tgl_selesai" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Nomor Sertifikat</label>
-                                        <input type="text" name="nmr_sertifikat" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Nomor Sertifikat</label>
+                                        <input type="text" name="nmr_sertifikat" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Tahun Sertifikat</label>
-                                        <input type="number" name="thn_sertifikat" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Tahun Sertifikat</label>
+                                        <input type="number" name="thn_sertifikat" className="form-control" required />
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Penyelenggara</label>
-                                        <input type="text" name="penyelenggara" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">Penyelenggara</label>
+                                        <input type="text" name="penyelenggara" className="form-control" required />
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">File Dokumen</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required />
+                                    <div className="form-group col-md-6">
+                                        <label className="form-label">File Dokumen</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-12 form-group">
-                                        <button type="sumbit" name="submit" class="btn btn-primary">Tambah</button>
+                                    <div className="col-md-12 form-group">
+                                        <button type="sumbit" name="submit" className="btn btn-primary">Tambah</button>
 
                                     </div>
                                 </div>

@@ -137,11 +137,11 @@ function ListUser() {
                 <div className="container-xl">
                     <div className="card">
                         <div className="card-header pe-0">
-                            <div class="row w-100">
-                                <div class="col-md-6 col-sm-12">
-                                    <h3 class="card-title">Daftar Pengguna</h3>
+                            <div className="row w-100">
+                                <div className="col-md-6 col-sm-12">
+                                    <h3 className="card-title">Daftar Pengguna</h3>
                                 </div>
-                                <div class="col-md-6 col-sm-12 text-end">
+                                <div className="col-md-6 col-sm-12 text-end">
                                     <a href="http://localhost/simpeglocal/import/formatimportsimpeg.xlsx" className="btn btn-secondary me-1" target="_blank" rel="noreferrer" download>
                                         Download Format Import
                                     </a>
@@ -157,29 +157,29 @@ function ListUser() {
                     </div>
                 </div>
             </div>
-            <div class="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-modal="true" style={{ paddingRight: 6 }}>
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Pengguna</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal modal-blur fade" id="ModalEdit" tabindex="-1" role="dialog" aria-modal="true" style={{ paddingRight: 6 }}>
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Edit Pengguna</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form action="{{ url('users/update') }}" method="post" id="editForm{{$user->id}}">
 
-                                <div class="mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="text" name="email" class="form-control" value={user.email} placeholder="" required />
-                                    <input type="hidden" name="id_user" class="form-control" value="{{$user->id}}" placeholder="" required />
+                                <div className="mb-3">
+                                    <label className="form-label">Email</label>
+                                    <input type="text" name="email" className="form-control" value={user.email} placeholder="" required />
+                                    <input type="hidden" name="id_user" className="form-control" value="{{$user->id}}" placeholder="" required />
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Password Baru</label>
-                                    <input type="text" name="password" class="form-control" placeholder="" />
+                                <div className="mb-3">
+                                    <label className="form-label">Password Baru</label>
+                                    <input type="text" name="password" className="form-control" placeholder="" />
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Level</label>
-                                    <select name="level" required class="form-select">
+                                <div className="mb-3">
+                                    <label className="form-label">Level</label>
+                                    <select name="level" required className="form-select">
                                         <option value="adminunit"> Admin Unit </option>
                                         <option value="pegawai"> Pegawai </option>
                                         <option value="adminkeuangansekolahmasuk"> Admin Keuangan Pemasukan Sekolah </option>
@@ -190,9 +190,9 @@ function ListUser() {
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary" form="editForm">Simpan</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn me-auto" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" className="btn btn-primary" form="editForm">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -226,14 +226,14 @@ function ListUser() {
                     </div>
                 </div>
             </div>
-            <div class="modal modal-blur fade" id="modal-import" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Import Pengguna</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal modal-blur fade" id="modal-import" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Import Pengguna</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form action="http://localhost/simpeglocal/users/import" method="post" id="import" enctype="multipart/form-data">
                                 <div class ="mb-3">
                                 <label class ="form-label">File</label>
@@ -243,9 +243,9 @@ function ListUser() {
 
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary" form="import">Simpan</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn me-auto" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" className="btn btn-primary" form="import">Simpan</button>
                         </div>
                     </div>
                 </div>

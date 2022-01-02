@@ -229,46 +229,46 @@ function HistorySalary() {
                         </div>
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/gapok/tambah" method="POST" enctype="multipart/form-data">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">No SK</label>
-                                        <input type="text" name="no_sk" class="form-control" required />
+                                <div className="row g-3">
+                                    <div className="col-md-6">
+                                        <label className="form-label">No SK</label>
+                                        <input type="text" name="no_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label" class="form-label">File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label" className="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Gaji Pokok</label>
-                                        <select name="kode_gapok" class="form-control" required >
+                                    <div className="col-md-6">
+                                        <label className="form-label">Gaji Pokok</label>
+                                        <select name="kode_gapok" className="form-control" required >
                                             <option value="1">Rp 1.000.000,00</option>
                                         </select>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Terhitung Mulai</label>
-                                        <input type="date" name="tmt" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Terhitung Mulai</label>
+                                        <input type="date" name="tmt" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Naik Selanjutnya</label>
-                                        <input type="date" name="naik_selanjutnya" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Naik Selanjutnya</label>
+                                        <input type="date" name="naik_selanjutnya" className="form-control" required />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Keterangan</label>
-                                        <input type="text" name="ket" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Keterangan</label>
+                                        <input type="text" name="ket" className="form-control" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
                             </form>
@@ -286,46 +286,46 @@ function HistorySalary() {
                         </div>
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/gapok/tambah" method="POST" enctype="multipart/form-data">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">No SK</label>
-                                        <input type="text" name="no_sk" class="form-control" required />
+                                <div className="row g-3">
+                                    <div className="col-md-6">
+                                        <label className="form-label">No SK</label>
+                                        <input type="text" name="no_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label" class="form-label">File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label" className="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Gaji Pokok</label>
-                                        <select name="kode_gapok" class="form-control" required >
+                                    <div className="col-md-6">
+                                        <label className="form-label">Gaji Pokok</label>
+                                        <select name="kode_gapok" className="form-control" required >
                                             <option value="1">Rp 1.000.000,00</option>
                                         </select>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Terhitung Mulai</label>
-                                        <input type="date" name="tmt" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Terhitung Mulai</label>
+                                        <input type="date" name="tmt" className="form-control" required />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Naik Selanjutnya</label>
-                                        <input type="date" name="naik_selanjutnya" class="form-control" required />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Naik Selanjutnya</label>
+                                        <input type="date" name="naik_selanjutnya" className="form-control" required />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Keterangan</label>
-                                        <input type="text" name="ket" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Keterangan</label>
+                                        <input type="text" name="ket" className="form-control" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
                             </form>

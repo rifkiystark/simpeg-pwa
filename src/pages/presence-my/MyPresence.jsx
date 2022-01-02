@@ -89,9 +89,9 @@ function MyPresence() {
                 <div className="container-xl">
                     <div className="card">
                         <div className="card-header pe-0">
-                            <div class="row w-100">
-                                <div class="col-md-6 col-sm-12">
-                                    <h3 class="card-title">Daftar Pengguna</h3>
+                            <div className="row w-100">
+                                <div className="col-md-6 col-sm-12">
+                                    <h3 className="card-title">Daftar Pengguna</h3>
                                 </div>
                                 
                             </div>

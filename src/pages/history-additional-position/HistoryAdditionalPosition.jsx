@@ -230,23 +230,23 @@ function HistoryAdditionalPosition() {
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/jabatanfungsionalt/tambah" method="post" enctype="multipart/form-data">
 
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">No. SK</label>
-                                        <input type="text" name="no_sk" class="form-control" />
+                                <div className="row g-3">
+                                    <div className="col-md-6">
+                                        <label className="form-label">No. SK</label>
+                                        <input type="text" name="no_sk" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" className="form-control" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Jabatan Tambahan</label>
-                                        <select name="kode_jbtft" class="form-control">
+                                    <div className="col-md-6">
+                                        <label className="form-label">Jabatan Tambahan</label>
+                                        <select name="kode_jbtft" className="form-control">
                                             <option value="2">Satpam</option>
                                             <option value="4">Pembantu Pelaksana</option>
                                             <option value="5">Toolman</option>
@@ -255,21 +255,21 @@ function HistoryAdditionalPosition() {
                                             <option value="10">s</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Terhitung Mulai</label>
-                                        <input type="date" name="tmt" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Terhitung Mulai</label>
+                                        <input type="date" name="tmt" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tamat Jabatan</label>
-                                        <input type="date" name="tamat_jabatan" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tamat Jabatan</label>
+                                        <input type="date" name="tamat_jabatan" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
 
@@ -289,23 +289,23 @@ function HistoryAdditionalPosition() {
                         <div className="modal-body">
                             <form action="http://localhost/simpeglocal/pegawai/jabatanfungsionalt/tambah" method="post" enctype="multipart/form-data">
 
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">No. SK</label>
-                                        <input type="text" name="no_sk" class="form-control" />
+                                <div className="row g-3">
+                                    <div className="col-md-6">
+                                        <label className="form-label">No. SK</label>
+                                        <input type="text" name="no_sk" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tanggal SK</label>
-                                        <input type="date" name="tgl_sk" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tanggal SK</label>
+                                        <input type="date" name="tgl_sk" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Pejabat Pengesah</label>
-                                        <input type="text" name="pejabat_sk" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Pejabat Pengesah</label>
+                                        <input type="text" name="pejabat_sk" className="form-control" />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Jabatan Tambahan</label>
-                                        <select name="kode_jbtft" class="form-control">
+                                    <div className="col-md-6">
+                                        <label className="form-label">Jabatan Tambahan</label>
+                                        <select name="kode_jbtft" className="form-control">
                                             <option value="2">Satpam</option>
                                             <option value="4">Pembantu Pelaksana</option>
                                             <option value="5">Toolman</option>
@@ -314,21 +314,21 @@ function HistoryAdditionalPosition() {
                                             <option value="10">s</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Terhitung Mulai</label>
-                                        <input type="date" name="tmt" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Terhitung Mulai</label>
+                                        <input type="date" name="tmt" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tamat Jabatan</label>
-                                        <input type="date" name="tamat_jabatan" class="form-control" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">Tamat Jabatan</label>
+                                        <input type="date" name="tamat_jabatan" className="form-control" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">File Dokumen SK</label>
-                                        <input type="file" name="dokumen_sk" class="form-control" required="" />
+                                    <div className="col-md-6">
+                                        <label className="form-label">File Dokumen SK</label>
+                                        <input type="file" name="dokumen_sk" className="form-control" required="" />
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Tambah" class="btn btn-primary" />
+                                    <div className="col-md-12">
+                                        <input type="submit" value="Tambah" className="btn btn-primary" />
                                     </div>
                                 </div>
 
