@@ -9,18 +9,18 @@ import Toast from "../../components/toast/Toast";
 
 function PresenceOut() {
     const router = useNavigate()
-    const keluar = moment().unix()
-    const date = moment().format("YYYY-MM-DD")
-
+    
     const [isLoading, setLoading] = useState(false)
-
+    
     const doPresenceOut = async () => {
+        const keluar = moment().unix()
+        const date = moment().format("YYYY-MM-DD")
         setLoading(true)
         const { status, data, message } = await presenceOut({ keluar, date });
         if (status) {
             Toast.successToast("Presensi Berhasil")
             let presence = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.PRESENCE))
-            presence = { ...presence, ...data }
+            presence = { ...presence, ...data.data }
             localStorage.setItem(Const.STORAGE_KEY.PRESENCE, JSON.stringify(presence))
         } else {
             if (message === Const.MESSAGE_CODE.NOT_YET_PRESENCE_IN) {

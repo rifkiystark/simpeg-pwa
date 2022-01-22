@@ -4,9 +4,11 @@ import Const from "../../constant"
 import { useEffect, useState } from 'react';
 import { presenceStatus } from "../../repository/presence";
 import moment from 'moment';
+import 'moment/locale/id';
 
 
 function DashboardPage() {
+  moment().locale("id");
   const me = useSelector(state => state.me)
   const uptInfo = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.UPT_INFO))
   const level = me != null ? me.level : ""
@@ -122,7 +124,7 @@ function DashboardPage() {
                       <div className="h1 mb-1 me-2">Masuk</div>
                     </div>
                     <div className="d-flex align-items-center">
-                      <div className="subheader">{presence != null ? "Anda masuk pada " + moment.unix(parseInt(presence.masuk)).format("HH:MM:ss") : ""}</div>
+                      <div className="subheader">{presence != null ? "Anda masuk pada " + moment.unix(parseInt(presence.masuk)).format("HH:mm:ss") : ""}</div>
                     </div>
                   </div>
                 </div>
@@ -144,7 +146,7 @@ function DashboardPage() {
                       <div className="h1 mb-1 me-2">Pulang</div>
                     </div>
                     <div className="d-flex align-items-center">
-                      <div className="subheader">{presence != null ? presence.keluar != null ? "Anda pulang pada " + moment.unix(parseInt(presence.keluar)).format("HH:MM:ss") : "" : ""}</div>
+                      <div className="subheader">{presence != null ? presence.keluar != null ? "Anda pulang pada " + moment.unix(presence.keluar).format("HH:mm:ss") : "" : ""}</div>
                     </div>
                   </div>
                 </div>
