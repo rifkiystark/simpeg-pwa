@@ -1,14 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
 function Table({ data, tableName }) {
+
+    
     let [dataTable, setDataTable] = useState(data)
     let [activePage, setActivePage] = useState(1)
 
     let totalDataPerPage = 10
     let [totalPage, setTotalPage] = useState(parseInt(dataTable.data.length / totalDataPerPage) + (dataTable.data.length % totalDataPerPage > 0 ? 1 : 0))
 
+    useEffect(() => {
+        setDataTable(data)
+        setTotalPage(parseInt(dataTable.data.length / totalDataPerPage) + (dataTable.data.length % totalDataPerPage > 0 ? 1 : 0))
+    },[data])
+    
     const search = (e) => {
         setActivePage(1)
         if (e.target.value === "") {
