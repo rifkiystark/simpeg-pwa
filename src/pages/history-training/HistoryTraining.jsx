@@ -2,21 +2,25 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/table/Table";
 import { setTraining } from "../../reduxslice/competenceDataSlice";
-import { myTraining } from "../../repository/training";
+import { myTraining, updateTraining } from "../../repository/training";
 import { masterDiklat as diklats } from "../../repository/masterData";
 import { tableApproved, tableSubmitted } from "./data";
 import Const from "../../constant";
 import SimpleReactValidator from "simple-react-validator";
 import "simple-react-validator/dist/locale/id";
+import Toast from "../../components/toast/Toast";
+import LoadingIcon from "../../components/loading-icon/LoadingIcon";
 
 function HistoryTraining() {
   const dispatch = useDispatch();
   const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
   const training = useSelector((state) => state.competence.training);
-  let [approved, setApproved] = useState([]);
-  let [submitted, setSubmitted] = useState([]);
-  let [masterDiklat, setMasterDiklat] = useState([]);
-  let columnApproved = [
+  const [fileEditTraining, setFileEditTraining] = useState(null);
+  const [approved, setApproved] = useState([]);
+  const [submitted, setSubmitted] = useState([]);
+  const [masterDiklat, setMasterDiklat] = useState([]);
+  const [loadingEditTraining, setLoadingEditTraining] = useState(false);
+  const columnApproved = [
     ...tableApproved.column,
     {
       name: "Aksi",
@@ -90,13 +94,32 @@ function HistoryTraining() {
     getMasterDiklat();
   }, []);
 
-  const editDiklat = (e) => {
+  const editDiklat = async (e) => {
     e.preventDefault();
-    if(simpleValidator.current.allValid()){
-      alert("valid");
-    } else {
-      alert("tidak");
-
+    if (simpleValidator.current.allValid()) {
+      setLoadingEditTraining(true)
+      const fd = new FormData();
+      fd.append("id_diklat", training.id_diklat);
+      fd.append("id_peg", training.id_peg);
+      fd.append("nama_diklat", training.nama_diklat);
+      fd.append("tgl_mulai", training.tgl_mulai);
+      fd.append("tgl_selesai", training.tgl_selesai);
+      fd.append("no_sertifikat", training.no_sertifikat);
+      fd.append("thn_sertifikat", training.thn_sertifikat);
+      fd.append("penyelenggara", training.penyelenggara);
+      fd.append("kode_diklat", training.kode_diklat);
+      if (fileEditTraining != null) {
+        fd.append("dokumen_sk", fileEditTraining);
+      }
+      const { status, data, message } = await updateTraining(fd);
+      if (status) {
+        Toast.successToast("Berhasil memperbarui data diklat");
+        setFileEditTraining(null)
+        getTrainings()
+      } else {
+        Toast.warningToast("Gagal memperbarui data diklat")
+      }
+      setLoadingEditTraining(false)
     }
   };
   return (
@@ -299,7 +322,6 @@ function HistoryTraining() {
             </div>
             <div className="modal-body">
               <form onSubmit={editDiklat}>
-                <input type="hidden" value={training.id_diklat} />
                 <div className="form-row row g-3">
                   <div className="form-group col-md-6">
                     <label className="form-label">Nama Diklat</label>
@@ -466,9 +488,7 @@ function HistoryTraining() {
                             penyelenggara: e.target.value,
                           })
                         );
-                        simpleValidator.current.showMessageFor(
-                          "penyelenggara"
-                        );
+                        simpleValidator.current.showMessageFor("penyelenggara");
                       }}
                       value={training.penyelenggara}
                     />
@@ -480,7 +500,13 @@ function HistoryTraining() {
                   </div>
                   <div className="form-group col-md-6">
                     <label className="form-label">File Dokumen</label>
-                    <input type="file" className="form-control" />
+                    <input
+                      type="file"
+                      className="form-control"
+                      onChange={(e) => {
+                        setFileEditTraining(e.target.files[0]);
+                      }}
+                    />
                   </div>
                   <div className="col-md-12 form-group">
                     <button
@@ -488,7 +514,7 @@ function HistoryTraining() {
                       name="submit"
                       className="btn btn-primary"
                     >
-                      Perbarui
+                      {!loadingEditTraining ? "Perbarui" : <LoadingIcon />}
                     </button>
                   </div>
                 </div>
