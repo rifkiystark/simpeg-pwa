@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/table/Table";
 import { setTraining } from "../../reduxslice/competenceDataSlice";
 import { myTraining } from "../../repository/training";
 import { masterDiklat as diklats } from "../../repository/masterData";
 import { tableApproved, tableSubmitted } from "./data";
-import { useForm } from "react-hook-form";
+import Const from "../../constant";
+import SimpleReactValidator from "simple-react-validator";
+import "simple-react-validator/dist/locale/id";
 
 function HistoryTraining() {
   const dispatch = useDispatch();
-  const me = useSelector((state) => state.me);
+  const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
   const training = useSelector((state) => state.competence.training);
   let [approved, setApproved] = useState([]);
   let [submitted, setSubmitted] = useState([]);
@@ -62,11 +64,11 @@ function HistoryTraining() {
     ];
   }
 
-  // DEFINE FORM HOOK
-  let {
-    register: registerEditTraining,
-    handleSubmit: handleSubmitEditTraining,
-  } = useForm();
+  const simpleValidator = useRef(
+    new SimpleReactValidator({
+      locale: "id",
+    })
+  );
 
   const getTrainings = async () => {
     const { status, data, message } = await myTraining();
@@ -88,8 +90,14 @@ function HistoryTraining() {
     getMasterDiklat();
   }, []);
 
-  const editDiklat = (data) => {
-    console.log(data);
+  const editDiklat = (e) => {
+    e.preventDefault();
+    if(simpleValidator.current.allValid()){
+      alert("valid");
+    } else {
+      alert("tidak");
+
+    }
   };
   return (
     <>
@@ -184,9 +192,9 @@ function HistoryTraining() {
                       required
                       readOnly
                     >
-                      {masterDiklat.map((data) => {
+                      {masterDiklat.map((data, index) => {
                         return (
-                          <option value={data.kode_diklat}>
+                          <option key={index} value={data.kode_diklat}>
                             {data.jenis_diklat}
                           </option>
                         );
@@ -290,51 +298,60 @@ function HistoryTraining() {
               ></button>
             </div>
             <div className="modal-body">
-              <form onSubmit={handleSubmitEditTraining(editDiklat)}>
-                <input
-                  type="hidden"
-                  defaultValue={training.id_diklat}
-                  {...registerEditTraining("id_diklat", {
-                    required: true,
-                  })}
-                />
+              <form onSubmit={editDiklat}>
+                <input type="hidden" value={training.id_diklat} />
                 <div className="form-row row g-3">
                   <div className="form-group col-md-6">
                     <label className="form-label">Nama Diklat</label>
                     <input
                       type="text"
                       className="form-control"
-                      defaultValue={training.nama_diklat}
-                      {...registerEditTraining("nama_diklat", {
-                        required: true,
-                      })}
+                      value={training.nama_diklat}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            nama_diklat: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor("Nama diklat");
+                      }}
                     />
+                    {simpleValidator.current.message(
+                      "Nama diklat",
+                      training.nama_diklat,
+                      "required"
+                    )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Jenis Diklat</label>
                     <select
                       className="form-control"
-                      {...registerEditTraining("jenis_diklat", {
-                        required: true,
-                      })}
-                      readOnly
+                      value={training.kode_diklat}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            kode_diklat: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor("jenis_diklat");
+                      }}
                     >
-                      {masterDiklat.map((data) => {
+                      {masterDiklat.map((data, index) => {
                         return (
-                          <option
-                            value={data.kode_diklat}
-                            selected={
-                              data.kode_diklat == training.kode_diklat
-                                ? true
-                                : false
-                            }
-                          >
+                          <option key={index} value={data.kode_diklat}>
                             {data.jenis_diklat}
                           </option>
                         );
                       })}
                     </select>
+                    {simpleValidator.current.message(
+                      "jenis_diklat",
+                      training.kode_diklat,
+                      "required"
+                    )}
                   </div>
 
                   <div className="form-group col-md-6">
@@ -342,11 +359,24 @@ function HistoryTraining() {
                     <input
                       type="date"
                       className="form-control"
-                      {...registerEditTraining("tgl_mulai", {
-                        required: true,
-                      })}
-                      defaultValue={training.tgl_mulai}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            tgl_mulai: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor(
+                          "tanggal_mulai_diklat"
+                        );
+                      }}
+                      value={training.tgl_mulai}
                     />
+                    {simpleValidator.current.message(
+                      "tanggal_mulai_diklat",
+                      training.tgl_mulai,
+                      "required"
+                    )}
                   </div>
 
                   <div className="form-group col-md-6">
@@ -354,11 +384,24 @@ function HistoryTraining() {
                     <input
                       type="date"
                       className="form-control"
-                      {...registerEditTraining("tgl_selesai", {
-                        required: true,
-                      })}
-                      defaultValue={training.tgl_selesai}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            tgl_selesai: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor(
+                          "tanggal_selesai_diklat"
+                        );
+                      }}
+                      value={training.tgl_selesai}
                     />
+                    {simpleValidator.current.message(
+                      "tanggal_selesai_diklat",
+                      training.tgl_selesai,
+                      "required"
+                    )}
                   </div>
 
                   <div className="form-group col-md-6">
@@ -366,11 +409,24 @@ function HistoryTraining() {
                     <input
                       type="text"
                       className="form-control"
-                      {...registerEditTraining("no_sertifikat", {
-                        required: true,
-                      })}
-                      defaultValue={training.no_sertifikat}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            no_sertifikat: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor(
+                          "nomor_sertifikat"
+                        );
+                      }}
+                      value={training.no_sertifikat}
                     />
+                    {simpleValidator.current.message(
+                      "nomor_sertifikat",
+                      training.no_sertifikat,
+                      "required"
+                    )}
                   </div>
 
                   <div className="form-group col-md-6">
@@ -378,11 +434,24 @@ function HistoryTraining() {
                     <input
                       type="number"
                       className="form-control"
-                      {...registerEditTraining("thn_sertifikat", {
-                        required: true,
-                      })}
-                      defaultValue={training.thn_sertifikat}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            thn_sertifikat: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor(
+                          "tahun_sertifikat"
+                        );
+                      }}
+                      value={training.thn_sertifikat}
                     />
+                    {simpleValidator.current.message(
+                      "tahun_sertifikat",
+                      training.thn_sertifikat,
+                      "required|numeric"
+                    )}
                   </div>
 
                   <div className="form-group col-md-6">
@@ -390,29 +459,36 @@ function HistoryTraining() {
                     <input
                       type="text"
                       className="form-control"
-                      {...registerEditTraining("penyelenggara", {
-                        required: true,
-                      })}
-                      defaultValue={training.penyelenggara}
+                      onChange={(e) => {
+                        dispatch(
+                          setTraining({
+                            ...training,
+                            penyelenggara: e.target.value,
+                          })
+                        );
+                        simpleValidator.current.showMessageFor(
+                          "penyelenggara"
+                        );
+                      }}
+                      value={training.penyelenggara}
                     />
+                    {simpleValidator.current.message(
+                      "penyelenggara",
+                      training.penyelenggara,
+                      "required"
+                    )}
                   </div>
                   <div className="form-group col-md-6">
                     <label className="form-label">File Dokumen</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      {...registerEditTraining("dokumen_sk", {
-                        required: false,
-                      })}
-                    />
+                    <input type="file" className="form-control" />
                   </div>
                   <div className="col-md-12 form-group">
                     <button
-                      type="sumbit"
+                      type="submit"
                       name="submit"
                       className="btn btn-primary"
                     >
-                      Tambah
+                      Perbarui
                     </button>
                   </div>
                 </div>

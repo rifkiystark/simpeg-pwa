@@ -528,3 +528,17 @@ body.no-transitions * {
 .demo-icons-list-item:hover {
     text-decoration: none
 }
+
+.srv-validation-message {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 85.71428571%;
+    color: #d63939;
+}
+
+.srv-validation-message {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 85.71428571%;
+    color: #d63939;
+}

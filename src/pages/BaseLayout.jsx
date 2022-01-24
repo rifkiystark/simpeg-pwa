@@ -12,7 +12,7 @@ import { syncPresence } from '../repository/presence';
 import { useLocation } from 'react-router';
 
 function BaseLayout() {
-    const me = useSelector(state => state.me)
+    const me = useSelector((state) => state.me)
     const dispatch = useDispatch()
     const router = useNavigate()
     const location = useLocation()
