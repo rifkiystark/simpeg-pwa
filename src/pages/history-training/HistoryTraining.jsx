@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/table/Table";
 import { setTraining } from "../../reduxslice/competenceDataSlice";
-import { myTraining, updateTraining } from "../../repository/training";
+import {
+  addTraining,
+  deleteTraining,
+  myTraining,
+  updateTraining,
+} from "../../repository/training";
 import { masterDiklat as diklats } from "../../repository/masterData";
 import { tableApproved, tableSubmitted } from "./data";
 import Const from "../../constant";
@@ -20,6 +25,20 @@ function HistoryTraining() {
   const [submitted, setSubmitted] = useState([]);
   const [masterDiklat, setMasterDiklat] = useState([]);
   const [loadingEditTraining, setLoadingEditTraining] = useState(false);
+  const [loadingDeleteTraining, setLoadingDeleteTraining] = useState(false);
+  const [loadingAddTraining, setLoadingAddTraining] = useState(false);
+
+  const [dataAddDiklat, setAddDiklat] = useState({
+    id_user: null,
+    nama_diklat: null,
+    kode_diklat: null,
+    tgl_mulai: null,
+    tgl_selesai: null,
+    no_sertifikat: null,
+    thn_sertifikat: null,
+    penyelenggara: null,
+    dokumen: null,
+  });
   const columnApproved = [
     ...tableApproved.column,
     {
@@ -43,6 +62,9 @@ function HistoryTraining() {
             href="#"
             data-bs-toggle="modal"
             data-bs-target="#modal-delete"
+            onClick={() => {
+              dispatch(setTraining(rowData));
+            }}
           >
             Hapus
           </a>
@@ -74,6 +96,12 @@ function HistoryTraining() {
     })
   );
 
+  let simpleValidatorAdd = useRef(
+    new SimpleReactValidator({
+      locale: "id",
+    })
+  );
+
   const getTrainings = async () => {
     const { status, data, message } = await myTraining();
     if (status) {
@@ -94,10 +122,10 @@ function HistoryTraining() {
     getMasterDiklat();
   }, []);
 
-  const editDiklat = async (e) => {
+  const doEditDiklat = async (e) => {
     e.preventDefault();
     if (simpleValidator.current.allValid()) {
-      setLoadingEditTraining(true)
+      setLoadingEditTraining(true);
       const fd = new FormData();
       fd.append("id_diklat", training.id_diklat);
       fd.append("id_peg", training.id_peg);
@@ -114,12 +142,77 @@ function HistoryTraining() {
       const { status, data, message } = await updateTraining(fd);
       if (status) {
         Toast.successToast("Berhasil memperbarui data diklat");
-        setFileEditTraining(null)
-        getTrainings()
+        setFileEditTraining(null);
+        getTrainings();
       } else {
-        Toast.warningToast("Gagal memperbarui data diklat")
+        Toast.warningToast("Gagal memperbarui data diklat");
       }
-      setLoadingEditTraining(false)
+      setLoadingEditTraining(false);
+    } else {
+      simpleValidatorAdd.current.showMessages();
+    }
+  };
+
+  const doDeleteTraining = async () => {
+    setLoadingDeleteTraining(true);
+    const { status } = await deleteTraining(training.id_diklat);
+    if (status) {
+      Toast.successToast("Hapus data diklat berhasil");
+      getTrainings();
+    } else {
+      Toast.warningToast("Hapus data diklat gagal");
+    }
+    setLoadingDeleteTraining(false);
+  };
+
+  const doAddDiklat = async (e) => {
+    e.preventDefault();
+    if (simpleValidatorAdd.current.allValid()) {
+      setLoadingAddTraining(true);
+      const fd = new FormData();
+      fd.append("id_user", me.id);
+      fd.append("nama_diklat", dataAddDiklat.nama_diklat);
+      fd.append("kode_diklat", dataAddDiklat.kode_diklat);
+      fd.append("tgl_mulai", dataAddDiklat.tgl_mulai);
+      fd.append("tgl_selesai", dataAddDiklat.tgl_selesai);
+      fd.append("no_sertifikat", dataAddDiklat.no_sertifikat);
+      fd.append("thn_sertifikat", dataAddDiklat.thn_sertifikat);
+      fd.append("penyelenggara", dataAddDiklat.penyelenggara);
+      fd.append("dokumen_sk", dataAddDiklat.dokumen);
+
+      const { status } = await addTraining(fd);
+      if (status) {
+        getTrainings();
+        Toast.successToast("Berhasil menambah data diklat");
+        setAddDiklat({
+          id_user: "",
+          nama_diklat: "",
+          kode_diklat: "",
+          tgl_mulai: "",
+          tgl_selesai: "",
+          no_sertifikat: "",
+          thn_sertifikat: "",
+          penyelenggara: "",
+          dokumen: "",
+        });
+        setAddDiklat({
+          id_user: null,
+          nama_diklat: null,
+          kode_diklat: null,
+          tgl_mulai: null,
+          tgl_selesai: null,
+          no_sertifikat: null,
+          thn_sertifikat: null,
+          penyelenggara: null,
+          dokumen: null,
+        });
+      } else {
+        Toast.warningToast("Gagal menambah data diklat");
+      }
+
+      setLoadingAddTraining(false);
+    } else {
+      Toast.errorToast("Harap lengkapi semua data");
     }
   };
   return (
@@ -191,30 +284,50 @@ function HistoryTraining() {
               ></button>
             </div>
             <div className="modal-body">
-              <form
-                action="http://localhost/simpeglocal/pegawai/diklat/tambah"
-                method="POST"
-                enctype="multipart/form-data"
-              >
+              <form onSubmit={doAddDiklat}>
                 <div className="form-row row g-3">
                   <div className="form-group col-md-6">
                     <label className="form-label">Nama Diklat</label>
                     <input
                       type="text"
-                      name="nama_diklat"
                       className="form-control"
-                      required
+                      value={dataAddDiklat.nama_diklat}
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          nama_diklat: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "Nama diklat"
+                        );
+                      }}
                     />
+                    {dataAddDiklat.nama_diklat != null &&
+                      simpleValidatorAdd.current.message(
+                        "Nama diklat",
+                        dataAddDiklat.nama_diklat,
+                        "required"
+                      )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Jenis Diklat</label>
                     <select
-                      name="jenis_diklat"
                       className="form-control"
-                      required
-                      readOnly
+                      value={dataAddDiklat.kode_diklat}
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          kode_diklat: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "jenis_diklat"
+                        );
+                      }}
                     >
+                      <option value="">Pilih jenis diklat</option>
                       {masterDiklat.map((data, index) => {
                         return (
                           <option key={index} value={data.kode_diklat}>
@@ -223,73 +336,164 @@ function HistoryTraining() {
                         );
                       })}
                     </select>
+                    {dataAddDiklat.kode_diklat != null &&
+                      simpleValidatorAdd.current.message(
+                        "jenis_diklat",
+                        dataAddDiklat.kode_diklat,
+                        "required"
+                      )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Tanggal Mulai</label>
                     <input
                       type="date"
-                      name="tgl_mulai"
                       className="form-control"
-                      required
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          tgl_mulai: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "tanggal_mulai_diklat"
+                        );
+                      }}
+                      value={dataAddDiklat.tgl_mulai}
                     />
+                    {dataAddDiklat.tgl_mulai != null &&
+                      simpleValidatorAdd.current.message(
+                        "tanggal_mulai_diklat",
+                        dataAddDiklat.tgl_mulai,
+                        "required"
+                      )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Tanggal Selesai</label>
                     <input
                       type="date"
-                      name="tgl_selesai"
                       className="form-control"
-                      required
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          tgl_selesai: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "tanggal_selesai_diklat"
+                        );
+                      }}
+                      value={dataAddDiklat.tgl_selesai}
                     />
+                    {dataAddDiklat.tgl_selesai != null &&
+                      simpleValidatorAdd.current.message(
+                        "tanggal_selesai_diklat",
+                        dataAddDiklat.tgl_selesai,
+                        "required"
+                      )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Nomor Sertifikat</label>
                     <input
                       type="text"
-                      name="nmr_sertifikat"
                       className="form-control"
-                      required
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          no_sertifikat: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "nomor_sertifikat"
+                        );
+                      }}
+                      value={dataAddDiklat.no_sertifikat}
                     />
+                    {dataAddDiklat.no_sertifikat != null &&
+                      simpleValidatorAdd.current.message(
+                        "nomor_sertifikat",
+                        dataAddDiklat.no_sertifikat,
+                        "required"
+                      )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Tahun Sertifikat</label>
                     <input
                       type="number"
-                      name="thn_sertifikat"
                       className="form-control"
-                      required
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          thn_sertifikat: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "tahun_sertifikat"
+                        );
+                      }}
+                      value={dataAddDiklat.thn_sertifikat}
                     />
+                    {dataAddDiklat.thn_sertifikat != null &&
+                      simpleValidatorAdd.current.message(
+                        "tahun_sertifikat",
+                        dataAddDiklat.thn_sertifikat,
+                        "required|numeric"
+                      )}
                   </div>
 
                   <div className="form-group col-md-6">
                     <label className="form-label">Penyelenggara</label>
                     <input
                       type="text"
-                      name="penyelenggara"
                       className="form-control"
-                      required
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          penyelenggara: e.target.value,
+                        });
+
+                        simpleValidatorAdd.current.showMessageFor(
+                          "penyelenggara"
+                        );
+                      }}
+                      value={dataAddDiklat.penyelenggara}
                     />
+                    {dataAddDiklat.penyelenggara != null &&
+                      simpleValidatorAdd.current.message(
+                        "penyelenggara",
+                        dataAddDiklat.penyelenggara,
+                        "required"
+                      )}
                   </div>
                   <div className="form-group col-md-6">
                     <label className="form-label">File Dokumen</label>
                     <input
                       type="file"
-                      name="dokumen_sk"
                       className="form-control"
-                      required
+                      onChange={(e) => {
+                        setAddDiklat({
+                          ...dataAddDiklat,
+                          dokumen: e.target.files[0],
+                        });
+                      }}
                     />
+                    {dataAddDiklat.dokumen != null &&
+                      simpleValidatorAdd.current.message(
+                        "dokumen_diklat",
+                        dataAddDiklat.dokumen,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-12 form-group">
                     <button
-                      type="sumbit"
+                      type="submit"
                       name="submit"
                       className="btn btn-primary"
                     >
-                      Tambah
+                      {!loadingAddTraining ? "Tambah" : <LoadingIcon />}
                     </button>
                   </div>
                 </div>
@@ -321,7 +525,7 @@ function HistoryTraining() {
               ></button>
             </div>
             <div className="modal-body">
-              <form onSubmit={editDiklat}>
+              <form onSubmit={doEditDiklat}>
                 <div className="form-row row g-3">
                   <div className="form-group col-md-6">
                     <label className="form-label">Nama Diklat</label>
@@ -563,7 +767,7 @@ function HistoryTraining() {
               </svg>
               <h3>Apakah anda yakin?</h3>
               <div className="text-muted">
-                Anda akan menghapus data diklat <b>nama diklat</b>
+                Anda akan menghapus data diklat <b>{training.nama_diklat}</b>
               </div>
             </div>
             <div className="modal-footer">
@@ -578,13 +782,12 @@ function HistoryTraining() {
                     </button>
                   </div>
                   <div className="col">
-                    <a
-                      href="{{ url('/') }}/pegawai/hapus/{{$p->id_peg}}"
+                    <button
                       className="btn btn-danger w-100"
-                      data-bs-dismiss="modal"
+                      onClick={doDeleteTraining}
                     >
-                      Hapus
-                    </a>
+                      {!loadingDeleteTraining ? "Hapus" : <LoadingIcon />}
+                    </button>
                   </div>
                 </div>
               </div>
