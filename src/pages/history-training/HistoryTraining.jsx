@@ -224,7 +224,7 @@ function HistoryTraining() {
               <div className="col">
                 <div className="page-pretitle">Halaman Diklat</div>
                 <h2 className="page-title">
-                  Riwayat Diklat : Ananda Rifkiy Hasan
+                  Riwayat Diklat : {me.name}
                 </h2>
               </div>
             </div>
