@@ -1,9 +1,9 @@
 import axiosIntance from "./_axios-instance";
 import Const from "../constant";
 
-const myTraining = async () => {
+const getTrainings = async (id) => {
   try {
-    let result = await axiosIntance().get("diklat/my", {
+    let result = await axiosIntance().get("diklat/get/" + id, {
       headers: {
         Authorization:
           "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
@@ -74,4 +74,4 @@ const deleteTraining = async (idDiklat) => {
   }
 };
 
-export { myTraining, updateTraining, deleteTraining, addTraining };
+export { getTrainings, updateTraining, deleteTraining, addTraining };

@@ -219,7 +219,7 @@ function HistorySalary() {
             <div className="row align-items-center">
               <div className="col">
                 <div className="page-pretitle">Halaman Gapok</div>
-                <h2 className="page-title">Riwayat Gapok : {user.name}</h2>
+                <h2 className="page-title">Riwayat Gapok : {user?.name}</h2>
               </div>
             </div>
           </div>

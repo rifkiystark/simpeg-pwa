@@ -5,6 +5,7 @@ import { setTraining } from "../../reduxslice/competenceDataSlice";
 import {
   addTraining,
   deleteTraining,
+  getTrainings,
   myTraining,
   updateTraining,
 } from "../../repository/training";
@@ -15,10 +16,18 @@ import SimpleReactValidator from "simple-react-validator";
 import "simple-react-validator/dist/locale/id";
 import Toast from "../../components/toast/Toast";
 import LoadingIcon from "../../components/loading-icon/LoadingIcon";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function HistoryTraining() {
-  const dispatch = useDispatch();
+  // REACT ROUTER
+  const location = useLocation();
+  const router = useNavigate();
+
+  // INIT VALUE
+  const user = location.state?.user;
   const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
+
+  const dispatch = useDispatch();
   const training = useSelector((state) => state.competence.training);
   const [fileEditTraining, setFileEditTraining] = useState(null);
   const [approved, setApproved] = useState([]);
@@ -29,7 +38,6 @@ function HistoryTraining() {
   const [loadingAddTraining, setLoadingAddTraining] = useState(false);
 
   const [dataAddDiklat, setAddDiklat] = useState({
-    id_user: null,
     nama_diklat: null,
     kode_diklat: null,
     tgl_mulai: null,
@@ -102,8 +110,8 @@ function HistoryTraining() {
     })
   );
 
-  const getTrainings = async () => {
-    const { status, data, message } = await myTraining();
+  const doGetTrainings = async () => {
+    const { status, data, message } = await getTrainings(user.id);
     if (status) {
       setApproved(data.riwayatdiklat.filter((d) => d.status === 1));
       setSubmitted(data.riwayatdiklat.filter((d) => d.status === 0));
@@ -118,8 +126,12 @@ function HistoryTraining() {
   };
 
   useEffect(() => {
-    getTrainings();
-    getMasterDiklat();
+    if (!user) {
+      router("/dashboard", { replace: true });
+    } else { 
+      doGetTrainings();
+      getMasterDiklat();
+    }
   }, []);
 
   const doEditDiklat = async (e) => {
@@ -143,7 +155,7 @@ function HistoryTraining() {
       if (status) {
         Toast.successToast("Berhasil memperbarui data diklat");
         setFileEditTraining(null);
-        getTrainings();
+        doGetTrainings();
       } else {
         Toast.warningToast("Gagal memperbarui data diklat");
       }
@@ -158,7 +170,7 @@ function HistoryTraining() {
     const { status } = await deleteTraining(training.id_diklat);
     if (status) {
       Toast.successToast("Hapus data diklat berhasil");
-      getTrainings();
+      doGetTrainings();
     } else {
       Toast.warningToast("Hapus data diklat gagal");
     }
@@ -170,7 +182,7 @@ function HistoryTraining() {
     if (simpleValidatorAdd.current.allValid()) {
       setLoadingAddTraining(true);
       const fd = new FormData();
-      fd.append("id_user", me.id);
+      fd.append("id_user", user.id);
       fd.append("nama_diklat", dataAddDiklat.nama_diklat);
       fd.append("kode_diklat", dataAddDiklat.kode_diklat);
       fd.append("tgl_mulai", dataAddDiklat.tgl_mulai);
@@ -182,7 +194,7 @@ function HistoryTraining() {
 
       const { status } = await addTraining(fd);
       if (status) {
-        getTrainings();
+        doGetTrainings();
         Toast.successToast("Berhasil menambah data diklat");
         setAddDiklat({
           id_user: "",
@@ -224,7 +236,7 @@ function HistoryTraining() {
               <div className="col">
                 <div className="page-pretitle">Halaman Diklat</div>
                 <h2 className="page-title">
-                  Riwayat Diklat : {me.name}
+                  Riwayat Diklat : {user?.name}
                 </h2>
               </div>
             </div>

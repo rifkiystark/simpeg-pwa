@@ -79,7 +79,11 @@ const Navbar = () => {
                 <div className="dropdown-menu">
                   <div className="dropdown-menu-columns">
                     <div className="dropdown-menu-column">
-                      <Link className="dropdown-item" to="history/training"> 
+                      <Link
+                        className="dropdown-item"
+                        to="history/training"
+                        state={{ user: me }}
+                      >
                         Diklat
                       </Link>
                       <Link
@@ -243,7 +247,6 @@ const Navbar = () => {
                                 className="dropdown-item"
                                 to="master/religions"
                               >
-                                
                                 Agama
                               </Link>
                               <Link
@@ -256,7 +259,6 @@ const Navbar = () => {
                                 className="dropdown-item"
                                 to="master/salary"
                               >
-                                
                                 Gapok
                               </Link>
                               <Link className="dropdown-item" to="master/group">
@@ -296,7 +298,6 @@ const Navbar = () => {
                         )}
 
                         <Link className="dropdown-item" to="employees">
-                          
                           Pegawai
                         </Link>
                         <div className="dropend">
@@ -318,7 +319,6 @@ const Navbar = () => {
                               className="dropdown-item"
                               to="presence/setting"
                             >
-                              
                               Setting
                             </Link>
                           </div>
