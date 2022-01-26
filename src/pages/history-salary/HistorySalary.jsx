@@ -8,6 +8,7 @@ import LoadingIcon from "../../components/loading-icon/LoadingIcon";
 import Table from "../../components/table/Table";
 import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
+import $ from "jquery";
 import { formatRupiah, validateInput } from "../../helpers";
 import { setSalary } from "../../reduxslice/competenceDataSlice";
 import { masterGapok } from "../../repository/masterData";
@@ -92,6 +93,9 @@ function HistorySalary() {
   const validatorAdd = useRef(new SimpleReactValidator({ locale: "id" }));
   const validatorEdit = useRef(new SimpleReactValidator({ locale: "id" }));
 
+  // Close Modal Ref
+  const closeRef = useRef();
+
   // API
   const doAddSalary = async (e) => {
     e.preventDefault();
@@ -112,6 +116,7 @@ function HistorySalary() {
       const { status } = await addSalary(fd);
       if (status) {
         doGetSalaries();
+        closeRef.current.click();
         Toast.successToast("Berhasil menambah data gaji pokok");
         setDataAddSalary({
           no_sk: "",
@@ -194,7 +199,7 @@ function HistorySalary() {
     const { status } = await deleteSalary(salary.id_gapok);
     if (status) {
       doGetSalaries();
-
+      closeRef.current.click();
       Toast.successToast("Berhasil menghapus data gaji pokok");
     } else {
       Toast.errorToast("Gagal menghapus data gaji pokok");
@@ -275,6 +280,7 @@ function HistorySalary() {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                ref={closeRef}
               ></button>
             </div>
             <div className="modal-body">
@@ -739,6 +745,7 @@ function HistorySalary() {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              ref={closeRef}
             ></button>
             <div className="modal-status bg-danger"></div>
             <div className="modal-body text-center py-4">
