@@ -64,7 +64,7 @@ const deleteStructuralPosition = async (idJabatanStruktural) => {
   try {
     let result = await axiosIntance().post(
       "jabatan-struktural/delete",
-      { id_jabatan_struktural: idJabatanStruktural },
+      { id_jabatan: idJabatanStruktural },
       {
         headers: {
           Authorization:

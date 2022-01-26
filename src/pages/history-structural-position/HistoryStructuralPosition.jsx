@@ -16,6 +16,7 @@ import {
 import {
   addStructuralPosition,
   getStructuralPositions,
+  deleteStructuralPosition,
 } from "../../repository/structuralPosition";
 import { tableApproved, tableSubmitted } from "./tableColumn";
 
@@ -30,7 +31,9 @@ function HistoryStructuralPosition() {
 
   // REDUX
   const dispatch = useDispatch();
-  const salary = useSelector((state) => state.competence.structuralPosition);
+  const structuralPosition = useSelector(
+    (state) => state.competence.structuralPosition
+  );
 
   // TABLE COLUMN
   let columnApproved = [
@@ -170,6 +173,21 @@ function HistoryStructuralPosition() {
     } else {
       Toast.warningToast("Harap isi semua data");
     }
+  };
+
+  const doDeleteStructuralPosition = async () => {
+    setLoadingDeleteStructuralPosition(true);
+    const { status } = await deleteStructuralPosition(
+      structuralPosition.id_jabatan
+    );
+    if (status) {
+      doGetStructuralPositions();
+      closeRef.current.click();
+      Toast.successToast("Berhasil menghapus data");
+    } else {
+      Toast.errorToast("Gagal menghapus data");
+    }
+    setLoadingDeleteStructuralPosition(false);
   };
 
   // COMPONENT DID MOUNT
@@ -633,6 +651,7 @@ function HistoryStructuralPosition() {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              ref={closeRef}
             ></button>
             <div className="modal-status bg-danger"></div>
             <div className="modal-body text-center py-4">
@@ -654,7 +673,8 @@ function HistoryStructuralPosition() {
               </svg>
               <h3>Apakah anda yakin?</h3>
               <div className="text-muted">
-                Anda akan menghapus data jabatan struktural <b>nama diklat</b>
+                Anda akan menghapus data jabatan struktural{" "}
+                <b>{structuralPosition.no_sk}</b>
               </div>
             </div>
             <div className="modal-footer">
@@ -669,13 +689,18 @@ function HistoryStructuralPosition() {
                     </button>
                   </div>
                   <div className="col">
-                    <a
-                      href="{{ url('/') }}/pegawai/hapus/{{$p->id_peg}}"
+                    <button
                       className="btn btn-danger w-100"
-                      data-bs-dismiss="modal"
+                      onClick={() => {
+                        doDeleteStructuralPosition();
+                      }}
                     >
-                      Hapus
-                    </a>
+                      {loadingDeleteStructuralPosition ? (
+                        <LoadingIcon />
+                      ) : (
+                        "Hapus"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
