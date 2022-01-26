@@ -93,25 +93,32 @@ const Navbar = () => {
                       >
                         Gapok
                       </Link>
-                      <Link className="dropdown-item" to="history/punishment">
+                      <Link
+                        className="dropdown-item"
+                        to="history/punishment"
+                        state={{ user: me }}
+                      >
                         Hukuman
                       </Link>
 
                       <Link
                         className="dropdown-item"
                         to="history/structural-position"
+                        state={{ user: me }}
                       >
                         Jabatan Struktural
                       </Link>
                       <Link
                         className="dropdown-item"
                         to="history/functional-position"
+                        state={{ user: me }}
                       >
                         Jabatan Fungsional
                       </Link>
                       <Link
                         className="dropdown-item"
                         to="history/additional-position"
+                        state={{ user: me }}
                       >
                         Jabatan Tambahan
                       </Link>

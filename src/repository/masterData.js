@@ -36,4 +36,40 @@ const masterGapok = async () => {
   }
 };
 
-export { masterDiklat, masterGapok };
+const masterJabatanStruktural = async () => {
+  try {
+    let result = await axiosIntance().get("master/jabatan-struktural", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+const masterGolongan = async () => {
+  try {
+    let result = await axiosIntance().get("master/golongan", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+export { masterDiklat, masterGapok, masterJabatanStruktural, masterGolongan };

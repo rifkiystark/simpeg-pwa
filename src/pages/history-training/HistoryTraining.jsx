@@ -10,7 +10,7 @@ import {
   updateTraining,
 } from "../../repository/training";
 import { masterDiklat as diklats } from "../../repository/masterData";
-import { tableApproved, tableSubmitted } from "./data";
+import { tableApproved, tableSubmitted } from "./tableColumn";
 import Const from "../../constant";
 import SimpleReactValidator from "simple-react-validator";
 import "simple-react-validator/dist/locale/id";
