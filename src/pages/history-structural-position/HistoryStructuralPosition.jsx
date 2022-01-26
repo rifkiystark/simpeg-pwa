@@ -17,6 +17,7 @@ import {
   addStructuralPosition,
   getStructuralPositions,
   deleteStructuralPosition,
+  updateStructuralPosition,
 } from "../../repository/structuralPosition";
 import { tableApproved, tableSubmitted } from "./tableColumn";
 
@@ -87,6 +88,7 @@ function HistoryStructuralPosition() {
     dokumen_sk: null,
     tamat_jabatan: null,
   });
+  const [fileEdit, setFileEdit] = useState(null);
   const [fileEditStructuralPosition, setFileEditStructuralPosition] =
     useState(null);
   const [loadingAddStructuralPosition, setLoadingAddStructuralPosition] =
@@ -170,6 +172,39 @@ function HistoryStructuralPosition() {
         Toast.errorToast("Gagal menambah data jabatan struktural");
       }
       setLoadingAddStructuralPosition(false);
+    } else {
+      Toast.warningToast("Harap isi semua data");
+    }
+  };
+
+  const doEditStructuralPosition = async (e) => {
+    e.preventDefault();
+    if (validatorEdit.current.allValid()) {
+      setLoadingEditStructuralPosition(true);
+      const fd = new FormData();
+      fd.append("id_peg", structuralPosition.id_peg);
+      fd.append("id_jabatan", structuralPosition.id_jabatan);
+      fd.append("no_sk", structuralPosition.no_sk);
+      fd.append("tgl_sk", structuralPosition.tgl_sk);
+      fd.append("pejabat_sk", structuralPosition.pejabat_sk);
+      fd.append("kode_jbts", structuralPosition.kode_jbts);
+      fd.append("kode_gol", structuralPosition.kode_gol);
+      fd.append("tmt", structuralPosition.tmt);
+      fd.append("tamat_jabatan", structuralPosition.tamat_jabatan);
+      fd.append("ket", structuralPosition.ket);
+
+      if (fileEdit != null) {
+        fd.append("dokumen_sk", fileEdit);
+      }
+
+      const { status } = await updateStructuralPosition(fd);
+      if (status) {
+        doGetStructuralPositions();
+        Toast.successToast("Berhasil memperbarui data");
+      } else {
+        Toast.errorToast("Gagal memperbarui data");
+      }
+      setLoadingEditStructuralPosition(false);
     } else {
       Toast.warningToast("Harap isi semua data");
     }
@@ -527,11 +562,7 @@ function HistoryStructuralPosition() {
               ></button>
             </div>
             <div className="modal-body">
-              <form
-                action="http://localhost/simpeglocal/pegawai/jabatan/tambah"
-                method="post"
-                enctype="multipart/form-data"
-              >
+              <form onSubmit={doEditStructuralPosition}>
                 <div className="row g-3">
                   <div className="col-md-6">
                     <label>No. SK</label>
@@ -539,8 +570,23 @@ function HistoryStructuralPosition() {
                       type="text"
                       name="no_sk"
                       className="form-control"
-                      required=""
+                      value={structuralPosition.no_sk}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            no_sk: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("no_sk");
+                      }}
                     />
+                    {structuralPosition.no_sk != null &&
+                      validatorEdit.current.message(
+                        "no_sk",
+                        structuralPosition.no_sk,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Tanggal SK</label>
@@ -548,8 +594,23 @@ function HistoryStructuralPosition() {
                       type="date"
                       name="tgl_sk"
                       className="form-control"
-                      required=""
+                      value={structuralPosition.tgl_sk}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            tgl_sk: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("tanggal_sk");
+                      }}
                     />
+                    {structuralPosition.tgl_sk != null &&
+                      validatorEdit.current.message(
+                        "tanggal_sk",
+                        structuralPosition.tgl_sk,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Pejabat Pengesah</label>
@@ -557,25 +618,57 @@ function HistoryStructuralPosition() {
                       type="text"
                       name="pejabat_sk"
                       className="form-control"
-                      required=""
+                      value={structuralPosition.pejabat_sk}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            pejabat_sk: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("pejabat_sk");
+                      }}
                     />
+                    {structuralPosition.pejabat_sk != null &&
+                      validatorEdit.current.message(
+                        "pejabat_sk",
+                        structuralPosition.pejabat_sk,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Jabatan Struktural</label>
                     <select
                       name="kode_jbts"
                       className="form-control"
-                      required=""
+                      value={structuralPosition.kode_jbts}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            kode_jbts: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor(
+                          "jabatan_struktural"
+                        );
+                      }}
                     >
-                      <option value="1">Pimpinan</option>
-                      <option value="2">Wakil Pimpinan</option>
-                      <option value="3">Pegawai</option>
-                      <option value="4">Guru</option>
-                      <option value="5">Kepala Sekolah</option>
-                      <option value="6">Wakil Kepala Sekolah</option>
-                      <option value="7">KTU Yayasan</option>
-                      <option value="8">Staff Yayasan</option>
+                      <option value="">Pilih jabatan</option>
+                      {masterStructuralPostions.map((value, index) => {
+                        return (
+                          <option key={index} value={value.kode_jbts}>
+                            {value.nama_jabatan}
+                          </option>
+                        );
+                      })}
                     </select>
+                    {structuralPosition.kode_jbts != null &&
+                      validatorEdit.current.message(
+                        "jabatan_struktural",
+                        structuralPosition.kode_jbts,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Terhitung Mulai</label>
@@ -583,8 +676,23 @@ function HistoryStructuralPosition() {
                       type="date"
                       name="tmt"
                       className="form-control"
-                      required=""
+                      value={structuralPosition.tmt}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            tmt: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("terhitung_mulai");
+                      }}
                     />
+                    {structuralPosition.tmt != null &&
+                      validatorEdit.current.message(
+                        "terhitung_mulai",
+                        structuralPosition.tmt,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Tamat Jabatan</label>
@@ -592,17 +700,55 @@ function HistoryStructuralPosition() {
                       type="date"
                       name="tamat_jabatan"
                       className="form-control"
-                      required=""
+                      value={structuralPosition.tamat_jabatan}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            tamat_jabatan: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("tamat_jabatan");
+                      }}
                     />
+                    {structuralPosition.tamat_jabatan != null &&
+                      validatorEdit.current.message(
+                        "tamat_jabatan",
+                        structuralPosition.tamat_jabatan,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Golongan</label>
-                    <select name="kode_gol" className="form-control" required>
-                      <option value="-">-</option>
-                      <option value="2">Kepala Sekolah</option>
-                      <option value="3">Guru</option>
-                      <option value="4">Wakil Kepala Sekolah</option>
+                    <select
+                      name="kode_gol"
+                      className="form-control"
+                      value={structuralPosition.kode_gol}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            kode_gol: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("golongan");
+                      }}
+                    >
+                      <option value="">Pilih golongan</option>
+                      {masterGroups.map((value, index) => {
+                        return (
+                          <option key={index} value={value.kode_gol}>
+                            {value.pangkat}
+                          </option>
+                        );
+                      })}
                     </select>
+                    {structuralPosition.kode_gol != null &&
+                      validatorEdit.current.message(
+                        "golongan",
+                        structuralPosition.kode_gol,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>File Dokumen SK</label>
@@ -610,21 +756,52 @@ function HistoryStructuralPosition() {
                       type="file"
                       name="dokumen_sk"
                       className="form-control"
-                      required=""
+                      onChange={(e) => {
+                        setFileEdit(e.target.files[0]);
+                        validatorEdit.current.showMessageFor("dokumen_sk");
+                      }}
                     />
+                    {structuralPosition.dokumen_sk != null &&
+                      validatorEdit.current.message(
+                        "dokumen_sk",
+                        structuralPosition.dokumen_sk,
+                        "required"
+                      )}
                   </div>
 
                   <div className="col-md-12">
                     <label>Keterangan</label>
-                    <input type="text" name="ket" className="form-control" />
+                    <input
+                      type="text"
+                      name="ket"
+                      className="form-control"
+                      value={structuralPosition.ket}
+                      onChange={(e) => {
+                        dispatch(
+                          setStructuralPosition({
+                            ...structuralPosition,
+                            ket: e.target.value,
+                          })
+                        );
+                        validatorEdit.current.showMessageFor("keterangan");
+                      }}
+                    />
+                    {structuralPosition.ket != null &&
+                      validatorEdit.current.message(
+                        "keterangan",
+                        structuralPosition.ket,
+                        "required"
+                      )}
                   </div>
 
                   <div className="col-md-12">
-                    <input
-                      type="submit"
-                      value="Tambah"
-                      className="btn btn-primary"
-                    />
+                    <button type="submit" className="btn btn-primary">
+                      {loadingEditStructuralPosition ? (
+                        <LoadingIcon />
+                      ) : (
+                        "Perbarui"
+                      )}
+                    </button>
                   </div>
                 </div>
               </form>
