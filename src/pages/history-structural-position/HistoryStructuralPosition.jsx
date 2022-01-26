@@ -3,14 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
 import "simple-react-validator/dist/locale/id";
+import LoadingIcon from "../../components/loading-icon/LoadingIcon";
 import Table from "../../components/table/Table";
+import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
+import { validateInput } from "../../helpers";
 import { setStructuralPosition } from "../../reduxslice/competenceDataSlice";
 import {
   masterGolongan,
   masterJabatanStruktural,
 } from "../../repository/masterData";
-import { getStructuralPositions } from "../../repository/structuralPosition";
+import {
+  addStructuralPosition,
+  getStructuralPositions,
+} from "../../repository/structuralPosition";
 import { tableApproved, tableSubmitted } from "./tableColumn";
 
 function HistoryStructuralPosition() {
@@ -71,11 +77,12 @@ function HistoryStructuralPosition() {
     no_sk: null,
     tgl_sk: null,
     pejabat_sk: null,
-    kode_gapok: null,
+    kode_jbts: null,
     tmt: null,
-    naik_selanjutnya: null,
+    kode_gol: null,
     ket: null,
     dokumen_sk: null,
+    tamat_jabatan: null,
   });
   const [fileEditStructuralPosition, setFileEditStructuralPosition] =
     useState(null);
@@ -114,6 +121,58 @@ function HistoryStructuralPosition() {
     }
   };
 
+  const doAddStructuralPosition = async (e) => {
+    e.preventDefault();
+    if (validateInput(validatorAdd, dataAddStructuralPosition)) {
+      setLoadingAddStructuralPosition(true);
+      const fd = new FormData();
+      fd.append("id_user", user.id);
+      fd.append("no_sk", dataAddStructuralPosition.no_sk);
+      fd.append("tgl_sk", dataAddStructuralPosition.tgl_sk);
+      fd.append("pejabat_sk", dataAddStructuralPosition.pejabat_sk);
+      fd.append("kode_jbts", dataAddStructuralPosition.kode_jbts);
+      fd.append("kode_gol", dataAddStructuralPosition.kode_gol);
+      fd.append("tmt", dataAddStructuralPosition.tmt);
+      fd.append("tamat_jabatan", dataAddStructuralPosition.tamat_jabatan);
+      fd.append("dokumen_sk", dataAddStructuralPosition.dokumen_sk);
+      fd.append("ket", dataAddStructuralPosition.ket);
+
+      const { status } = await addStructuralPosition(fd);
+      if (status) {
+        doGetStructuralPositions();
+        Toast.successToast("Berhasil menambah data jabatan struktural");
+        setDataAddStructuralPosition({
+          no_sk: "",
+          tgl_sk: "",
+          pejabat_sk: "",
+          kode_jbts: "",
+          tmt: "",
+          kode_gol: "",
+          ket: "",
+          dokumen_sk: "",
+          tamat_jabatan: "",
+        });
+        setDataAddStructuralPosition({
+          no_sk: null,
+          tgl_sk: null,
+          pejabat_sk: null,
+          kode_jbts: null,
+          tmt: null,
+          kode_gol: null,
+          ket: null,
+          dokumen_sk: null,
+          tamat_jabatan: null,
+        });
+      } else {
+        Toast.errorToast("Gagal menambah data jabatan struktural");
+      }
+      setLoadingAddStructuralPosition(false);
+    } else {
+      Toast.warningToast("Harap isi semua data");
+    }
+  };
+
+  // COMPONENT DID MOUNT
   useEffect(() => {
     if (!user) {
       router("/dashboard", { replace: true });
@@ -193,11 +252,7 @@ function HistoryStructuralPosition() {
               ></button>
             </div>
             <div className="modal-body">
-              <form
-                action="http://localhost/simpeglocal/pegawai/jabatan/tambah"
-                method="post"
-                enctype="multipart/form-data"
-              >
+              <form onSubmit={doAddStructuralPosition}>
                 <div className="row g-3">
                   <div className="col-md-6">
                     <label>No. SK</label>
@@ -205,8 +260,21 @@ function HistoryStructuralPosition() {
                       type="text"
                       name="no_sk"
                       className="form-control"
-                      required=""
+                      value={dataAddStructuralPosition.no_sk}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          no_sk: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("no_sk");
+                      }}
                     />
+                    {dataAddStructuralPosition.no_sk != null &&
+                      validatorAdd.current.message(
+                        "no_sk",
+                        dataAddStructuralPosition.no_sk,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Tanggal SK</label>
@@ -214,8 +282,21 @@ function HistoryStructuralPosition() {
                       type="date"
                       name="tgl_sk"
                       className="form-control"
-                      required=""
+                      value={dataAddStructuralPosition.tgl_sk}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          tgl_sk: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("tanggal_sk");
+                      }}
                     />
+                    {dataAddStructuralPosition.tgl_sk != null &&
+                      validatorAdd.current.message(
+                        "tanggal_sk",
+                        dataAddStructuralPosition.tgl_sk,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Pejabat Pengesah</label>
@@ -223,12 +304,38 @@ function HistoryStructuralPosition() {
                       type="text"
                       name="pejabat_sk"
                       className="form-control"
-                      required=""
+                      value={dataAddStructuralPosition.pejabat_sk}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          pejabat_sk: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("pejabat_sk");
+                      }}
                     />
+                    {dataAddStructuralPosition.pejabat_sk != null &&
+                      validatorAdd.current.message(
+                        "pejabat_sk",
+                        dataAddStructuralPosition.pejabat_sk,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Jabatan Struktural</label>
-                    <select name="kode_jbts" className="form-control">
+                    <select
+                      name="kode_jbts"
+                      className="form-control"
+                      value={dataAddStructuralPosition.kode_jbts}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          kode_jbts: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor(
+                          "jabatan_struktural"
+                        );
+                      }}
+                    >
                       <option value="">Pilih jabatan</option>
                       {masterStructuralPostions.map((value, index) => {
                         return (
@@ -238,6 +345,12 @@ function HistoryStructuralPosition() {
                         );
                       })}
                     </select>
+                    {dataAddStructuralPosition.kode_jbts != null &&
+                      validatorAdd.current.message(
+                        "jabatan_struktural",
+                        dataAddStructuralPosition.kode_jbts,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Terhitung Mulai</label>
@@ -245,8 +358,21 @@ function HistoryStructuralPosition() {
                       type="date"
                       name="tmt"
                       className="form-control"
-                      required=""
+                      value={dataAddStructuralPosition.tmt}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          tmt: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("terhitung_mulai");
+                      }}
                     />
+                    {dataAddStructuralPosition.tmt != null &&
+                      validatorAdd.current.message(
+                        "terhitung_mulai",
+                        dataAddStructuralPosition.tmt,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Tamat Jabatan</label>
@@ -254,12 +380,36 @@ function HistoryStructuralPosition() {
                       type="date"
                       name="tamat_jabatan"
                       className="form-control"
-                      required=""
+                      value={dataAddStructuralPosition.tamat_jabatan}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          tamat_jabatan: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("tamat_jabatan");
+                      }}
                     />
+                    {dataAddStructuralPosition.tamat_jabatan != null &&
+                      validatorAdd.current.message(
+                        "tamat_jabatan",
+                        dataAddStructuralPosition.tamat_jabatan,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>Golongan</label>
-                    <select name="kode_gol" className="form-control" required>
+                    <select
+                      name="kode_gol"
+                      className="form-control"
+                      value={dataAddStructuralPosition.kode_gol}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          kode_gol: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("golongan");
+                      }}
+                    >
                       <option value="">Pilih golongan</option>
                       {masterGroups.map((value, index) => {
                         return (
@@ -269,6 +419,12 @@ function HistoryStructuralPosition() {
                         );
                       })}
                     </select>
+                    {dataAddStructuralPosition.kode_gol != null &&
+                      validatorAdd.current.message(
+                        "golongan",
+                        dataAddStructuralPosition.kode_gol,
+                        "required"
+                      )}
                   </div>
                   <div className="col-md-6">
                     <label>File Dokumen SK</label>
@@ -276,21 +432,53 @@ function HistoryStructuralPosition() {
                       type="file"
                       name="dokumen_sk"
                       className="form-control"
-                      required=""
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          dokumen_sk: e.target.files[0],
+                        });
+                        validatorAdd.current.showMessageFor("dokumen_sk");
+                      }}
                     />
+                    {dataAddStructuralPosition.dokumen_sk != null &&
+                      validatorAdd.current.message(
+                        "dokumen_sk",
+                        dataAddStructuralPosition.dokumen_sk,
+                        "required"
+                      )}
                   </div>
 
                   <div className="col-md-12">
                     <label>Keterangan</label>
-                    <input type="text" name="ket" className="form-control" />
+                    <input
+                      type="text"
+                      name="ket"
+                      className="form-control"
+                      value={dataAddStructuralPosition.ket}
+                      onChange={(e) => {
+                        setDataAddStructuralPosition({
+                          ...dataAddStructuralPosition,
+                          ket: e.target.value,
+                        });
+                        validatorAdd.current.showMessageFor("keterangan");
+                      }}
+                    />
+                    {dataAddStructuralPosition.ket != null &&
+                      validatorAdd.current.message(
+                        "keterangan",
+                        dataAddStructuralPosition.ket,
+                        "required"
+                      )}
                   </div>
 
                   <div className="col-md-12">
-                    <input
-                      type="submit"
-                      value="Tambah"
-                      className="btn btn-primary"
-                    />
+                    <button type="submit" className="btn btn-primary">
+                      {loadingAddStructuralPosition ? (
+                        <LoadingIcon />
+                      ) : (
+                        "Tambah"
+                      )}
+                    </button>
                   </div>
                 </div>
               </form>
