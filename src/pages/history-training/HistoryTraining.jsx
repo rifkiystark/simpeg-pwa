@@ -27,8 +27,11 @@ function HistoryTraining() {
   const user = location.state?.user;
   const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
 
+  // REDUX
   const dispatch = useDispatch();
   const training = useSelector((state) => state.competence.training);
+
+  // STATE
   const [fileEditTraining, setFileEditTraining] = useState(null);
   const [approved, setApproved] = useState([]);
   const [submitted, setSubmitted] = useState([]);
@@ -98,6 +101,7 @@ function HistoryTraining() {
     ];
   }
 
+  // VALIDATOR
   const simpleValidator = useRef(
     new SimpleReactValidator({
       locale: "id",
@@ -110,6 +114,10 @@ function HistoryTraining() {
     })
   );
 
+  // CLOSE REF MODAL
+  const closeRef = useRef();
+
+  // API
   const doGetTrainings = async () => {
     const { status, data, message } = await getTrainings(user.id);
     if (status) {
@@ -117,22 +125,12 @@ function HistoryTraining() {
       setSubmitted(data.riwayatdiklat.filter((d) => d.status === 0));
     }
   };
-  const getMasterDiklat = async () => {
+  const doGetMasterDiklat = async () => {
     const { status, data, message } = await diklats();
     if (status) {
-      console.log(data);
       setMasterDiklat(data);
     }
   };
-
-  useEffect(() => {
-    if (!user) {
-      router("/dashboard", { replace: true });
-    } else { 
-      doGetTrainings();
-      getMasterDiklat();
-    }
-  }, []);
 
   const doEditDiklat = async (e) => {
     e.preventDefault();
@@ -169,6 +167,7 @@ function HistoryTraining() {
     setLoadingDeleteTraining(true);
     const { status } = await deleteTraining(training.id_diklat);
     if (status) {
+      closeRef.current.click();
       Toast.successToast("Hapus data diklat berhasil");
       doGetTrainings();
     } else {
@@ -227,6 +226,16 @@ function HistoryTraining() {
       Toast.errorToast("Harap lengkapi semua data");
     }
   };
+
+  // COMPONENT DID MOUNT
+  useEffect(() => {
+    if (!user) {
+      router("/dashboard", { replace: true });
+    } else {
+      doGetTrainings();
+      doGetMasterDiklat();
+    }
+  }, []);
   return (
     <>
       <div className="page-wrapper">
@@ -235,9 +244,7 @@ function HistoryTraining() {
             <div className="row align-items-center">
               <div className="col">
                 <div className="page-pretitle">Halaman Diklat</div>
-                <h2 className="page-title">
-                  Riwayat Diklat : {user?.name}
-                </h2>
+                <h2 className="page-title">Riwayat Diklat : {user?.name}</h2>
               </div>
             </div>
           </div>
@@ -758,6 +765,7 @@ function HistoryTraining() {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              ref={closeRef}
             ></button>
             <div className="modal-status bg-danger"></div>
             <div className="modal-body text-center py-4">

@@ -116,7 +116,6 @@ function HistorySalary() {
       const { status } = await addSalary(fd);
       if (status) {
         doGetSalaries();
-        closeRef.current.click();
         Toast.successToast("Berhasil menambah data gaji pokok");
         setDataAddSalary({
           no_sk: "",
@@ -280,7 +279,6 @@ function HistorySalary() {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                ref={closeRef}
               ></button>
             </div>
             <div className="modal-body">
