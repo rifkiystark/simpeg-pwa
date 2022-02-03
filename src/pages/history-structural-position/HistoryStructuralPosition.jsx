@@ -245,7 +245,7 @@ function HistoryStructuralPosition() {
               <div className="col">
                 <div className="page-pretitle">Halaman Jabatan Struktural</div>
                 <h2 className="page-title">
-                  Riwayat Jabatan Struktural : Ananda Rifkiy Hasan
+                  Riwayat Jabatan Struktural : {user.name}
                 </h2>
               </div>
             </div>

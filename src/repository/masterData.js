@@ -72,4 +72,22 @@ const masterGolongan = async () => {
   }
 };
 
-export { masterDiklat, masterGapok, masterJabatanStruktural, masterGolongan };
+const masterJabatanFungsional = async () => {
+  try {
+    let result = await axiosIntance().get("master/jabatan-fungsional", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+export { masterDiklat, masterGapok, masterJabatanStruktural, masterGolongan, masterJabatanFungsional };
