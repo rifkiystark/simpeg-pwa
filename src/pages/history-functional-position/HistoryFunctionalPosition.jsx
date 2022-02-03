@@ -6,6 +6,7 @@ import {
 } from "../../repository/masterData";
 import {
   addFunctionalPosition,
+  deleteFunctionalPosition,
   getFunctionalPositions,
   updateFunctionalPosition,
 } from "../../repository/functionalPosition";
@@ -207,6 +208,21 @@ function HistoryFunctionalPosition() {
     } else {
       Toast.warningToast("Harap isi semua data");
     }
+  };
+
+  const doDeleteFunctionalPosition = async () => {
+    setLoadingDeleteFunctionalPosition(true);
+    const { status } = await deleteFunctionalPosition(
+      functionalPosition.id_jabatanf
+    );
+    if (status) {
+      doGetFunctionalPositions();
+      closeRef.current.click();
+      Toast.successToast("Berhasil menghapus data");
+    } else {
+      Toast.errorToast("Gagal menghapus data");
+    }
+    setLoadingDeleteFunctionalPosition(false);
   };
 
   // COMPONENT DID MOUNT
@@ -806,6 +822,7 @@ function HistoryFunctionalPosition() {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              ref={closeRef}
             ></button>
             <div className="modal-status bg-danger"></div>
             <div className="modal-body text-center py-4">
@@ -827,7 +844,8 @@ function HistoryFunctionalPosition() {
               </svg>
               <h3>Apakah anda yakin?</h3>
               <div className="text-muted">
-                Anda akan menghapus data jabatan fungsional <b>nama diklat</b>
+                Anda akan menghapus data jabatan fungsional{" "}
+                <b>{functionalPosition.no_sk}</b>
               </div>
             </div>
             <div className="modal-footer">
@@ -842,13 +860,18 @@ function HistoryFunctionalPosition() {
                     </button>
                   </div>
                   <div className="col">
-                    <a
-                      href="{{ url('/') }}/pegawai/hapus/{{$p->id_peg}}"
+                    <button
                       className="btn btn-danger w-100"
-                      data-bs-dismiss="modal"
+                      onClick={() => {
+                        doDeleteFunctionalPosition();
+                      }}
                     >
-                      Hapus
-                    </a>
+                      {loadingDeleteFunctionalPosition ? (
+                        <LoadingIcon />
+                      ) : (
+                        "Hapus"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>

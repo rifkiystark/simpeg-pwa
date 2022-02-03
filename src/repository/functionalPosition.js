@@ -64,7 +64,7 @@ const deleteFunctionalPosition = async (idJabatanFungsional) => {
   try {
     let result = await axiosIntance().post(
       "jabatan-fungsional/delete",
-      { id_jabatan: idJabatanFungsional },
+      { id_jabatanf: idJabatanFungsional },
       {
         headers: {
           Authorization:
