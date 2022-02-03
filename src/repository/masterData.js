@@ -89,5 +89,29 @@ const masterJabatanFungsional = async () => {
     };
   }
 };
+const masterJabatanTambahan = async () => {
+  try {
+    let result = await axiosIntance().get("master/jabatan-tambahan", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
-export { masterDiklat, masterGapok, masterJabatanStruktural, masterGolongan, masterJabatanFungsional };
+export {
+  masterDiklat,
+  masterGapok,
+  masterJabatanStruktural,
+  masterGolongan,
+  masterJabatanFungsional,
+  masterJabatanTambahan,
+};

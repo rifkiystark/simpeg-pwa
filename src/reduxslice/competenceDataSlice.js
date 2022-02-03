@@ -70,8 +70,16 @@ export const competenceSlice = createSlice({
       tamat_jabatan: "",
     },
     additionalPosition: {
-      kodeJabatanTambahan: "",
-      namaJabatan: "",
+      id_jabatanft: "",
+      id_peg: "",
+      no_sk: "",
+      tgl_sk: "",
+      pejabat_sk: "",
+      kode_jbtft: "",
+      tmt: "",
+      status: "",
+      dokumen_sk: "",
+      tamat_jabatan: "",
     },
     units: {
       kodeUPT: "",

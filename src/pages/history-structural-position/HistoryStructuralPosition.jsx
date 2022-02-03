@@ -89,8 +89,6 @@ function HistoryStructuralPosition() {
     tamat_jabatan: null,
   });
   const [fileEdit, setFileEdit] = useState(null);
-  const [fileEditStructuralPosition, setFileEditStructuralPosition] =
-    useState(null);
   const [loadingAddStructuralPosition, setLoadingAddStructuralPosition] =
     useState(false);
   const [loadingEditStructuralPosition, setLoadingEditStructuralPosition] =
