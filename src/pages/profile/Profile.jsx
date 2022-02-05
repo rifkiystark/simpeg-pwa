@@ -10,6 +10,7 @@ import { validateInput } from "../../helpers";
 import {
   addChild,
   addMarital,
+  addParent,
   employeeByUserId,
 } from "../../repository/employee";
 import { masterPendidikan } from "../../repository/masterData";
@@ -75,6 +76,7 @@ function Profile() {
 
   const [loadingMarital, setLoadingMarital] = useState(false);
   const [loadingChild, setLoadingChild] = useState(false);
+  const [loadingParent, setLoadingParent] = useState(false);
 
   const [pendidikans, setPendidikans] = useState([]);
 
@@ -101,9 +103,20 @@ function Profile() {
     keterangan: null,
   });
 
+  const [parent, setParent] = useState({
+    nama: null,
+    t_lahir: null,
+    tgl_lahir: null,
+    kelamin: null,
+    alamat: null,
+    pekerjaan: null,
+    keterangan: null,
+  });
+
   // VALIDATOR
   const validatorMarital = useRef(new SimpleReactValidator({ locale: "id" }));
   const validatorChild = useRef(new SimpleReactValidator({ locale: "id" }));
+  const validatorParent = useRef(new SimpleReactValidator({ locale: "id" }));
 
   // API CALL
   const doGetUserById = async () => {
@@ -191,6 +204,43 @@ function Profile() {
         Toast.errorToast("Gagal menambah data");
       }
       setLoadingChild(false);
+    } else {
+      Toast.warningToast("Harap isi semua data");
+    }
+  };
+
+  const doAddParent = async (e) => {
+    e.preventDefault();
+
+    if (validateInput(validatorParent, parent)) {
+      setLoadingParent(true);
+      const requestData = { ...parent, id_user: user.id };
+      const { status, data, message } = await addParent(requestData);
+      if (status) {
+        setParent({
+          nama: "",
+          t_lahir: "",
+          tgl_lahir: "",
+          kelamin: "",
+          alamat: "",
+          pekerjaan: "",
+          keterangan: "",
+        });
+        setParent({
+          nama: null,
+          t_lahir: null,
+          tgl_lahir: null,
+          kelamin: null,
+          alamat: null,
+          pekerjaan: null,
+          keterangan: null,
+        });
+        doGetUserById();
+        Toast.successToast("Berhasil menambah data");
+      } else {
+        Toast.errorToast("Gagal menambah data");
+      }
+      setLoadingParent(false);
     } else {
       Toast.warningToast("Harap isi semua data");
     }
@@ -1116,10 +1166,7 @@ function Profile() {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <form
-                    action="{{url('/')}/pegawai/orangtua/tambah/proses"
-                    method="post"
-                  >
+                  <form onSubmit={doAddParent}>
                     <div className="form-row g-3 row">
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputKarpeg">
@@ -1130,8 +1177,21 @@ function Profile() {
                           name="nama"
                           id="inputKarpeg"
                           className="form-control"
-                          required
+                          value={parent.nama}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              nama: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor("nama");
+                          }}
                         />
+                        {parent.nama != null &&
+                          validatorParent.current.message(
+                            "nama",
+                            parent.nama,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputTtl">
@@ -1141,7 +1201,23 @@ function Profile() {
                           type="text"
                           name="t_lahir"
                           className="form-control"
+                          value={parent.t_lahir}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              t_lahir: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor(
+                              "tempat_lahir"
+                            );
+                          }}
                         />
+                        {parent.t_lahir != null &&
+                          validatorParent.current.message(
+                            "tempat_lahir",
+                            parent.t_lahir,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputTgl">
@@ -1151,7 +1227,23 @@ function Profile() {
                           type="date"
                           name="tgl_lahir"
                           className="form-control"
+                          value={parent.tgl_lahir}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              tgl_lahir: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor(
+                              "tanggal_lahir"
+                            );
+                          }}
                         />
+                        {parent.tgl_lahir != null &&
+                          validatorParent.current.message(
+                            "tanggal_lahir",
+                            parent.tgl_lahir,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputStatus">
@@ -1161,13 +1253,25 @@ function Profile() {
                           name="kelamin"
                           id="inputUser"
                           className="form-control"
-                          required
+                          value={parent.kelamin}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              kelamin: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor("kelamin");
+                          }}
                         >
-                          <option>---</option>
-
+                          <option value="">---</option>
                           <option value="L">Laki-laki</option>
                           <option value="P">Perempuan</option>
                         </select>
+                        {parent.kelamin != null &&
+                          validatorParent.current.message(
+                            "kelamin",
+                            parent.kelamin,
+                            "required"
+                          )}
                       </div>
 
                       <div className="form-group col-md-6">
@@ -1178,7 +1282,21 @@ function Profile() {
                           type="text"
                           className="form-control"
                           name="alamat"
+                          value={parent.alamat}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              alamat: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor("alamat");
+                          }}
                         />
+                        {parent.alamat != null &&
+                          validatorParent.current.message(
+                            "alamat",
+                            parent.alamat,
+                            "required"
+                          )}
                       </div>
 
                       <div className="form-group col-md-6">
@@ -1189,7 +1307,21 @@ function Profile() {
                           type="text"
                           className="form-control"
                           name="pekerjaan"
+                          value={parent.pekerjaan}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              pekerjaan: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor("pekerjaan");
+                          }}
                         />
+                        {parent.pekerjaan != null &&
+                          validatorParent.current.message(
+                            "pekerjaan",
+                            parent.pekerjaan,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputStatus">
@@ -1199,7 +1331,23 @@ function Profile() {
                           type="text"
                           className="form-control"
                           name="keterangan"
+                          value={parent.keterangan}
+                          onChange={(e) => {
+                            setParent({
+                              ...parent,
+                              keterangan: e.target.value,
+                            });
+                            validatorParent.current.showMessageFor(
+                              "keterangan"
+                            );
+                          }}
                         />
+                        {parent.keterangan != null &&
+                          validatorParent.current.message(
+                            "keterangan",
+                            parent.keterangan,
+                            "required"
+                          )}
                       </div>
                     </div>
 
@@ -1212,7 +1360,7 @@ function Profile() {
                         Close
                       </button>
                       <button type="submit" className="btn btn-primary">
-                        Tambah
+                        {loadingParent ? <LoadingIcon /> : "Tambah"}
                       </button>
                     </div>
                   </form>

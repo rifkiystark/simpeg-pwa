@@ -53,5 +53,22 @@ const addChild = async (requestData) => {
     };
   }
 };
+const addParent = async (requestData) => {
+  try {
+    let result = await axiosIntance().post("pegawai/orang-tua", requestData, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
-export { employeeByUserId, addMarital, addChild };
+export { employeeByUserId, addMarital, addChild, addParent };
