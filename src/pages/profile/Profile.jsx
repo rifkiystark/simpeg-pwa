@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SimpleReactValidator from "simple-react-validator";
+import "simple-react-validator/dist/locale/id";
+import LoadingIcon from "../../components/loading-icon/LoadingIcon";
 import Table from "../../components/table/Table";
+import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
-import { employeeByUserId } from "../../repository/employee";
+import { validateInput } from "../../helpers";
+import { addMarital, employeeByUserId } from "../../repository/employee";
+import { masterPendidikan } from "../../repository/masterData";
 import { childColumn, maritalColumn, parentColumn } from "./tableColumn";
 
 function Profile() {
@@ -63,14 +69,80 @@ function Profile() {
     },
   });
 
+  const [loadingMarital, setLoadingMarital] = useState(false);
+
+  const [pendidikans, setPendidikans] = useState([]);
+
+  const [marital, setMarital] = useState({
+    nama: null,
+    kelamin: null,
+    t_lahir: null,
+    tgl_lahir: null,
+    kelamin: null,
+    pendidikan: null,
+    tgl_menikah: null,
+    sts_tunjangan: null,
+    keterangan: null,
+  });
+
+  // VALIDATOR
+  const validatorMarital = useRef(new SimpleReactValidator({ locale: "id" }));
+
   // API CALL
   const doGetUserById = async () => {
     const { status, data, message } = await employeeByUserId(user.id);
     setEmployee(data.data);
   };
 
+  const doGetMasterPendidikan = async () => {
+    const { status, data, message } = await masterPendidikan();
+    setPendidikans(data);
+  };
+
+  const doAddMarital = async (e) => {
+    e.preventDefault();
+
+    if (validateInput(validatorMarital, marital)) {
+      setLoadingMarital(true);
+      const requestData = { ...marital, id_user: user.id };
+      const { status, data, message } = await addMarital(requestData);
+      if (status) {
+        setMarital({
+          nama: "",
+          kelamin: "",
+          t_lahir: "",
+          tgl_lahir: "",
+          kelamin: "",
+          pendidikan: "",
+          tgl_menikah: "",
+          sts_tunjangan: "",
+          keterangan: "",
+        });
+        setMarital({
+          nama: null,
+          kelamin: null,
+          t_lahir: null,
+          tgl_lahir: null,
+          kelamin: null,
+          pendidikan: null,
+          tgl_menikah: null,
+          sts_tunjangan: null,
+          keterangan: null,
+        });
+        doGetUserById();
+        Toast.successToast("Berhasil menambah data");
+      } else {
+        Toast.errorToast("Gagal menambah data");
+      }
+      setLoadingMarital(false);
+    } else {
+      Toast.warningToast("Harap isi semua data");
+    }
+  };
+
   useEffect(() => {
     doGetUserById();
+    doGetMasterPendidikan();
   }, []);
 
   return (
@@ -101,6 +173,8 @@ function Profile() {
                             width: 100,
                             height: 100,
                             objectFit: "cover",
+                            borderRadius: "50%",
+                            border: "1px solid #a8a8a8",
                           }}
                           alt="User profile picture"
                         />
@@ -454,10 +528,7 @@ function Profile() {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form
-                      action="{{url('/')}/pegawai/suamiistri/tambah/proses"
-                      method="post"
-                    >
+                    <form onSubmit={doAddMarital}>
                       <div className="form-row g-3 row">
                         <div className="form-group col-md-4">
                           <label className="form-label" for="inputKarpeg">
@@ -468,8 +539,18 @@ function Profile() {
                             name="nama"
                             id="inputKarpeg"
                             className="form-control"
-                            required
+                            value={marital.nama}
+                            onChange={(e) => {
+                              setMarital({ ...marital, nama: e.target.value });
+                              validatorMarital.current.showMessageFor("nama");
+                            }}
                           />
+                          {marital.nama != null &&
+                            validatorMarital.current.message(
+                              "nama",
+                              marital.nama,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-4">
                           <label className="form-label" for="inputTtl">
@@ -479,7 +560,23 @@ function Profile() {
                             type="text"
                             name="t_lahir"
                             className="form-control"
+                            value={marital.t_lahir}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                t_lahir: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "tempat_lahir"
+                              );
+                            }}
                           />
+                          {marital.t_lahir != null &&
+                            validatorMarital.current.message(
+                              "tempat_lahir",
+                              marital.t_lahir,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-4">
                           <label className="form-label" for="inputTgl">
@@ -489,7 +586,23 @@ function Profile() {
                             type="date"
                             name="tgl_lahir"
                             className="form-control"
+                            value={marital.tgl_lahir}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                tgl_lahir: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "tanggal_lahir"
+                              );
+                            }}
                           />
+                          {marital.tgl_lahir != null &&
+                            validatorMarital.current.message(
+                              "tanggal_lahir",
+                              marital.tgl_lahir,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-4">
                           <label className="form-label" for="inputStatus">
@@ -499,13 +612,27 @@ function Profile() {
                             name="kelamin"
                             id="inputUser"
                             className="form-control"
-                            required
+                            value={marital.kelamin}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                kelamin: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "kelamin"
+                              );
+                            }}
                           >
-                            <option>---</option>
-
+                            <option value="">---</option>
                             <option value="L">Laki-laki</option>
                             <option value="P">Perempuan</option>
                           </select>
+                          {marital.kelamin != null &&
+                            validatorMarital.current.message(
+                              "kelamin",
+                              marital.kelamin,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-4">
                           <label className="form-label" for="inputStatus">
@@ -515,12 +642,32 @@ function Profile() {
                             name="pendidikan"
                             id="inputUser"
                             className="form-control"
-                            required
+                            value={marital.pendidikan}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                pendidikan: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "pendidikan"
+                              );
+                            }}
                           >
-                            <option>---</option>
-
-                            <option value="{{$pdds->kode_pdd}">asd</option>
+                            <option value="">---</option>
+                            {pendidikans.map((pendidikan, index) => {
+                              return (
+                                <option key={index} value={pendidikan.kode_pdd}>
+                                  {pendidikan.pendidikan}
+                                </option>
+                              );
+                            })}
                           </select>
+                          {marital.pendidikan != null &&
+                            validatorMarital.current.message(
+                              "pendidikan",
+                              marital.pendidikan,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-4">
                           <label className="form-label" for="inputStatus">
@@ -530,7 +677,23 @@ function Profile() {
                             type="date"
                             name="tgl_menikah"
                             className="form-control"
+                            value={marital.tgl_menikah}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                tgl_menikah: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "tanggal_menikah"
+                              );
+                            }}
                           />
+                          {marital.tgl_menikah != null &&
+                            validatorMarital.current.message(
+                              "tanggal_menikah",
+                              marital.tgl_menikah,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-6">
                           <label className="form-label" for="inputStatus">
@@ -540,12 +703,27 @@ function Profile() {
                             name="sts_tunjangan"
                             id="inputUser"
                             className="form-control"
-                            required
+                            value={marital.sts_tunjangan}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                sts_tunjangan: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "status_tunjangan"
+                              );
+                            }}
                           >
-                            <option>---</option>
+                            <option value="">---</option>
                             <option value="Ya">Iya</option>
                             <option value="Tidak">Tidak</option>
                           </select>
+                          {marital.sts_tunjangan != null &&
+                            validatorMarital.current.message(
+                              "status_tunjangan",
+                              marital.sts_tunjangan,
+                              "required"
+                            )}
                         </div>
                         <div className="form-group col-md-6">
                           <label className="form-label" for="inputStatus">
@@ -555,7 +733,23 @@ function Profile() {
                             type="text"
                             className="form-control"
                             name="keterangan"
+                            value={marital.keterangan}
+                            onChange={(e) => {
+                              setMarital({
+                                ...marital,
+                                keterangan: e.target.value,
+                              });
+                              validatorMarital.current.showMessageFor(
+                                "keterangan"
+                              );
+                            }}
                           />
+                          {marital.keterangan != null &&
+                            validatorMarital.current.message(
+                              "keterangan",
+                              marital.keterangan,
+                              "required"
+                            )}
                         </div>
                       </div>
                       <div className="modal-footer">
@@ -567,7 +761,7 @@ function Profile() {
                           Close
                         </button>
                         <button type="submit" className="btn btn-primary">
-                          Tambah
+                          {loadingMarital ? <LoadingIcon /> : "Tambah"}
                         </button>
                       </div>
                     </form>

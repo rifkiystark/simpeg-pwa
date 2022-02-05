@@ -19,6 +19,22 @@ const employeeByUserId = async (userId) => {
   }
 };
 
-export {
-  employeeByUserId
+const addMarital = async (requestData) => {
+  try {
+    let result = await axiosIntance().post("pegawai/suami-istri", requestData, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
 };
+
+export { employeeByUserId, addMarital };

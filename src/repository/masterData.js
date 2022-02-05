@@ -107,6 +107,24 @@ const masterJabatanTambahan = async () => {
   }
 };
 
+const masterPendidikan = async () => {
+  try {
+    let result = await axiosIntance().get("master/pendidikan", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
 export {
   masterDiklat,
   masterGapok,
@@ -114,4 +132,5 @@ export {
   masterGolongan,
   masterJabatanFungsional,
   masterJabatanTambahan,
+  masterPendidikan,
 };
