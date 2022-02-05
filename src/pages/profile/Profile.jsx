@@ -313,6 +313,7 @@ function Profile() {
                       </ul>
                       <Link
                         to="/profile/edit"
+                        state={{ user: user }}
                         className="btn btn-primary btn-block w-100"
                       >
                         <b>Edit</b>
@@ -331,18 +332,21 @@ function Profile() {
                       <Link
                         to="/history/training"
                         className="btn btn-primary m-1"
+                        state={{ user: user }}
                       >
                         Diklat
                       </Link>
                       <Link
                         to="/history/salary"
                         className="btn btn-success m-1"
+                        state={{ user: user }}
                       >
                         Gapok
                       </Link>
                       <Link
                         to="/history/punishment"
                         className="btn btn-warning m-1"
+                        state={{ user: user }}
                       >
                         Hukuman
                       </Link>
@@ -350,18 +354,21 @@ function Profile() {
                       <Link
                         to="/history/structural-position"
                         className="btn btn-danger m-1"
+                        state={{ user: user }}
                       >
                         Jabatan
                       </Link>
                       <Link
                         to="/history/functional-position"
                         className="btn btn-info m-1"
+                        state={{ user: user }}
                       >
                         Jabatan Fungsional
                       </Link>
                       <Link
                         to="/history/additional-position"
                         className="btn btn-danger m-1"
+                        state={{ user: user }}
                       >
                         Jabatan Tambahan
                       </Link>
