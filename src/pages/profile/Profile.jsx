@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
 import "simple-react-validator/dist/locale/id";
 import LoadingIcon from "../../components/loading-icon/LoadingIcon";
+import LoadingWrapper from "../../components/loading-wrapper/LoadingWrapper";
 import Table from "../../components/table/Table";
 import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
@@ -74,6 +75,8 @@ function Profile() {
     },
   });
 
+  const [loadingContent, setLoadingContent] = useState(true);
+
   const [loadingMarital, setLoadingMarital] = useState(false);
   const [loadingChild, setLoadingChild] = useState(false);
   const [loadingParent, setLoadingParent] = useState(false);
@@ -118,10 +121,17 @@ function Profile() {
   const validatorChild = useRef(new SimpleReactValidator({ locale: "id" }));
   const validatorParent = useRef(new SimpleReactValidator({ locale: "id" }));
 
+  //  REF
+  const modalMarital = useRef();
+  const modalChild = useRef();
+  const modalParent = useRef();
+
   // API CALL
   const doGetUserById = async () => {
+    setLoadingContent(true);
     const { status, data, message } = await employeeByUserId(user.id);
     setEmployee(data.data);
+    setLoadingContent(false);
   };
 
   const doGetMasterPendidikan = async () => {
@@ -137,6 +147,7 @@ function Profile() {
       const requestData = { ...marital, id_user: user.id };
       const { status, data, message } = await addMarital(requestData);
       if (status) {
+        modalMarital.current.click();
         setMarital({
           nama: "",
           kelamin: "",
@@ -178,6 +189,7 @@ function Profile() {
       const requestData = { ...child, id_user: user.id };
       const { status, data, message } = await addChild(requestData);
       if (status) {
+        modalChild.current.click();
         setChild({
           nama: "",
           t_lahir: "",
@@ -217,6 +229,7 @@ function Profile() {
       const requestData = { ...parent, id_user: user.id };
       const { status, data, message } = await addParent(requestData);
       if (status) {
+        modalParent.current.click();
         setParent({
           nama: "",
           t_lahir: "",
@@ -251,6 +264,9 @@ function Profile() {
     doGetMasterPendidikan();
   }, []);
 
+  if (loadingContent) {
+    return <LoadingWrapper />;
+  }
   return (
     <div className="page-wrapper">
       <div className="container-xl">
@@ -636,6 +652,7 @@ function Profile() {
                       className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
+                      ref={modalMarital}
                     >
                       <span aria-hidden="true">&times; </span>
                     </button>
@@ -902,6 +919,7 @@ function Profile() {
                     className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    ref={modalChild}
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -1168,6 +1186,7 @@ function Profile() {
                     className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    ref={modalParent}
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>

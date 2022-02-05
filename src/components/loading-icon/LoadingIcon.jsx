@@ -1,9 +1,9 @@
 import { ThreeDots } from 'react-loading-icons'
 
-function LoadingIcon() {
+function LoadingIcon({primary}) {
     return (
         <ThreeDots
-            fill="#fff"
+            fill={primary ? "#206bc4" : "#fff"}
             fillOpacity={1}
             height="1em"
             speed={1}
