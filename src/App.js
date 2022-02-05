@@ -43,7 +43,7 @@ function App() {
             <Route path="employees" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListEmployee /></AuthProvider>} />
             <Route path="users" element={<AuthProvider level={["pegawai", "admin", "adminupt"]}><ListUser /></AuthProvider>} />
             <Route path="submission" element={<AuthProvider level={["admin"]}><Submission /></AuthProvider>} />
-            <Route path="profile" element={<AuthProvider level={["admin"]}><Profile /></AuthProvider>} />
+            <Route path="profile" element={<AuthProvider level={['admin', 'adminunit', 'pegawai']}><Profile /></AuthProvider>} />
             <Route path="profile/edit" element={<AuthProvider level={["admin"]}><EditProfile /></AuthProvider>} />
 
             <Route path="master/religions" element={<AuthProvider level={["admin"]}><MasterReligion /></AuthProvider>} />
