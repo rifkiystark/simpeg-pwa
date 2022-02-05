@@ -7,7 +7,11 @@ import Table from "../../components/table/Table";
 import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
 import { validateInput } from "../../helpers";
-import { addMarital, employeeByUserId } from "../../repository/employee";
+import {
+  addChild,
+  addMarital,
+  employeeByUserId,
+} from "../../repository/employee";
 import { masterPendidikan } from "../../repository/masterData";
 import { childColumn, maritalColumn, parentColumn } from "./tableColumn";
 
@@ -70,6 +74,7 @@ function Profile() {
   });
 
   const [loadingMarital, setLoadingMarital] = useState(false);
+  const [loadingChild, setLoadingChild] = useState(false);
 
   const [pendidikans, setPendidikans] = useState([]);
 
@@ -85,8 +90,20 @@ function Profile() {
     keterangan: null,
   });
 
+  const [child, setChild] = useState({
+    nama: null,
+    t_lahir: null,
+    tgl_lahir: null,
+    kelamin: null,
+    pendidikan: null,
+    sts_tunjangan: null,
+    sts_pernikahan: null,
+    keterangan: null,
+  });
+
   // VALIDATOR
   const validatorMarital = useRef(new SimpleReactValidator({ locale: "id" }));
+  const validatorChild = useRef(new SimpleReactValidator({ locale: "id" }));
 
   // API CALL
   const doGetUserById = async () => {
@@ -135,6 +152,45 @@ function Profile() {
         Toast.errorToast("Gagal menambah data");
       }
       setLoadingMarital(false);
+    } else {
+      Toast.warningToast("Harap isi semua data");
+    }
+  };
+
+  const doAddChild = async (e) => {
+    e.preventDefault();
+
+    if (validateInput(validatorChild, child)) {
+      setLoadingChild(true);
+      const requestData = { ...child, id_user: user.id };
+      const { status, data, message } = await addChild(requestData);
+      if (status) {
+        setChild({
+          nama: "",
+          t_lahir: "",
+          tgl_lahir: "",
+          kelamin: "",
+          pendidikan: "",
+          sts_tunjangan: "",
+          sts_pernikahan: "",
+          keterangan: "",
+        });
+        setChild({
+          nama: null,
+          t_lahir: null,
+          tgl_lahir: null,
+          kelamin: null,
+          pendidikan: null,
+          sts_tunjangan: null,
+          sts_pernikahan: null,
+          keterangan: null,
+        });
+        doGetUserById();
+        Toast.successToast("Berhasil menambah data");
+      } else {
+        Toast.errorToast("Gagal menambah data");
+      }
+      setLoadingChild(false);
     } else {
       Toast.warningToast("Harap isi semua data");
     }
@@ -794,10 +850,7 @@ function Profile() {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <form
-                    action="{{url('/')}/pegawai/anak/tambah/proses"
-                    method="post"
-                  >
+                  <form onSubmit={doAddChild}>
                     <div className="form-row g-3 row">
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputKarpeg">
@@ -808,8 +861,21 @@ function Profile() {
                           name="nama"
                           id="inputKarpeg"
                           className="form-control"
-                          required
+                          value={child.nama}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              nama: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor("nama");
+                          }}
                         />
+                        {child.nama != null &&
+                          validatorChild.current.message(
+                            "nama",
+                            child.nama,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputTtl">
@@ -819,7 +885,23 @@ function Profile() {
                           type="text"
                           name="t_lahir"
                           className="form-control"
+                          value={child.t_lahir}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              t_lahir: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor(
+                              "tempat_lahir"
+                            );
+                          }}
                         />
+                        {child.t_lahir != null &&
+                          validatorChild.current.message(
+                            "tempat_lahir",
+                            child.t_lahir,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputTgl">
@@ -829,7 +911,23 @@ function Profile() {
                           type="date"
                           name="tgl_lahir"
                           className="form-control"
+                          value={child.tgl_lahir}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              tgl_lahir: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor(
+                              "tanggal_lahir"
+                            );
+                          }}
                         />
+                        {child.tgl_lahir != null &&
+                          validatorChild.current.message(
+                            "tanggal_lahir",
+                            child.tgl_lahir,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputStatus">
@@ -839,13 +937,25 @@ function Profile() {
                           name="kelamin"
                           id="inputUser"
                           className="form-control"
-                          required
+                          value={child.kelamin}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              kelamin: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor("kelamin");
+                          }}
                         >
-                          <option>---</option>
-
+                          <option value="">---</option>
                           <option value="L">Laki-laki</option>
                           <option value="P">Perempuan</option>
                         </select>
+                        {child.kelamin != null &&
+                          validatorChild.current.message(
+                            "kelamin",
+                            child.kelamin,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputStatus">
@@ -855,11 +965,30 @@ function Profile() {
                           name="pendidikan"
                           id="inputUser"
                           className="form-control"
-                          required
+                          value={child.pendidikan}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              pendidikan: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor("pendidikan");
+                          }}
                         >
-                          <option>---</option>
-                          <option value="{{$pdds->kode_pdd}">SD</option>
+                          <option value="">---</option>
+                          {pendidikans.map((pendidikan, index) => {
+                            return (
+                              <option key={index} value={pendidikan.kode_pdd}>
+                                {pendidikan.pendidikan}
+                              </option>
+                            );
+                          })}
                         </select>
+                        {child.pendidikan != null &&
+                          validatorChild.current.message(
+                            "pendidikan",
+                            child.pendidikan,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputStatus">
@@ -869,12 +998,27 @@ function Profile() {
                           name="sts_pernikahan"
                           id="inputUser"
                           className="form-control"
-                          required
+                          value={child.sts_pernikahan}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              sts_pernikahan: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor(
+                              "status_pernikahan"
+                            );
+                          }}
                         >
-                          <option>---</option>
+                          <option value="">---</option>
                           <option value="Menikah">Menikah</option>
                           <option value="Belum menikah">Belum menikah</option>
                         </select>
+                        {child.sts_pernikahan != null &&
+                          validatorChild.current.message(
+                            "status_pernikahan",
+                            child.sts_pernikahan,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputStatus">
@@ -884,12 +1028,27 @@ function Profile() {
                           name="sts_tunjangan"
                           id="inputUser"
                           className="form-control"
-                          required
+                          value={child.sts_tunjangan}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              sts_tunjangan: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor(
+                              "status_tunjangan"
+                            );
+                          }}
                         >
-                          <option>---</option>
+                          <option value="">---</option>
                           <option value="Iya">Iya</option>
                           <option value="Tidak">Tidak</option>
                         </select>
+                        {child.sts_tunjangan != null &&
+                          validatorChild.current.message(
+                            "status_tunjangan",
+                            child.sts_tunjangan,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputStatus">
@@ -899,7 +1058,21 @@ function Profile() {
                           type="text"
                           className="form-control"
                           name="keterangan"
+                          value={child.keterangan}
+                          onChange={(e) => {
+                            setChild({
+                              ...child,
+                              keterangan: e.target.value,
+                            });
+                            validatorChild.current.showMessageFor("keterangan");
+                          }}
                         />
+                        {child.keterangan != null &&
+                          validatorChild.current.message(
+                            "keterangan",
+                            child.keterangan,
+                            "required"
+                          )}
                       </div>
                     </div>
                     <div className="modal-footer">
@@ -911,7 +1084,7 @@ function Profile() {
                         Close
                       </button>
                       <button type="submit" className="btn btn-primary">
-                        Tambah
+                        {loadingChild ? <LoadingIcon /> : "Tambah"}
                       </button>
                     </div>
                   </form>

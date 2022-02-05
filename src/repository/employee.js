@@ -36,5 +36,22 @@ const addMarital = async (requestData) => {
     };
   }
 };
+const addChild = async (requestData) => {
+  try {
+    let result = await axiosIntance().post("pegawai/anak", requestData, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
-export { employeeByUserId, addMarital };
+export { employeeByUserId, addMarital, addChild };

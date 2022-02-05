@@ -48,7 +48,7 @@ let childColumn = [
   },
   {
     name: "Nama",
-    key: "nama_ortu",
+    key: "nama_anak",
     render: (data, index, rowData) => data,
   },
   {
@@ -90,7 +90,7 @@ let parentColumn = [
   },
   {
     name: "Nama",
-    key: "nama_orangtua",
+    key: "nama_ortu",
     render: (data, index, rowData) => data,
   },
   {
