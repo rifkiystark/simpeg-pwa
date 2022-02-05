@@ -127,7 +127,11 @@ const Navbar = () => {
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="presence/history">
+                <Link
+                  className="nav-link"
+                  to="presence/history"
+                  state={{ user: me }}
+                >
                   <span className="nav-link-icon d-md-none d-lg-inline-block">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
