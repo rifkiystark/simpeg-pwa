@@ -1,5 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import SimpleReactValidator from "simple-react-validator";
+import "simple-react-validator/dist/locale/id";
+import LoadingWrapper from "../../components/loading-wrapper/LoadingWrapper";
 import Const from "../../constant";
+import { editProfileGet } from "../../repository/employee";
 
 function EditProfile() {
   // REACT ROUTER
@@ -10,6 +15,66 @@ function EditProfile() {
   const user = location.state?.user;
   const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
 
+  // STATE
+  const [loadingContent, setLoadingContent] = useState(false);
+  const [pendidikans, setPendidikan] = useState([]);
+  const [upt, setUpt] = useState([]);
+  const [agama, setAgama] = useState([]);
+  const [pegawai, setPegawai] = useState({
+    id_peg: "",
+    nip: "",
+    nama: "",
+    nip_lama: "",
+    t_lahir: "",
+    tgl_lahir: "",
+    jns_kelamin: "",
+    kode_agama: "",
+    sts_marital: "",
+    kode_pdd: "",
+    nama_sekolah: "",
+    tahun_sttb: "",
+    gelar_depan: "",
+    gelar_belakang: "",
+    hobi: "",
+    sts_pegawai: "",
+    id_user: "",
+    no_telp: "",
+    foto: "",
+    created_at: "",
+    updated_at: "",
+    id_upt: "",
+    nik: "",
+    alamat_ktp: "",
+    alamat_domisili: "",
+    sts_keaktifan: "",
+    tmt: "",
+    naikkgb: [],
+  });
+
+  const validatorTab_1 = useRef(new SimpleReactValidator({ locale: "id" }));
+  const validatorTab_2 = useRef(new SimpleReactValidator({ locale: "id" }));
+  const validatorTab_3 = useRef(new SimpleReactValidator({ locale: "id" }));
+
+  // API CALL
+  const doGetEditData = async () => {
+    setLoadingContent(true);
+    const { status, data, message } = await editProfileGet(user.id);
+    setPegawai(data.data.pegawai);
+    setPendidikan(data.data.pendidikans);
+    setUpt(data.data.upt);
+    setAgama(data.data.agama);
+    setLoadingContent(false);
+    console.log(data);
+  };
+
+  // COMPONENT DID MOUNT
+  useEffect(() => {
+    doGetEditData();
+  }, []);
+
+  if (loadingContent) {
+    return <LoadingWrapper />;
+  }
   return (
     <div className="page-wrapper">
       <div className="container-xl">
@@ -82,26 +147,41 @@ function EditProfile() {
                           NIK
                         </label>
                         <input
-                          value="43433434"
+                          value={pegawai.nik}
                           type="number"
                           className="form-control"
-                          id="inputNip"
-                          name="nik"
-                          required
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, nik: e.target.value });
+                            validatorTab_1.current.showMessageFor("nik");
+                          }}
                         />
+                        {pegawai.nik != null &&
+                          validatorTab_1.current.message(
+                            "nik",
+                            pegawai.nik,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label required" for="inputNama">
                           Nama
                         </label>
                         <input
-                          value="Admin YPPMNU"
+                          value={pegawai.nama}
                           type="text"
                           className="form-control"
                           id="inputNama"
-                          name="nama"
-                          required
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, nama: e.target.value });
+                            validatorTab_1.current.showMessageFor("nama");
+                          }}
                         />
+                        {pegawai.nama != null &&
+                          validatorTab_1.current.message(
+                            "nama",
+                            pegawai.nama,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label required" for="inputNama">
@@ -111,11 +191,22 @@ function EditProfile() {
                           className="form-control"
                           name="alamat_ktp"
                           rows="4"
-                          placeholder
-                          required
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              alamat_ktp: e.target.value,
+                            });
+                            validatorTab_1.current.showMessageFor("alamat_ktp");
+                          }}
                         >
-                          er s
+                          {pegawai.alamat_ktp}
                         </textarea>
+                        {pegawai.alamat_ktp != null &&
+                          validatorTab_1.current.message(
+                            "alamat_ktp",
+                            pegawai.alamat_ktp,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label required" for="inputNama">
@@ -125,36 +216,72 @@ function EditProfile() {
                           className="form-control"
                           name="alamat_domisili"
                           rows="4"
-                          placeholder=""
-                          required
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              alamat_domisili: e.target.value,
+                            });
+                            validatorTab_1.current.showMessageFor(
+                              "alamat_domisili"
+                            );
+                          }}
                         >
-                          
-                          er
+                          {pegawai.alamat_domisili}
                         </textarea>
+                        {pegawai.alamat_domisili != null &&
+                          validatorTab_1.current.message(
+                            "alamat_domisili",
+                            pegawai.alamat_domisili,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label required" for="inputTtl">
                           Tempat
                         </label>
                         <input
-                          value="Banyumas"
+                          value={pegawai.t_lahir}
                           type="text"
-                          name="t_lahir"
                           className="form-control"
-                          required
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, t_lahir: e.target.value });
+                            validatorTab_1.current.showMessageFor(
+                              "tempat_lahir"
+                            );
+                          }}
                         />
+                        {pegawai.t_lahir != null &&
+                          validatorTab_1.current.message(
+                            "tempat_lahir",
+                            pegawai.t_lahir,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label required" for="inputTgl">
                           Tgl Lahir
                         </label>
                         <input
-                          value="1993-06-09"
+                          value={pegawai.tgl_lahir}
                           type="date"
                           name="tgl_lahir"
                           className="form-control"
-                          required
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              tgl_lahir: e.target.value,
+                            });
+                            validatorTab_1.current.showMessageFor(
+                              "tanggal_lahir"
+                            );
+                          }}
                         />
+                        {pegawai.tgl_lahir != null &&
+                          validatorTab_1.current.message(
+                            "tanggal_lahir",
+                            pegawai.tgl_lahir,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label
@@ -164,10 +291,17 @@ function EditProfile() {
                           Jenis Kelamin
                         </label>
                         <select
-                          name="kelamin"
-                          id="inputKelamin"
-                          className="form-control"
-                          required
+                          className="form-select"
+                          value={pegawai.jns_kelamin}
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              jns_kelamin: e.target.value,
+                            });
+                            validatorTab_1.current.showMessageFor(
+                              "jenis_kelamin"
+                            );
+                          }}
                         >
                           <option value="">---</option>
                           <option value="L" selected>
@@ -175,6 +309,12 @@ function EditProfile() {
                           </option>
                           <option value="P">Perempuan</option>
                         </select>
+                        {pegawai.jns_kelamin != null &&
+                          validatorTab_1.current.message(
+                            "jenis_kelamin",
+                            pegawai.jns_kelamin,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label
@@ -184,10 +324,17 @@ function EditProfile() {
                           Status Pernikahan
                         </label>
                         <select
-                          name="sts_marital"
-                          id="inputKelamin"
-                          className="form-control"
-                          required
+                          className="form-select"
+                          value={pegawai.sts_marital}
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              sts_marital: e.target.value,
+                            });
+                            validatorTab_1.current.showMessageFor(
+                              "status_pernikahan"
+                            );
+                          }}
                         >
                           <option value="">---</option>
                           <option value="Menikah" selected>
@@ -195,6 +342,12 @@ function EditProfile() {
                           </option>
                           <option value="Belum Menikah">Belum Menikah</option>
                         </select>
+                        {pegawai.sts_marital != null &&
+                          validatorTab_1.current.message(
+                            "status_pernikahan",
+                            pegawai.sts_marital,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label
@@ -204,32 +357,51 @@ function EditProfile() {
                           Agama
                         </label>
                         <select
-                          name="agama"
-                          id="inputUser"
-                          className="form-control"
-                          required
+                          className="form-select"
+                          value={pegawai.kode_agama}
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              kode_agama: e.target.value,
+                            });
+                            validatorTab_1.current.showMessageFor("agama");
+                          }}
                         >
                           <option value="">---</option>
-                          <option value="1" selected>
-                            Islam
-                          </option>
-                          <option value="2">Kristen</option>
-                          <option value="3">Katolik</option>
-                          <option value="4">Budha</option>
+                          {agama.map((value, index) => {
+                            return (
+                              <option key={index} value={value.kode_agama}>
+                                {value.agama}
+                              </option>
+                            );
+                          })}
                         </select>
+                        {pegawai.kode_agama != null &&
+                          validatorTab_1.current.message(
+                            "agama",
+                            pegawai.kode_agama,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label required" for="inputTgl">
                           No.Telp
                         </label>
                         <input
-                          value="0987654321232"
+                          value={pegawai.no_telp}
                           type="number"
-                          id="inputTgl"
-                          name="no_telp"
                           className="form-control"
-                          required
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, no_telp: e.target.value });
+                            validatorTab_1.current.showMessageFor("no_telepon");
+                          }}
                         />
+                        {pegawai.no_telp != null &&
+                          validatorTab_1.current.message(
+                            "no_telepon",
+                            pegawai.no_telp,
+                            "required"
+                          )}
                       </div>
 
                       <div className="form-group col-md-4">
@@ -241,9 +413,9 @@ function EditProfile() {
                           className="form-control"
                           name="foto"
                           id="inputFoto"
+                          // TODO
                         />
                       </div>
-
                       <div className="form-group col-md-4">
                         <label className="form-label" for="inputFoto">
                           Password Baru
@@ -254,7 +426,7 @@ function EditProfile() {
                             type="password"
                             id="password"
                             className="form-control"
-                            name="password"
+                            // TODO
                           />
                           <span className="input-group-text">
                             <a
@@ -303,57 +475,93 @@ function EditProfile() {
                           NIP / NIPY
                         </label>
                         <input
-                          value="12345678"
+                          value={pegawai.nip}
                           type="number"
                           className="form-control"
-                          id="inputNip"
-                          name="nipy"
-                          required
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, nip: e.target.value });
+                            validatorTab_2.current.showMessageFor("nip");
+                          }}
                         />
+                        {pegawai.nip != null &&
+                          validatorTab_2.current.message(
+                            "nip",
+                            pegawai.nip,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputNip">
                           NIP / NIPY Lama
                         </label>
                         <input
-                          value="123456789"
+                          value={pegawai.nip_lama}
                           type="number"
                           className="form-control"
                           id="inputNip"
-                          name="nipy_lama"
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              nip_lama: e.target.value,
+                            });
+                            validatorTab_2.current.showMessageFor("nip_lama");
+                          }}
                         />
+                        {pegawai.nip_lama != null &&
+                          validatorTab_2.current.message(
+                            "nip_lama",
+                            pegawai.nip_lama,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputNip">
                           TMT
                         </label>
                         <input
-                          value=""
+                          value={pegawai.tmt}
                           type="date"
                           className="form-control"
                           id="inputNip"
-                          name="tmt"
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, tmt: e.target.value });
+                            validatorTab_2.current.showMessageFor("tmt");
+                          }}
                         />
+                        {pegawai.tmt != null &&
+                          validatorTab_2.current.message(
+                            "tmt",
+                            pegawai.tmt,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label required" for="inputFoto">
                           UPT
                         </label>
                         <select
-                          name="id_upt"
-                          id="inputUser"
                           className="form-control"
-                          required
+                          value={pegawai.id_upt}
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, id_upt: e.target.value });
+                            validatorTab_2.current.showMessageFor("upt");
+                          }}
                         >
                           <option value="">---</option>
-                          <option value="2" selected>
-                            SMK Ma&#039; arif NU 2 Ajibarang
-                          </option>
-                          <option value="3">STIKES Ibnu Sina</option>
-                          <option value="4">
-                            SMK Ma&#039; arif NU 1 Ajibarang
-                          </option>
+                          {upt.map((value, index) => {
+                            return (
+                              <option key={index} value={value.id}>
+                                {value.upt}
+                              </option>
+                            );
+                          })}
                         </select>
+                        {pegawai.id_upt != null &&
+                          validatorTab_2.current.message(
+                            "upt",
+                            pegawai.id_upt,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label
@@ -363,10 +571,17 @@ function EditProfile() {
                           Status Kepegawaian
                         </label>
                         <select
-                          name="sts_pegawai"
-                          id="inputStatus"
-                          className="form-control"
-                          required
+                          className="form-select"
+                          value={pegawai.sts_pegawai}
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              sts_pegawai: e.target.value,
+                            });
+                            validatorTab_2.current.showMessageFor(
+                              "status_pegawai"
+                            );
+                          }}
                         >
                           <option value="">---</option>
                           <option value="Tetap" selected>
@@ -374,6 +589,12 @@ function EditProfile() {
                           </option>
                           <option value="Tidak Tetap">Tidak Tetap</option>
                         </select>
+                        {pegawai.sts_pegawai != null &&
+                          validatorTab_2.current.message(
+                            "status_pegawai",
+                            pegawai.sts_pegawai,
+                            "required"
+                          )}
                       </div>
 
                       <div className="form-group col-md-6">
@@ -384,10 +605,17 @@ function EditProfile() {
                           Status
                         </label>
                         <select
-                          name="sts_keaktifan"
-                          id="inputStatus"
-                          className="form-control"
-                          required
+                          className="form-select"
+                          value={pegawai.sts_keaktifan}
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              sts_keaktifan: e.target.value,
+                            });
+                            validatorTab_2.current.showMessageFor(
+                              "status_keaktifan"
+                            );
+                          }}
                         >
                           <option value="">---</option>
                           <option value="Aktif" selected>
@@ -397,6 +625,12 @@ function EditProfile() {
                           <option value="Cuti">Cuti</option>
                           <option value="Pensiun">Pernsiun</option>
                         </select>
+                        {pegawai.sts_keaktifan != null &&
+                          validatorTab_2.current.message(
+                            "status_keaktifan",
+                            pegawai.sts_keaktifan,
+                            "required"
+                          )}
                       </div>
                     </div>
                   </div>
@@ -415,34 +649,56 @@ function EditProfile() {
                           Pendidikan Terakhir
                         </label>
                         <select
-                          name="pendidikan"
-                          id="inputUser"
-                          className="form-control"
-                          required
+                          className="form-select"
+                          value={pegawai.kode_pdd}
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              kode_pdd: e.target.value,
+                            });
+                            validatorTab_3.current.showMessageFor("pendidikan");
+                          }}
                         >
                           <option value="">---</option>
-                          <option value="1">SD</option>
-                          <option value="2">SMP</option>
-                          <option value="3">SMA</option>
-                          <option value="4">D3</option>
-                          <option value="5">S1</option>
-                          <option value="6" selected>
-                            S2
-                          </option>
+                          {pendidikans.map((value, index) => {
+                            return (
+                              <option key={index} value={value.kode_pdd}>
+                                {value.pendidikan}
+                              </option>
+                            );
+                          })}
                         </select>
+                        {pegawai.kode_pdd != null &&
+                          validatorTab_3.current.message(
+                            "pendidikan",
+                            pegawai.kode_pdd,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label className="form-label required" for="inputNip">
                           Institusi Pendidikan
                         </label>
                         <input
-                          value="ITTP"
+                          value={pegawai.nama_sekolah}
                           type="text"
                           className="form-control"
-                          id="inputNip"
-                          name="namasekolah"
-                          required
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              nama_sekolah: e.target.value,
+                            });
+                            validatorTab_3.current.showMessageFor(
+                              "institusi_pendidikan"
+                            );
+                          }}
                         />
+                        {pegawai.nama_sekolah != null &&
+                          validatorTab_3.current.message(
+                            "institusi_pendidikan",
+                            pegawai.nama_sekolah,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-4">
                         <label
@@ -452,37 +708,75 @@ function EditProfile() {
                           Tahun Lulus
                         </label>
                         <input
-                          value="2006"
+                          value={pegawai.tahun_sttb}
                           type="number"
-                          name="sttb"
-                          id="inputKarpeg"
                           className="form-control"
-                          required
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              tahun_sttb: e.target.value,
+                            });
+                            validatorTab_3.current.showMessageFor(
+                              "tahun_lulus"
+                            );
+                          }}
                         />
+                        {pegawai.tahun_sttb != null &&
+                          validatorTab_3.current.message(
+                            "tahun_lulus",
+                            pegawai.tahun_sttb,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputKarsu">
                           Gelar Depan
                         </label>
                         <input
-                          value="Prof"
+                          value={pegawai.gelar_depan}
                           type="text"
-                          name="gelard"
-                          id="inputKarsu"
                           className="form-control"
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              gelar_depan: e.target.value,
+                            });
+                            validatorTab_3.current.showMessageFor(
+                              "gelar_depan"
+                            );
+                          }}
                         />
+                        {pegawai.gelar_depan != null &&
+                          validatorTab_3.current.message(
+                            "gelar_depan",
+                            pegawai.gelar_depan,
+                            "required"
+                          )}
                       </div>
                       <div className="form-group col-md-6">
                         <label className="form-label" for="inputAskes">
                           Gelar Belakang
                         </label>
                         <input
-                          value="S.Ag"
+                          value={pegawai.gelar_belakang}
                           type="text"
-                          name="gelarb"
-                          id="inputAskes"
                           className="form-control"
+                          onChange={(e) => {
+                            setPegawai({
+                              ...pegawai,
+                              gelar_belakang: e.target.value,
+                            });
+                            validatorTab_3.current.showMessageFor(
+                              "gelar_belakang"
+                            );
+                          }}
                         />
+                        {pegawai.gelar_belakang != null &&
+                          validatorTab_3.current.message(
+                            "gelar_belakang",
+                            pegawai.gelar_belakang,
+                            "required"
+                          )}
                       </div>
 
                       <div className="form-group col-md-8">
@@ -490,13 +784,20 @@ function EditProfile() {
                           Hobi
                         </label>
                         <input
-                          value="Berkuda"
+                          value={pegawai.hobi}
                           type="text"
-                          name="hobi"
-                          id="inputKarpeg"
                           className="form-control"
-                          required
+                          onChange={(e) => {
+                            setPegawai({ ...pegawai, hobi: e.target.value });
+                            validatorTab_3.current.showMessageFor("hobi");
+                          }}
                         />
+                        {pegawai.hobi != null &&
+                          validatorTab_3.current.message(
+                            "hobi",
+                            pegawai.hobi,
+                            "required"
+                          )}
                       </div>
                     </div>
                   </div>
