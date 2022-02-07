@@ -3,8 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
 import "simple-react-validator/dist/locale/id";
 import LoadingWrapper from "../../components/loading-wrapper/LoadingWrapper";
+import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
-import { editProfileGet } from "../../repository/employee";
+import { validateInput } from "../../helpers";
+import { editProfileGet, editProfilePost } from "../../repository/employee";
 
 function EditProfile() {
   // REACT ROUTER
@@ -48,12 +50,19 @@ function EditProfile() {
     alamat_domisili: "",
     sts_keaktifan: "",
     tmt: "",
-    naikkgb: [],
   });
+  const [photo, setPhoto] = useState(null);
+  const [password, setPassword] = useState(null);
 
+  // VaLIDaTOR
   const validatorTab_1 = useRef(new SimpleReactValidator({ locale: "id" }));
   const validatorTab_2 = useRef(new SimpleReactValidator({ locale: "id" }));
   const validatorTab_3 = useRef(new SimpleReactValidator({ locale: "id" }));
+
+  // REF
+  const refTab_1 = useRef();
+  const refTab_2 = useRef();
+  const refTab_3 = useRef();
 
   // API CALL
   const doGetEditData = async () => {
@@ -65,6 +74,99 @@ function EditProfile() {
     setAgama(data.data.agama);
     setLoadingContent(false);
     console.log(data);
+  };
+
+  const doEdit = async (e) => {
+    e.preventDefault();
+    console.log(pegawai)
+    if (
+      // !validateInput(validatorTab_1, pegawai) ||
+      // !validateInput(validatorTab_2, pegawai) ||
+      !validateInput(validatorTab_3, pegawai)
+    ) {
+      Toast.warningToast("Isi semua data");
+      return;
+    }
+
+    const fd = new FormData();
+    fd.append("id_user", user.id);
+    Object.keys(pegawai).forEach((key) => fd.append(key, pegawai[key]));
+
+    if (photo != null) {
+      fd.append("photo", photo);
+    }
+
+    if (password != null) {
+      fd.append("password", password);
+    }
+
+    const { status, data, message } = await editProfilePost(fd);
+    if (status) {
+      doGetEditData();
+      setPegawai({
+        id_peg: "",
+        nip: "",
+        nama: "",
+        nip_lama: "",
+        t_lahir: "",
+        tgl_lahir: "",
+        jns_kelamin: "",
+        kode_agama: "",
+        sts_marital: "",
+        kode_pdd: "",
+        nama_sekolah: "",
+        tahun_sttb: "",
+        gelar_depan: "",
+        gelar_belakang: "",
+        hobi: "",
+        sts_pegawai: "",
+        id_user: "",
+        no_telp: "",
+        foto: "",
+        created_at: "",
+        updated_at: "",
+        id_upt: "",
+        nik: "",
+        alamat_ktp: "",
+        alamat_domisili: "",
+        sts_keaktifan: "",
+        tmt: "",
+      });
+      setPegawai({
+        id_peg: null,
+        nip: null,
+        nama: null,
+        nip_lama: null,
+        t_lahir: null,
+        tgl_lahir: null,
+        jns_kelamin: null,
+        kode_agama: null,
+        sts_marital: null,
+        kode_pdd: null,
+        nama_sekolah: null,
+        tahun_sttb: null,
+        gelar_depan: null,
+        gelar_belakang: null,
+        hobi: null,
+        sts_pegawai: null,
+        id_user: null,
+        no_telp: null,
+        foto: null,
+        created_at: null,
+        updated_at: null,
+        id_upt: null,
+        nik: null,
+        alamat_ktp: null,
+        alamat_domisili: null,
+        sts_keaktifan: null,
+        tmt: null,
+      });
+      setPhoto(null);
+      setPassword("");
+      setPassword(null);
+    } else {
+      Toast.errorToast("Gagal memperbarui data");
+    }
   };
 
   // COMPONENT DID MOUNT
@@ -92,11 +194,7 @@ function EditProfile() {
         <div className="container-xl">
           <div className="card card-primary card-outline">
             <div className="card-body" style={{ paddingTop: 24 }}>
-              <form
-                action="http://localhost/simpeglocal/pegawai/edit/6"
-                method="POST"
-                enctype="multipart/form-data"
-              >
+              <form onSubmit={doEdit}>
                 <nav>
                   <div className="nav nav-tabs" id="nav-tab" role="tablist">
                     <a
@@ -107,6 +205,7 @@ function EditProfile() {
                       role="tab"
                       aria-controls="nav-home"
                       aria-selected="true"
+                      ref={refTab_1}
                     >
                       Umum
                     </a>
@@ -118,6 +217,7 @@ function EditProfile() {
                       role="tab"
                       aria-controls="nav-profile"
                       aria-selected="false"
+                      ref={refTab_2}
                     >
                       Detail 1
                     </a>
@@ -129,6 +229,7 @@ function EditProfile() {
                       role="tab"
                       aria-controls="nav-contact"
                       aria-selected="false"
+                      ref={refTab_3}
                     >
                       Detail 2
                     </a>
@@ -413,7 +514,9 @@ function EditProfile() {
                           className="form-control"
                           name="foto"
                           id="inputFoto"
-                          // TODO
+                          onChange={(e) => {
+                            setPhoto(e.target.files[0]);
+                          }}
                         />
                       </div>
                       <div className="form-group col-md-4">
@@ -422,11 +525,13 @@ function EditProfile() {
                         </label>
                         <div className="input-group input-group-flat">
                           <input
-                            value=""
                             type="password"
                             id="password"
                             className="form-control"
-                            // TODO
+                            value={password}
+                            onChange={(e) => {
+                              setPassword(e.target.value);
+                            }}
                           />
                           <span className="input-group-text">
                             <a

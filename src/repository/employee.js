@@ -89,4 +89,29 @@ const editProfileGet = async (userId) => {
   }
 };
 
-export { employeeByUserId, addMarital, addChild, addParent, editProfileGet };
+const editProfilePost = async (data) => {
+  try {
+    let result = await axiosIntance().post("pegawai/edit", data, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+export {
+  employeeByUserId,
+  addMarital,
+  addChild,
+  addParent,
+  editProfileGet,
+  editProfilePost,
+};
