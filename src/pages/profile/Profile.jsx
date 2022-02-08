@@ -290,7 +290,13 @@ function Profile() {
                       <div className="text-center mt-4">
                         <img
                           className="profile-user-img img-fluid img-circle"
-                          src={Const.BASE_URL + "foto/" + employee.foto}
+                          src={
+                            Const.BASE_URL +
+                            "foto/" +
+                            employee.foto +
+                            "?v=" +
+                            Math.random()
+                          }
                           style={{
                             width: 100,
                             height: 100,

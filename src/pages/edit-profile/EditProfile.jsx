@@ -78,7 +78,7 @@ function EditProfile() {
 
   const doEdit = async (e) => {
     e.preventDefault();
-    console.log(pegawai)
+    console.log(pegawai);
     if (
       // !validateInput(validatorTab_1, pegawai) ||
       // !validateInput(validatorTab_2, pegawai) ||
@@ -94,6 +94,7 @@ function EditProfile() {
 
     if (photo != null) {
       fd.append("photo", photo);
+      console.log("ADA FOTONYAS");
     }
 
     if (password != null) {
@@ -516,6 +517,7 @@ function EditProfile() {
                           id="inputFoto"
                           onChange={(e) => {
                             setPhoto(e.target.files[0]);
+                            console.log("PHOTO")
                           }}
                         />
                       </div>
