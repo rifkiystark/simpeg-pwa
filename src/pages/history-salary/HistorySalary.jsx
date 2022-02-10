@@ -388,7 +388,6 @@ function HistorySalary() {
                         validatorAdd.current.showMessageFor("gaji_pokok");
                       }}
                     >
-                      {/* // TODO */}
                       <option value="">Pilih gapok</option>
                       {masterSalaries.map((masterSalary, index) => {
                         return (
@@ -620,7 +619,6 @@ function HistorySalary() {
                         validatorEdit.current.showMessageFor("gaji_pokok");
                       }}
                     >
-                      {/* // TODO */}
                       <option value="">Pilih gapok</option>
                       {masterSalaries.map((masterSalary, index) => {
                         return (

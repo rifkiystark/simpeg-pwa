@@ -28,11 +28,27 @@ const updateUser = async (payload) => {
     });
     return { status: true, data: result.data, message: "" };
   } catch (error) {
-    return {
-      status: false,
-      data: null,
-      message: "",
-    };
+    if (error.response) {
+      if (error.response.status == 422) {
+        return {
+          status: false,
+          data: null,
+          message: "Email sudah digunakan oleh pegawai lain",
+        };
+      } else {
+        return {
+          status: false,
+          data: null,
+          message: "Gagal memperbarui data",
+        };
+      }
+    } else {
+      return {
+        status: false,
+        data: null,
+        message: "Gagal memperbarui data",
+      };
+    }
   }
 };
 

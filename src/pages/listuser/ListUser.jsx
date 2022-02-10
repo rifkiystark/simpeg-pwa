@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Toast from "../../components/toast/Toast";
 import LoadingIcon from "../../components/loading-icon/LoadingIcon";
+import Const from "../../constant";
 
 function ListUser() {
   const dispatch = useDispatch();
@@ -61,15 +62,18 @@ function ListUser() {
       Toast.successToast("Berhasil memperbarui data");
       doGetUsers();
     } else {
-      Toast.errorToast("Gagal memperbarui data");
+      Toast.errorToast(message);
     }
     setIsUpdating(false);
   };
+  // TODO IMPORT
+
 
   // COMPONENT DID MOUNT
   useEffect(() => {
     doGetUsers();
   }, []);
+
 
   return (
     <div className="page-wrapper">
@@ -93,7 +97,7 @@ function ListUser() {
                 </div>
                 <div className="col-md-6 col-sm-12 text-end">
                   <a
-                    href="http://localhost/simpeglocal/import/formatimportsimpeg.xlsx"
+                    href={`${Const.BASE_URL}import/formatimportsimpeg.xlsx`}
                     className="btn btn-secondary me-1"
                     target="_blank"
                     rel="noreferrer"

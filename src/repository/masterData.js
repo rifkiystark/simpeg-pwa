@@ -125,6 +125,59 @@ const masterPendidikan = async () => {
   }
 };
 
+const masterAgama = async () => {
+  try {
+    let result = await axiosIntance().get("master/agama", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+const updateMasterAgama = async (payload) => {
+  try {
+    let result = await axiosIntance().patch("master/agama", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterAgama = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/agama", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
 export {
   masterDiklat,
   masterGapok,
@@ -133,4 +186,7 @@ export {
   masterJabatanFungsional,
   masterJabatanTambahan,
   masterPendidikan,
+  masterAgama,
+  updateMasterAgama,
+  addMasterAgama
 };
