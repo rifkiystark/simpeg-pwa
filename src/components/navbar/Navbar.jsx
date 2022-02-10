@@ -8,7 +8,7 @@ const Navbar = () => {
   const level = me != null ? me.level : "";
 
   useEffect(() => {
-    $(".dropend a.dropdown-toggle").on("click", function (e) {
+    $(".dropend-custom a.dropdown-toggle-custom").on("click", function (e) {
       var $subMenu = $(this).children(".dropdown-menu");
       $subMenu.toggleClass("show");
       return false;
@@ -242,9 +242,9 @@ const Navbar = () => {
                     <div className="dropdown-menu-columns">
                       <div className="dropdown-menu-column">
                         {level === "admin" ? (
-                          <div className="dropend">
+                          <div className="dropend dropend-custom">
                             <a
-                              className="dropdown-item dropdown-toggle"
+                              className="dropdown-item dropdown-toggle dropdown-toggle-custom"
                               href="#sidebar-keuangan"
                               data-bs-toggle="dropdown"
                               data-bs-auto-close="outside"
@@ -311,9 +311,9 @@ const Navbar = () => {
                         <Link className="dropdown-item" to="employees">
                           Pegawai
                         </Link>
-                        <div className="dropend">
+                        <div className="dropend dropend-custom">
                           <a
-                            className="dropdown-item dropdown-toggle"
+                            className="dropdown-item dropdown-toggle dropdown-toggle-custom"
                             href="#sidebar-presensi"
                             data-bs-toggle="dropdown"
                             data-bs-auto-close="outside"
