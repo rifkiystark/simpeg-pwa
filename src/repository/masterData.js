@@ -141,6 +141,40 @@ const masterGolongan = async () => {
     };
   }
 };
+const updateMasterGolongan = async (payload) => {
+  try {
+    let result = await axiosIntance().patch("master/golongan", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterGolongan = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/golongan", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
 const masterJabatanFungsional = async () => {
   try {
@@ -258,7 +292,11 @@ export {
   addMasterGapok,
   ///
   masterJabatanStruktural,
+  ///
   masterGolongan,
+  updateMasterGolongan,
+  addMasterGolongan,
+  ///
   masterJabatanFungsional,
   masterJabatanTambahan,
   masterPendidikan,
