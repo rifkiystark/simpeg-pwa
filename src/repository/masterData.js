@@ -122,6 +122,48 @@ const masterJabatanStruktural = async () => {
     };
   }
 };
+const updateMasterJabatanStruktural = async (payload) => {
+  try {
+    let result = await axiosIntance().patch(
+      "master/jabatan-struktural",
+      payload,
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterJabatanStruktural = async (payload) => {
+  try {
+    let result = await axiosIntance().post(
+      "master/jabatan-struktural",
+      payload,
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
 const masterGolongan = async () => {
   try {
@@ -325,6 +367,8 @@ export {
   addMasterGapok,
   ///
   masterJabatanStruktural,
+  addMasterJabatanStruktural,
+  updateMasterJabatanStruktural,
   ///
   masterGolongan,
   updateMasterGolongan,
