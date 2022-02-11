@@ -79,7 +79,7 @@ function MasterGroup() {
     });
     if (status) {
       Toast.successToast("Berhasil menambah data");
-      setGroupAdd("")
+      setGroupAdd("");
       doGetMasterGroup();
     } else {
       Toast.errorToast("Gagal menambah data");

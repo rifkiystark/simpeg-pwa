@@ -53,7 +53,6 @@ const addMasterDiklat = async (payload) => {
   }
 };
 
-
 const masterGapok = async () => {
   try {
     let result = await axiosIntance().get("master/gapok", {
@@ -228,6 +227,40 @@ const masterPendidikan = async () => {
     };
   }
 };
+const updateMasterPendidikan = async (payload) => {
+  try {
+    let result = await axiosIntance().patch("master/pendidikan", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterPendidikan = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/pendidikan", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
 const masterAgama = async () => {
   try {
@@ -299,8 +332,12 @@ export {
   ///
   masterJabatanFungsional,
   masterJabatanTambahan,
+  ///
   masterPendidikan,
+  addMasterPendidikan,
+  updateMasterPendidikan,
+  ///
   masterAgama,
   updateMasterAgama,
-  addMasterAgama
+  addMasterAgama,
 };
