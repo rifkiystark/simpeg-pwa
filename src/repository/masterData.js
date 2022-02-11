@@ -438,6 +438,58 @@ const addMasterAgama = async (payload) => {
   }
 };
 
+const masterUPT = async () => {
+  try {
+    let result = await axiosIntance().get("master/upt", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+const updateMasterUPT = async (payload) => {
+  try {
+    let result = await axiosIntance().patch("master/upt", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterUPT = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/upt", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 export {
   masterDiklat,
   updateMasterDiklat,
@@ -470,4 +522,8 @@ export {
   masterAgama,
   updateMasterAgama,
   addMasterAgama,
+  ///
+  masterUPT,
+  updateMasterUPT,
+  addMasterUPT,
 };

@@ -69,7 +69,7 @@ export const masterDataSlice = createSlice({
         setAdditionalPosition: (state, data) => {
             state.additionalPosition = data.payload
         },
-        setUnits: (state, data) => {
+        setUnit: (state, data) => {
             state.units = data.payload
         },
     }
@@ -85,7 +85,7 @@ export const {
     setStructuralPosition,
     setFunctionalPosition,
     setAdditionalPosition,
-    setUnits,
+    setUnit,
 } = masterDataSlice.actions
 
 export default masterDataSlice.reducer
