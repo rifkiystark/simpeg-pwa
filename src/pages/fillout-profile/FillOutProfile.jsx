@@ -65,6 +65,8 @@ function FillOutProfile() {
                                                     <option value="">---</option>
                                                     <option value="Menikah" selected >Menikah</option>
                                                     <option value="Belum Menikah" >Belum Menikah</option>
+                                                    <option value="Duda" >Duda</option>
+                                                    <option value="Janda" >Janda</option>
                                                 </select>
                                             </div>
                                             <div className="form-group col-md-4">

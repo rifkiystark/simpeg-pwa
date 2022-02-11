@@ -443,6 +443,8 @@ function EditProfile() {
                             Menikah
                           </option>
                           <option value="Belum Menikah">Belum Menikah</option>
+                          <option value="Belum Menikah">Duda</option>
+                          <option value="Belum Menikah">Janda</option>
                         </select>
                         {pegawai.sts_marital != null &&
                           validatorTab_1.current.message(
