@@ -1,19 +1,12 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import $ from "jquery";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const me = useSelector((state) => state.me);
   const level = me != null ? me.level : "";
 
-  useEffect(() => {
-    $(".dropend-custom a.dropdown-toggle-custom").on("click", function (e) {
-      var $subMenu = $(this).children(".dropdown-menu");
-      $subMenu.toggleClass("show");
-      return false;
-    });
-  }, []);
+  const [isShowKepegawaian, setIsShowKepegawaian] = useState(false);
 
   return (
     <div className="navbar-expand-md">
@@ -211,11 +204,17 @@ const Navbar = () => {
               {level === "admin" || level === "adminunit" ? (
                 <li className="nav-item dropdown">
                   <a
-                    className="nav-link dropdown-toggle"
+                    className={`nav-link dropdown-toggle ${
+                      isShowKepegawaian ? "show" : ""
+                    }`}
                     href="#navbar-base"
-                    data-bs-toggle="dropdown"
-                    role="button"
-                    aria-expanded="false"
+                    onClick={() => {
+                      if (isShowKepegawaian) {
+                        setIsShowKepegawaian(false);
+                      } else {
+                        setIsShowKepegawaian(true);
+                      }
+                    }}
                   >
                     <span className="nav-link-icon d-md-none d-lg-inline-block">
                       <svg
@@ -238,7 +237,11 @@ const Navbar = () => {
                     </span>
                     <span className="nav-link-title"> Kepegawaian </span>
                   </a>
-                  <div className="dropdown-menu">
+                  <div
+                    className={`dropdown-menu ${
+                      isShowKepegawaian ? "show" : ""
+                    }`}
+                  >
                     <div className="dropdown-menu-columns">
                       <div className="dropdown-menu-column">
                         {level === "admin" ? (
@@ -249,11 +252,10 @@ const Navbar = () => {
                               data-bs-toggle="dropdown"
                               data-bs-auto-close="outside"
                               role="button"
-                              aria-expanded="false"
                             >
                               Master Data
                             </a>
-                            <div className="dropdown-menu">
+                            <div className={`dropdown-menu`}>
                               <Link
                                 className="dropdown-item"
                                 to="master/religions"
