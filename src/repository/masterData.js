@@ -236,12 +236,16 @@ const masterJabatanFungsional = async () => {
 };
 const updateMasterJabatanFungsional = async (payload) => {
   try {
-    let result = await axiosIntance().patch("master/jabatan-fungsional", payload, {
-      headers: {
-        Authorization:
-          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
-      },
-    });
+    let result = await axiosIntance().patch(
+      "master/jabatan-fungsional",
+      payload,
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
     return { status: true, data: result.data.data, message: "" };
   } catch (error) {
     return {
@@ -253,12 +257,16 @@ const updateMasterJabatanFungsional = async (payload) => {
 };
 const addMasterJabatanFungsional = async (payload) => {
   try {
-    let result = await axiosIntance().post("master/jabatan-fungsional", payload, {
-      headers: {
-        Authorization:
-          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
-      },
-    });
+    let result = await axiosIntance().post(
+      "master/jabatan-fungsional",
+      payload,
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
     return { status: true, data: result.data.data, message: "" };
   } catch (error) {
     return {
@@ -272,6 +280,44 @@ const addMasterJabatanFungsional = async (payload) => {
 const masterJabatanTambahan = async () => {
   try {
     let result = await axiosIntance().get("master/jabatan-tambahan", {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const updateMasterJabatanTambahan = async (payload) => {
+  try {
+    let result = await axiosIntance().patch(
+      "master/jabatan-tambahan",
+      payload,
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterJabatanTambahan = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/jabatan-tambahan", payload, {
       headers: {
         Authorization:
           "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
@@ -414,6 +460,8 @@ export {
   updateMasterJabatanFungsional,
   ///
   masterJabatanTambahan,
+  addMasterJabatanTambahan,
+  updateMasterJabatanTambahan,
   ///
   masterPendidikan,
   addMasterPendidikan,
