@@ -234,6 +234,41 @@ const masterJabatanFungsional = async () => {
     };
   }
 };
+const updateMasterJabatanFungsional = async (payload) => {
+  try {
+    let result = await axiosIntance().patch("master/jabatan-fungsional", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterJabatanFungsional = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/jabatan-fungsional", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
 const masterJabatanTambahan = async () => {
   try {
     let result = await axiosIntance().get("master/jabatan-tambahan", {
@@ -375,6 +410,9 @@ export {
   addMasterGolongan,
   ///
   masterJabatanFungsional,
+  addMasterJabatanFungsional,
+  updateMasterJabatanFungsional,
+  ///
   masterJabatanTambahan,
   ///
   masterPendidikan,
