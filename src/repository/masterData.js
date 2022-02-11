@@ -18,6 +18,42 @@ const masterDiklat = async () => {
     };
   }
 };
+const updateMasterDiklat = async (payload) => {
+  try {
+    let result = await axiosIntance().patch("master/diklat", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+const addMasterDiklat = async (payload) => {
+  try {
+    let result = await axiosIntance().post("master/diklat", payload, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+
 const masterGapok = async () => {
   try {
     let result = await axiosIntance().get("master/gapok", {
@@ -180,7 +216,12 @@ const addMasterAgama = async (payload) => {
 
 export {
   masterDiklat,
+  updateMasterDiklat,
+  addMasterDiklat,
+  ///
   masterGapok,
+
+  ///
   masterJabatanStruktural,
   masterGolongan,
   masterJabatanFungsional,
