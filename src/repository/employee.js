@@ -107,6 +107,24 @@ const editProfilePost = async (data) => {
   }
 };
 
+const getListPegawai = async (upt) => {
+  try {
+    let result = await axiosIntance().get("pegawai/list?upt=" + upt, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
 export {
   employeeByUserId,
   addMarital,
@@ -114,4 +132,5 @@ export {
   addParent,
   editProfileGet,
   editProfilePost,
+  getListPegawai
 };
