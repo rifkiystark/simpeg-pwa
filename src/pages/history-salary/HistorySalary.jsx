@@ -8,7 +8,6 @@ import LoadingIcon from "../../components/loading-icon/LoadingIcon";
 import Table from "../../components/table/Table";
 import Toast from "../../components/toast/Toast";
 import Const from "../../constant";
-import $ from "jquery";
 import { formatRupiah, validateInput } from "../../helpers";
 import { setSalary } from "../../reduxslice/competenceDataSlice";
 import { masterGapok } from "../../repository/masterData";
