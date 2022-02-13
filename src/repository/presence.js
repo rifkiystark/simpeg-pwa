@@ -125,10 +125,34 @@ const getPresencesByUserId = async (userId) => {
   }
 };
 
+const getPresencesData = async (
+  upt,
+  tanggalAwal,
+  tanggalAkhir,
+  idPegawai,
+  day
+) => {
+  try {
+    let result = await axiosIntance().get(
+      `presensi/data?upt=${upt}&tanggalAwal=${tanggalAwal}&tanggalAkhir=${tanggalAkhir}&idPegawai=${idPegawai}&day=${day}`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data, message: "" };
+  } catch (error) {
+    return { status: false, data: null, message: "" };
+  }
+};
+
 export {
   presenceStatus,
   presenceIn,
   presenceOut,
   syncPresence,
   getPresencesByUserId,
+  getPresencesData,
 };
