@@ -23,7 +23,8 @@ function Profile() {
   const router = useNavigate();
 
   // INITIAL DATA
-  const user = location.state?.user;
+  // const user = location.state?.user;
+  const user = { id: 9, level: "admin", name: "AdminYPPMNU" };
   const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
 
   // STATE
