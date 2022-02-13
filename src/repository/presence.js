@@ -148,6 +148,20 @@ const getPresencesData = async (
   }
 };
 
+const getSettingsPresence = async () => {
+  try {
+    let result = await axiosIntance().get(`presensi/settings`, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return { status: false, data: null, message: "" };
+  }
+};
+
 export {
   presenceStatus,
   presenceIn,
@@ -155,4 +169,5 @@ export {
   syncPresence,
   getPresencesByUserId,
   getPresencesData,
+  getSettingsPresence,
 };
