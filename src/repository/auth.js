@@ -14,6 +14,8 @@ const login = async (email, password) => {
             }
         } else if (error.request) {
             return { status: false, data: {}, message: "Server error" }
+        } else {
+            return { status: false, data: {}, message: "Error tidak diketahui" }
         }
     }
 }

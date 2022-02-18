@@ -308,8 +308,8 @@ function Profile() {
                         />
                       </div>
 
-                      <h3 className="profile-username text-center">
-                        {employee.gelar_depan} {employee.nama}
+                      <h3 className="profile-username text-center mt-3">
+                        {employee.gelar_depan} {employee.nama}{" "}
                         {employee.gelar_belakang}
                       </h3>
 
