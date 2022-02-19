@@ -13,40 +13,40 @@ const allEmployeeColumn = [
     name: "WFH (Tepat Waktu)",
     key: "",
     render: (data, index, rowData) =>
-      rowData.wfh.filter((item) => item.keterangan.indexOf("erlambat") == -1)
+      rowData.wfh?.filter((item) => item.keterangan.indexOf("erlambat") == -1)
         .length,
   },
   {
     name: "WFH (Terlambat)",
     key: "",
     render: (data, index, rowData) =>
-      rowData.wfh.filter((item) => item.keterangan.indexOf("erlambat") != -1)
+      rowData.wfh?.filter((item) => item.keterangan.indexOf("erlambat") != -1)
         .length,
   },
   {
     name: "WFO (Tepat Waktu)",
     key: "",
     render: (data, index, rowData) =>
-      rowData.wfo.filter((item) => item.keterangan.indexOf("erlambat") == -1)
+      rowData.wfo?.filter((item) => item.keterangan.indexOf("erlambat") == -1)
         .length,
   },
   {
     name: "WFO (Terlambat)",
     key: "",
     render: (data, index, rowData) =>
-      rowData.wfo.filter((item) => item.keterangan.indexOf("erlambat") != -1)
+      rowData.wfo?.filter((item) => item.keterangan.indexOf("erlambat") != -1)
         .length,
   },
   {
     name: "Tidak Masuk",
     key: "notPresence",
     render: (data, index, rowData) =>
-      rowData.totalDay - (rowData.wfo.length + rowData.wfh.length),
+      rowData.totalDay - (rowData.wfo?.length + rowData.wfh?.length),
   },
   {
     name: "Total Masuk",
     key: "total",
-    render: (data, index, rowData) => rowData.wfo.length + rowData.wfh.length,
+    render: (data, index, rowData) => rowData.wfo?.length + rowData.wfh?.length,
   },
 ];
 
@@ -64,12 +64,14 @@ const oneEmployeeColumn = [
   {
     name: "Waktu Masuk",
     key: "masuk",
-    render: (data, index, rowData) => data,
+    render: (data, index, rowData) =>
+      data != null ? new Date(data * 1000).toLocaleTimeString() : "-",
   },
   {
     name: "Waktu Pulang",
-    key: "outTime",
-    render: (data, index, rowData) => data,
+    key: "pulang",
+    render: (data, index, rowData) =>
+      data != null ? new Date(data * 1000).toLocaleTimeString() : "-",
   },
   {
     name: "Tipe",
@@ -78,12 +80,12 @@ const oneEmployeeColumn = [
   },
   {
     name: "Keterangan",
-    key: "note",
+    key: "keterangan",
     render: (data, index, rowData) => data,
   },
   {
     name: "Lokasi",
-    key: "location",
+    key: "lokasi",
     render: (data, index, rowData) => data,
   },
 ];
