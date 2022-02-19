@@ -1,14 +1,8 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router";
 import logo from "../../assets/img/logo.svg";
 import LoadingIcon from "../../components/loading-icon/LoadingIcon";
-import { login, userInfo } from "../../repository/auth";
 import Toast from "../../components/toast/Toast";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Const from "../../constant";
-import { useDispatch } from "react-redux";
-import { setMe } from "../../reduxslice/meSlice";
 import {
   presenceByNIPY,
   presenceInUpt,
