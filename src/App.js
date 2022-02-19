@@ -37,7 +37,7 @@ import PresenceInUpt from "./pages/presence-in-upt/PresenceInUpt";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/pwa">
         <Routes>
           <Route exact path="/" element={<BaseLayout />}>
             <Route
