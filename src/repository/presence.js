@@ -175,6 +175,56 @@ const updateSettingsPresence = async (data) => {
   }
 };
 
+const presenceByNIPY = async (nipy) => {
+  try {
+    let result = await axiosIntance().get(`presensi/get-by-nipy/${nipy}`, {
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+      },
+    });
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return { status: false, data: null, message: "" };
+  }
+};
+
+const presenceInUpt = async (id) => {
+  try {
+    let result = await axiosIntance().post(
+      `presensi/masuk-upt`,
+      { id },
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return { status: false, data: null, message: "" };
+  }
+};
+
+const presenceOutUpt = async (id) => {
+  try {
+    let result = await axiosIntance().post(
+      `presensi/pulang-upt`,
+      { id },
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return { status: false, data: null, message: "" };
+  }
+};
+
 export {
   presenceStatus,
   presenceIn,
@@ -184,4 +234,7 @@ export {
   getPresencesData,
   getSettingsPresence,
   updateSettingsPresence,
+  presenceByNIPY,
+  presenceInUpt,
+  presenceOutUpt
 };
