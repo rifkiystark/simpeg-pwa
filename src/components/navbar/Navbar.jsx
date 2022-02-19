@@ -338,7 +338,6 @@ const Navbar = () => {
                         </div>
                         <Link className="dropdown-item" to="submission">
                           <span className="nav-link-title"> Pengajuan </span>
-                          <span className="badge bg-red"></span>
                         </Link>
                       </div>
                     </div>

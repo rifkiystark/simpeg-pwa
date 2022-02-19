@@ -43,7 +43,7 @@ function App() {
             <Route
               path="dashboard"
               element={
-                <AuthProvider level={["pegawai", "admin", "adminupt"]}>
+                <AuthProvider level={["pegawai", "admin", "adminunit"]}>
                   <DashboardPage />
                 </AuthProvider>
               }
@@ -51,7 +51,7 @@ function App() {
             <Route
               path="employees"
               element={
-                <AuthProvider level={["pegawai", "admin", "adminupt"]}>
+                <AuthProvider level={["pegawai", "admin", "adminunit"]}>
                   <ListEmployee />
                 </AuthProvider>
               }
@@ -59,7 +59,7 @@ function App() {
             <Route
               path="users"
               element={
-                <AuthProvider level={["pegawai", "admin", "adminupt"]}>
+                <AuthProvider level={["pegawai", "admin", "adminunit"]}>
                   <ListUser />
                 </AuthProvider>
               }
@@ -67,7 +67,7 @@ function App() {
             <Route
               path="submission"
               element={
-                <AuthProvider level={["admin"]}>
+                <AuthProvider level={["admin", "adminunit"]}>
                   <Submission />
                 </AuthProvider>
               }
@@ -206,7 +206,7 @@ function App() {
             <Route
               path="history/training"
               element={
-                <AuthProvider level={["admin", "pegawai"]}>
+                <AuthProvider level={["admin", "pegawai", "adminunit"]}>
                   <HistoryTraining />
                 </AuthProvider>
               }
@@ -214,7 +214,7 @@ function App() {
             <Route
               path="history/salary"
               element={
-                <AuthProvider level={["admin", "pegawai"]}>
+                <AuthProvider level={["admin", "pegawai", "adminunit"]}>
                   <HistorySalary />
                 </AuthProvider>
               }
@@ -222,7 +222,7 @@ function App() {
             <Route
               path="history/punishment"
               element={
-                <AuthProvider level={["admin", "pegawai"]}>
+                <AuthProvider level={["admin", "pegawai", "adminunit"]}>
                   <HistoryPunishment />
                 </AuthProvider>
               }
@@ -230,7 +230,7 @@ function App() {
             <Route
               path="history/structural-position"
               element={
-                <AuthProvider level={["admin", "pegawai"]}>
+                <AuthProvider level={["admin", "pegawai", "adminunit"]}>
                   <HistoryStructuralPosition />
                 </AuthProvider>
               }
@@ -238,7 +238,7 @@ function App() {
             <Route
               path="history/functional-position"
               element={
-                <AuthProvider level={["admin", "pegawai"]}>
+                <AuthProvider level={["admin", "pegawai", "adminunit"]}>
                   <HistoryFunctionalPosition />
                 </AuthProvider>
               }
@@ -246,7 +246,7 @@ function App() {
             <Route
               path="history/additional-position"
               element={
-                <AuthProvider level={["admin", "pegawai"]}>
+                <AuthProvider level={["admin", "pegawai", "adminunit"]}>
                   <HistoryAdditionalPosition />
                 </AuthProvider>
               }
@@ -262,13 +262,13 @@ function App() {
           />
           <Route exact path="/login" element={<LoginPage />} />
           <Route
-              path="presence-in-upt"
-              element={
-                <AuthProvider level={["admin", "adminupt"]}>
-                  <PresenceInUpt />
-                </AuthProvider>
-              }
-            />
+            path="presence-in-upt"
+            element={
+              <AuthProvider level={["admin", "adminunit"]}>
+                <PresenceInUpt />
+              </AuthProvider>
+            }
+          />
         </Routes>
       </BrowserRouter>
       <ToastContainer

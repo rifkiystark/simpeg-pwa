@@ -5,6 +5,7 @@ import { getListPegawai } from "../../repository/employee";
 import { masterUPT } from "../../repository/masterData";
 import { getPresencesData } from "../../repository/presence";
 import { allEmployeeColumn, oneEmployeeColumn } from "./tableColumn";
+import Const from "../../constant";
 
 function DataPresence() {
   // STATE
@@ -16,6 +17,7 @@ function DataPresence() {
   const [presences, setPresences] = useState([]);
   const [masterUpt, setMasterUpt] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
+  const me = localStorage.getItem(Const.STORAGE_KEY.USER_INFO);
 
   // API CALL
   const doGetPresenceData = async () => {
@@ -74,29 +76,34 @@ function DataPresence() {
                 <div className="row">
                   <div className="col-md-3">
                     <div className="row g-3">
-                      <div className="col-12 form-group">
-                        <label className="form-label" for="inputStatus">
-                          UPT
-                        </label>
-                        <select
-                          name="upt"
-                          id="inputUser"
-                          className="form-control"
-                          value={upt}
-                          onChange={(e) => {
-                            setUpt(e.target.value);
-                          }}
-                        >
-                          <option value="all">Semua</option>
-                          {masterUpt.map((value, index) => {
-                            return (
-                              <option value={value.id} key={index}>
-                                {value.upt}
-                              </option>
-                            );
-                          })}
-                        </select>
-                      </div>
+                      {me.level == "admin" && (
+                        <>
+                          <div className="col-12 form-group">
+                            <label className="form-label" for="inputStatus">
+                              UPT
+                            </label>
+                            <select
+                              name="upt"
+                              id="inputUser"
+                              className="form-control"
+                              value={upt}
+                              onChange={(e) => {
+                                setUpt(e.target.value);
+                              }}
+                            >
+                              <option value="all">Semua</option>
+                              {masterUpt.map((value, index) => {
+                                return (
+                                  <option value={value.id} key={index}>
+                                    {value.upt}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                        </>
+                      )}
+
                       <div className="col-12 form-group">
                         <label className="form-label" for="inputStatus">
                           Tanggal Awal

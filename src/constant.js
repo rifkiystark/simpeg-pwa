@@ -1,7 +1,7 @@
 import moment from "moment";
 
 const Const = {
-  BASE_URL: "http://localhost/simpendik/",
+  BASE_URL: "http://localhost/simpeg-keuangan/",
   API_PREFIX: "api/",
   FOTO_PREFIX: "foto/",
   STORAGE_KEY: {
