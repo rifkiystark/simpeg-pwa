@@ -73,5 +73,26 @@ const deleteSalary = async (idGapok) => {
     };
   }
 };
+const verifySalary = async (idGapok) => {
+  try {
+    let result = await axiosIntance().post(
+      "gapok/verify",
+      { id: idGapok },
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
-export { getSalaries, updateSalary, deleteSalary, addSalary };
+export { getSalaries, updateSalary, deleteSalary, addSalary, verifySalary };

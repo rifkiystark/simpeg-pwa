@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Table from "../../components/table/Table";
+import Toast from "../../components/toast/Toast";
+import { verifyAdditionalPosition } from "../../repository/additionalPosition";
+import { verifyFunctionalPosition } from "../../repository/functionalPosition";
+import { verifySalary } from "../../repository/salary";
+import { verifyStructuralPosition } from "../../repository/structuralPosition";
 import { getSubmissions } from "../../repository/submission";
+import { verifyTraining } from "../../repository/training";
 import { submissionColumn } from "./tableColumn";
 
 function Submission() {
@@ -10,6 +16,97 @@ function Submission() {
   const [jabatanStrukturals, setJabatanStrukturals] = useState([]);
   const [gapoks, setGapoks] = useState([]);
   const [diklats, setDiklats] = useState([]);
+
+  // COLUMN
+  const diklatColumn = [
+    ...submissionColumn.diklats,
+    {
+      name: "Aksi",
+      key: "",
+      render: (data, index, rowData) => (
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={(e) => {
+            verifyDiklat(rowData);
+          }}
+        >
+          Verifikasi
+        </button>
+      ),
+    },
+  ];
+
+  const fungsionalColumn = [
+    ...submissionColumn.jabatanFungsionals,
+    {
+      name: "Aksi",
+      key: "",
+      render: (data, index, rowData) => (
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={(e) => {
+            verifyFungsional(rowData);
+          }}
+        >
+          Verifikasi
+        </button>
+      ),
+    },
+  ];
+
+  const tambahanColumn = [
+    ...submissionColumn.jabatanFungsionalTambahans,
+    {
+      name: "Aksi",
+      key: "",
+      render: (data, index, rowData) => (
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={(e) => {
+            verifyTambahan(rowData);
+          }}
+        >
+          Verifikasi
+        </button>
+      ),
+    },
+  ];
+
+  const strukturalColumn = [
+    ...submissionColumn.jabatanStrukturals,
+    {
+      name: "Aksi",
+      key: "",
+      render: (data, index, rowData) => (
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={(e) => {
+            verifyStruktural(rowData);
+          }}
+        >
+          Verifikasi
+        </button>
+      ),
+    },
+  ];
+
+  const gapokColumn = [
+    ...submissionColumn.gapoks,
+    {
+      name: "Aksi",
+      key: "",
+      render: (data, index, rowData) => (
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={(e) => {
+            verifyGapok(rowData);
+          }}
+        >
+          Verifikasi
+        </button>
+      ),
+    },
+  ];
 
   // API CALL
   const doGetSubmision = async () => {
@@ -20,6 +117,60 @@ function Submission() {
       setJabatanStrukturals(data.jabatanStrukturals);
       setDiklats(data.diklats);
       setGapoks(data.gapoks);
+    }
+  };
+
+  const verifyDiklat = async (training) => {
+    const { status, data } = await verifyTraining(training.id_diklat);
+    if (status) {
+      doGetSubmision();
+      Toast.successToast("Berhasil memverifikasi");
+    } else {
+      Toast.errorToast("Gagal memverifikasi");
+    }
+  };
+
+  const verifyGapok = async (gapok) => {
+    const { status, data } = await verifySalary(gapok.id_gapok);
+    if (status) {
+      doGetSubmision();
+      Toast.successToast("Berhasil memverifikasi");
+    } else {
+      Toast.errorToast("Gagal memverifikasi");
+    }
+  };
+
+  const verifyFungsional = async (fungsional) => {
+    const { status, data } = await verifyFunctionalPosition(
+      fungsional.id_jabatanf
+    );
+    if (status) {
+      doGetSubmision();
+      Toast.successToast("Berhasil memverifikasi");
+    } else {
+      Toast.errorToast("Gagal memverifikasi");
+    }
+  };
+
+  const verifyStruktural = async (struktural) => {
+    const { status, data } = await verifyStructuralPosition(
+      struktural.id_jabatan
+    );
+    if (status) {
+      doGetSubmision();
+      Toast.successToast("Berhasil memverifikasi");
+    } else {
+      Toast.errorToast("Gagal memverifikasi");
+    }
+  };
+
+  const verifyTambahan = async (tambahan) => {
+    const { status, data } = await verifyAdditionalPosition(tambahan.id_jbtft);
+    if (status) {
+      doGetSubmision();
+      Toast.successToast("Berhasil memverifikasi");
+    } else {
+      Toast.errorToast("Gagal memverifikasi");
     }
   };
 
@@ -102,7 +253,7 @@ function Submission() {
                   <Table
                     data={{
                       data: diklats,
-                      column: submissionColumn.diklats,
+                      column: diklatColumn,
                     }}
                     tableName="Data Jabatan Tambahan"
                   />
@@ -111,7 +262,7 @@ function Submission() {
                   <Table
                     data={{
                       data: gapoks,
-                      column: submissionColumn.gapoks,
+                      column: gapokColumn,
                     }}
                     tableName="Data Jabatan Tambahan"
                   />
@@ -120,7 +271,7 @@ function Submission() {
                   <Table
                     data={{
                       data: jabatanStrukturals,
-                      column: submissionColumn.jabatanStrukturals,
+                      column: strukturalColumn,
                     }}
                     tableName="Data Jabatan Tambahan"
                   />
@@ -129,7 +280,7 @@ function Submission() {
                   <Table
                     data={{
                       data: jabatanFungsionals,
-                      column: submissionColumn.jabatanFungsionals,
+                      column: fungsionalColumn,
                     }}
                     tableName="Data Jabatan Tambahan"
                   />
@@ -138,7 +289,7 @@ function Submission() {
                   <Table
                     data={{
                       data: jabatanTambahans,
-                      column: submissionColumn.jabatanFungsionalTambahans,
+                      column: tambahanColumn,
                     }}
                     tableName="Data Jabatan Tambahan"
                   />

@@ -81,10 +81,32 @@ const deleteStructuralPosition = async (idJabatanStruktural) => {
     };
   }
 };
+const verifyStructuralPosition = async (idJabatanStruktural) => {
+  try {
+    let result = await axiosIntance().post(
+      "jabatan-struktural/verify",
+      { id: idJabatanStruktural },
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
 export {
   getStructuralPositions,
   updateStructuralPosition,
   deleteStructuralPosition,
   addStructuralPosition,
+  verifyStructuralPosition,
 };

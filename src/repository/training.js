@@ -74,4 +74,32 @@ const deleteTraining = async (idDiklat) => {
   }
 };
 
-export { getTrainings, updateTraining, deleteTraining, addTraining };
+const verifyTraining = async (idDiklat) => {
+  try {
+    let result = await axiosIntance().post(
+      "diklat/verify",
+      { id: idDiklat },
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
+
+export {
+  getTrainings,
+  updateTraining,
+  deleteTraining,
+  addTraining,
+  verifyTraining,
+};

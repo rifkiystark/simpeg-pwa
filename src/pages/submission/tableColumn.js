@@ -55,15 +55,6 @@ let submissionColumn = {
       key: "",
       render: (data, index, rowData) => rowData.updated_by.name,
     },
-    {
-      name: "Aksi",
-      key: "",
-      render: (data, index, rowData) => (
-        <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>
-          Verifikasi
-        </a>
-      ),
-    },
   ],
   jabatanFungsionals: [
     {
@@ -124,15 +115,6 @@ let submissionColumn = {
       name: "Di Update Oleh",
       key: "",
       render: (data, index, rowData) => rowData.updated_by.name,
-    },
-    {
-      name: "Aksi",
-      key: "",
-      render: (data, index, rowData) => (
-        <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>
-          Verifikasi
-        </a>
-      ),
     },
   ],
   jabatanStrukturals: [
@@ -195,15 +177,6 @@ let submissionColumn = {
       key: "",
       render: (data, index, rowData) => rowData.updated_by.name,
     },
-    {
-      name: "Aksi",
-      key: "",
-      render: (data, index, rowData) => (
-        <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>
-          Verifikasi
-        </a>
-      ),
-    },
   ],
   gapoks: [
     {
@@ -259,15 +232,6 @@ let submissionColumn = {
       name: "Di Update Oleh",
       key: "",
       render: (data, index, rowData) => rowData.updated_by.name,
-    },
-    {
-      name: "Aksi",
-      key: "",
-      render: (data, index, rowData) => (
-        <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>
-          Verifikasi
-        </a>
-      ),
     },
   ],
   diklats: [
@@ -329,15 +293,6 @@ let submissionColumn = {
       name: "Di Update Oleh",
       key: "",
       render: (data, index, rowData) => rowData.updated_by.name,
-    },
-    {
-      name: "Aksi",
-      key: "",
-      render: (data, index, rowData) => (
-        <a className="btn btn-primary btn-sm" href={rowData.id_jbtft}>
-          Verifikasi
-        </a>
-      ),
     },
   ],
 };

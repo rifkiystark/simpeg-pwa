@@ -81,10 +81,32 @@ const deleteAdditionalPosition = async (idJabatantambahan) => {
     };
   }
 };
+const verifyAdditionalPosition = async (idJabatantambahan) => {
+  try {
+    let result = await axiosIntance().post(
+      "jabatan-tambahan/verify",
+      { id: idJabatantambahan },
+      {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem(Const.STORAGE_KEY.TOKEN),
+        },
+      }
+    );
+    return { status: true, data: result.data.data, message: "" };
+  } catch (error) {
+    return {
+      status: false,
+      data: null,
+      message: "",
+    };
+  }
+};
 
 export {
   getAdditionalPositions,
   updateAdditionalPosition,
   deleteAdditionalPosition,
   addAdditionalPosition,
+  verifyAdditionalPosition,
 };
