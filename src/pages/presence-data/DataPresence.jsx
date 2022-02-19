@@ -17,7 +17,7 @@ function DataPresence() {
   const [presences, setPresences] = useState([]);
   const [masterUpt, setMasterUpt] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
-  const me = localStorage.getItem(Const.STORAGE_KEY.USER_INFO);
+  const me = JSON.parse(localStorage.getItem(Const.STORAGE_KEY.USER_INFO));
 
   // API CALL
   const doGetPresenceData = async () => {
